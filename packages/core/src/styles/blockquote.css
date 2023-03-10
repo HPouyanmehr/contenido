@@ -1,0 +1,9 @@
+.blockquote > .public-DraftStyleDefault-ltr {
+  padding: 0.5rem 0.75rem;
+  border-left: 4px solid rgba(125, 125, 125, 0.5);
+}
+
+.blockquote > .public-DraftStyleDefault-rtl {
+  padding: 0.5rem 0.75rem;
+  border-right: 4px solid rgba(125, 125, 125, 0.5);
+}

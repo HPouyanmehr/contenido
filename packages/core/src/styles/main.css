@@ -1,0 +1,9 @@
+@import './text-alignment.css';
+@import './blockquote.css';
+
+.rtl-placeholder
+  > div.DraftEditor-root
+  > div.public-DraftEditorPlaceholder-root
+  > div.public-DraftEditorPlaceholder-inner {
+  direction: rtl;
+}
