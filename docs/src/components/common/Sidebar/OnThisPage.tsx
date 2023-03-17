@@ -1,23 +1,9 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-
 // Types
-import BodyOne from 'components/core/BodyOne';
-import BodyTwo from 'components/core/BodyTwo';
-import Box from 'components/core/Box';
-import Collapse from 'components/core/Collapse';
-import Divider from 'components/core/Divider';
-import Drawer from 'components/core/Drawer';
-import List from 'components/core/List';
-import ListItem from 'components/core/ListItem';
-import ListItemButton from 'components/core/ListItemButton';
-import ListItemIcon from 'components/core/ListItemIcon';
-import ListItemText from 'components/core/ListItemText';
-import ArticleIcon from 'components/icon/Article';
 import type { FC } from 'react';
-import Logo from '../Link/Logo';
-import ChevronRightIcon from 'components/icon/ChevronRight';
-import DarkModeIcon from 'components/icon/DarkMode';
+
+// Custom Core
+import BodyOne from 'components/core/BodyOne';
+import Box from 'components/core/Box';
 import AppBarSpacer from 'components/core/AppBarSpacer';
 
 // Custom Types

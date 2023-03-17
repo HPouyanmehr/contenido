@@ -14,9 +14,7 @@ const DocumentPage: FC<DocumentPageProps> = (props) => {
   // Props
   const { children, doc } = props;
 
-  return (
-    <DocumentLayout page={{ title: doc.title }}>{children}</DocumentLayout>
-  );
+  return <DocumentLayout doc={doc} />;
 };
 
 export default DocumentPage;

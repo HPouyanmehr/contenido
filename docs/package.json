@@ -20,6 +20,7 @@
     "@next/font": "13.1.6",
     "@next/mdx": "^13.2.3",
     "gray-matter": "^4.0.3",
+    "markdown-to-jsx": "^7.1.9",
     "next": "13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0"
