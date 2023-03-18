@@ -42,8 +42,8 @@ const DocumentLayout: FC<PageLayoutProps> = (props) => {
       <DocHeader />
       <Box sx={{ display: 'flex', gap: 4 }}>
         <DocSidebar />
-        <Box sx={{ display: 'flex', gap: 2 }}>
-          <Box component='main'>
+        <Box sx={{ display: 'flex', gap: 2, flexGrow: 1 }}>
+          <Box component='main' sx={{ flexGrow: 1 }}>
             <AppBarSpacer />
             <Markdown>{doc.content}</Markdown>
           </Box>

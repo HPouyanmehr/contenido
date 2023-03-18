@@ -11,9 +11,9 @@ export const fixHref = (href?: string | URL | Url | UrlObject): string => {
     link = href.toString();
   }
 
-  link = link.replaceAll("'", '');
+  link = link.replaceAll("'", '').trim().replaceAll(' ', '_');
 
-  return link;
+  return link.toLocaleLowerCase();
 };
 
 export const isExternal = (href?: string | URL | Url | UrlObject): boolean => {

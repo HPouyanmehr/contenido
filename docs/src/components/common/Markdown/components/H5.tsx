@@ -2,26 +2,24 @@
 import type { FC } from 'react';
 
 // Custom Core Components
-import HeadingTwo from 'components/core/HeadingTwo';
+import HeadingFive from 'components/core/HeadingFive';
 import Link from 'components/core/Link';
 
 // Custom Utilities
 import { fixHref } from 'utilities/helper/link';
 
 // Custom Types
-import { HeadingTwoProps } from 'components/core/HeadingTwo';
+import { HeadingFiveProps } from 'components/core/HeadingFive';
 
-const MarkdownH2: FC<HeadingTwoProps> = (props) => {
+const MarkdownH5: FC<HeadingFiveProps> = (props) => {
   // Props
   const { children, sx, ...otherProps } = props;
 
   return (
     <>
-      <HeadingTwo
+      <HeadingFive
         sx={{
           margin: '1.75em 0 0.83em',
-          borderBottom: '1px solid',
-          borderColor: 'divider',
           ':hover': {
             '& a': {
               display: 'inline-block',
@@ -41,9 +39,9 @@ const MarkdownH2: FC<HeadingTwoProps> = (props) => {
             #
           </Link>
         )}
-      </HeadingTwo>
+      </HeadingFive>
     </>
   );
 };
 
-export default MarkdownH2;
+export default MarkdownH5;
