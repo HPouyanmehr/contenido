@@ -26,7 +26,7 @@ import { DocProps } from 'types/docs';
 import HeadingOne from 'components/core/HeadingOne';
 import Markdown from 'components/common/Markdown';
 export interface PageLayoutProps {
-  doc: DocProps;
+  doc?: DocProps;
 }
 
 const DocumentLayout: FC<PageLayoutProps> = (props) => {
@@ -37,7 +37,7 @@ const DocumentLayout: FC<PageLayoutProps> = (props) => {
   return (
     <>
       <Head>
-        <title>{doc.title || 'Contenido'}</title>
+        <title>{doc?.title || 'Contenido'}</title>
       </Head>
       <DocHeader />
       <Box sx={{ display: 'flex', gap: 4 }}>
@@ -45,7 +45,7 @@ const DocumentLayout: FC<PageLayoutProps> = (props) => {
         <Box sx={{ display: 'flex', gap: 2, flexGrow: 1 }}>
           <Box component='main' sx={{ flexGrow: 1 }}>
             <AppBarSpacer />
-            <Markdown>{doc.content}</Markdown>
+            <Markdown>{doc?.content}</Markdown>
           </Box>
           <Box
             sx={({ breakpoints }) => ({
