@@ -5,11 +5,18 @@ import type { FC } from 'react';
 import BodyOne from 'components/core/BodyOne';
 import Box from 'components/core/Box';
 import AppBarSpacer from 'components/core/AppBarSpacer';
+import Link from 'components/core/Link';
+import { fixHref } from 'utilities/helper/link';
 
 // Custom Types
-export interface OnThisPageProps {}
+export interface OnThisPageProps {
+  headings?: { [key: string]: string[] };
+}
 
-const OnThisPage: FC<OnThisPageProps> = () => {
+const OnThisPage: FC<OnThisPageProps> = (props) => {
+  // Props
+  const { headings } = props;
+
   return (
     <Box
       sx={({}) => ({
@@ -27,11 +34,18 @@ const OnThisPage: FC<OnThisPageProps> = () => {
           display: 'flex',
           flexDirection: 'column',
           height: '91%',
-          justifyContent: 'space-between',
           p: spacing(2, 1),
         })}
       >
-        <BodyOne>On this page</BodyOne>
+        <BodyOne gutterBottom>On this page</BodyOne>
+        {headings &&
+          Object.keys(headings).map((headingTwo, index) => (
+            <Box key={headingTwo + index}>
+              <Link href={fixHref(`#${headingTwo}`)} color='text.secondary'>
+                {headingTwo}
+              </Link>
+            </Box>
+          ))}
       </Box>
     </Box>
   );

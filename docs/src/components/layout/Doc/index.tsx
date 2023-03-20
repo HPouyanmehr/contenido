@@ -45,7 +45,7 @@ const DocumentLayout: FC<PageLayoutProps> = (props) => {
               [breakpoints.down('xl')]: { display: 'none' },
             })}
           >
-            <OnThisPage />
+            <OnThisPage headings={doc?.headings} />
           </Box>
         </Box>
       </Box>
