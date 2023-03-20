@@ -1,30 +1,22 @@
+import Head from 'next/head';
+
 // Types
 import type { FC, ReactNode } from 'react';
 
 // Custom Core Components
 import AppBarSpacer from 'components/core/AppBarSpacer';
+import Box from 'components/core/Box';
 
 // Custom Common Components
-import Header from 'components/common/Header';
+import DocHeader from 'components/common/Header/Doc';
+import DocSidebar from 'components/common/Sidebar/Doc';
+import Markdown from 'components/common/Markdown';
+import OnThisPage from 'components/common/Sidebar/OnThisPage';
 
 // Custom Types
-import Head from 'next/head';
-import DocSidebar from 'components/common/Sidebar/Doc';
-import Box from 'components/core/Box';
-import AppBar from 'components/core/AppBar';
-import Toolbar from 'components/core/Toolbar';
-import MenuToggler from 'components/common/IconButton/MenuToggler';
-import Logo from 'components/common/Link/Logo';
-import GitHubIconButtonLink from 'components/common/Link/GitHub';
-import Divider from 'components/core/Divider';
-import DocHeader from 'components/common/Header/Doc';
-import BodyOne from 'components/core/BodyOne';
-import FooterOne from 'components/section/footer/One';
-import OnThisPage from 'components/common/Sidebar/OnThisPage';
 import DocsFooter from 'components/section/footer/Doc';
-import { DocProps, DocSidebarProps } from 'types/docs';
-import HeadingOne from 'components/core/HeadingOne';
-import Markdown from 'components/common/Markdown';
+
+import type { DocProps, DocSidebarProps } from 'types/docs';
 export interface PageLayoutProps {
   doc?: DocProps;
   sidebar?: DocSidebarProps[];
@@ -34,7 +26,6 @@ const DocumentLayout: FC<PageLayoutProps> = (props) => {
   // Props
   const { doc, sidebar = [] } = props;
 
-  const drawerWidth = 272;
   return (
     <>
       <Head>

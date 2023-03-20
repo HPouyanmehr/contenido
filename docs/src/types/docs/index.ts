@@ -3,6 +3,7 @@ export interface DocProps {
   section: string;
   title: string;
   content: string;
+  headings: { [key: string]: string[] };
 }
 
 export interface DocSdiebarItemProps {

@@ -5,6 +5,7 @@ import matter from 'gray-matter';
 // Types
 import type { ParsedUrlQuery } from 'querystring';
 import { DocProps, DocSdiebarItemProps, DocSidebarProps } from 'types/docs';
+import extractHeadings from 'utilities/helper/markdown';
 
 const docsDirectory = path.join(process.cwd(), '/src/docs');
 
@@ -78,12 +79,14 @@ export const getDocData = (
       const fileContents = fs.readFileSync(fullPath, 'utf-8');
 
       const matterResult = matter(fileContents);
+      const headings = extractHeadings(matterResult.content);
 
       return {
         id: docId,
         section: sectionName,
         title: matterResult.data.title,
         content: matterResult.content,
+        headings,
       };
     }
   }
