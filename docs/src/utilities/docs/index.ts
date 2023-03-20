@@ -41,12 +41,18 @@ export const getDocsSidebar = (): DocSidebarProps[] => {
     const items: DocSdiebarItemProps[] = [];
 
     fileNames.forEach((fileName, index) => {
+      const fullPath = path.join(docsDir, fileName);
+      const content = fs.readFileSync(fullPath, 'utf-8');
+      const matterResult = matter(content);
+
       items.push({
         link: fileName.replace(/\.mdx/, ''),
         title: fileName.replace(/\.mdx/, ''),
-        sort: index,
+        sort: matterResult.data.sort || index,
       });
     });
+
+    items.sort((a, b) => (a.sort > b.sort ? 1 : -1));
 
     sidebar.push({ title: section, items });
   });
