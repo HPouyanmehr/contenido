@@ -4,7 +4,7 @@ import matter from 'gray-matter';
 
 // Types
 import type { ParsedUrlQuery } from 'querystring';
-import { DocProps } from 'types/docs';
+import { DocProps, DocSdiebarItemProps, DocSidebarProps } from 'types/docs';
 
 const docsDirectory = path.join(process.cwd(), '/src/docs');
 
@@ -28,6 +28,30 @@ export const getAllDocsPaths = (): { params: ParsedUrlQuery }[] => {
   });
 
   return allDocsPaths;
+};
+
+export const getDocsSidebar = (): DocSidebarProps[] => {
+  const sidebar: DocSidebarProps[] = [];
+
+  const sections = fs.readdirSync(docsDirectory);
+
+  sections.forEach((section) => {
+    const docsDir = path.join(docsDirectory, section);
+    const fileNames = fs.readdirSync(docsDir);
+    const items: DocSdiebarItemProps[] = [];
+
+    fileNames.forEach((fileName, index) => {
+      items.push({
+        link: fileName.replace(/\.mdx/, ''),
+        title: fileName.replace(/\.mdx/, ''),
+        sort: index,
+      });
+    });
+
+    sidebar.push({ title: section, items });
+  });
+
+  return sidebar;
 };
 
 export const getDocData = (

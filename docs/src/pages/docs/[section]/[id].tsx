@@ -1,20 +1,22 @@
+// Types
+import type { FC } from 'react';
+import type { GetStaticPaths, GetStaticProps } from 'next/types';
+
+// Custom Layouts
 import DocumentLayout from 'components/layout/Doc';
-import { GetStaticPaths, GetStaticProps } from 'next/types';
-import { FC, ReactNode } from 'react';
-import { DocProps } from 'types/docs';
-import { getAllDocsPaths, getDocData } from 'utilities/docs';
+
+// Custom Utilities
+import { getAllDocsPaths, getDocData, getDocsSidebar } from 'utilities/docs';
 
 // Custom Types
+import type { DocProps, DocSidebarProps } from 'types/docs';
 export interface DocumentPageProps {
-  children: ReactNode;
   doc: DocProps;
+  sidebar: DocSidebarProps[];
 }
 
 const DocumentPage: FC<DocumentPageProps> = (props) => {
-  // Props
-  const { children, doc } = props;
-
-  return <DocumentLayout doc={doc} />;
+  return <DocumentLayout {...props} />;
 };
 
 export default DocumentPage;
@@ -32,8 +34,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { section, id } = params as { section: string; id: string };
 
   const doc = getDocData(section, id);
+  const sidebar = getDocsSidebar();
 
   return {
-    props: { doc },
+    props: { doc, sidebar },
   };
 };

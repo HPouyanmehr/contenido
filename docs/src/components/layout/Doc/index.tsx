@@ -22,16 +22,17 @@ import BodyOne from 'components/core/BodyOne';
 import FooterOne from 'components/section/footer/One';
 import OnThisPage from 'components/common/Sidebar/OnThisPage';
 import DocsFooter from 'components/section/footer/Doc';
-import { DocProps } from 'types/docs';
+import { DocProps, DocSidebarProps } from 'types/docs';
 import HeadingOne from 'components/core/HeadingOne';
 import Markdown from 'components/common/Markdown';
 export interface PageLayoutProps {
   doc?: DocProps;
+  sidebar?: DocSidebarProps[];
 }
 
 const DocumentLayout: FC<PageLayoutProps> = (props) => {
   // Props
-  const { doc } = props;
+  const { doc, sidebar = [] } = props;
 
   const drawerWidth = 272;
   return (
@@ -41,7 +42,7 @@ const DocumentLayout: FC<PageLayoutProps> = (props) => {
       </Head>
       <DocHeader />
       <Box sx={{ display: 'flex', gap: 4 }}>
-        <DocSidebar />
+        <DocSidebar sidebar={sidebar} />
         <Box sx={{ display: 'flex', gap: 2, flexGrow: 1 }}>
           <Box component='main' sx={{ flexGrow: 1 }}>
             <AppBarSpacer />

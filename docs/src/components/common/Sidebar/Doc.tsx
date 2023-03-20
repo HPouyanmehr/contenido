@@ -1,44 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 // Types
-import BodyOne from 'components/core/BodyOne';
+import type { FC } from 'react';
+
+// Custom Core Components
 import BodyTwo from 'components/core/BodyTwo';
 import Box from 'components/core/Box';
 import Collapse from 'components/core/Collapse';
 import Divider from 'components/core/Divider';
-import Drawer from 'components/core/Drawer';
 import List from 'components/core/List';
-import ListItem from 'components/core/ListItem';
 import ListItemButton from 'components/core/ListItemButton';
 import ListItemIcon from 'components/core/ListItemIcon';
 import ListItemText from 'components/core/ListItemText';
-import ArticleIcon from 'components/icon/Article';
-import type { FC } from 'react';
-import Logo from '../Link/Logo';
-import ChevronRightIcon from 'components/icon/ChevronRight';
-import DarkModeIcon from 'components/icon/DarkMode';
 import AppBarSpacer from 'components/core/AppBarSpacer';
 
-// Custom Types
-export interface DocSidebarProps {}
+// Custom Icon Components
+import DarkModeIcon from 'components/icon/DarkMode';
+import ChevronRightIcon from 'components/icon/ChevronRight';
 
-const sections = [
-  {
-    title: 'getting-started',
-    items: [
-      { title: 'overview', link: '/overview', sort: 0 },
-      { title: 'installation', link: '/installation', sort: 1 },
-    ],
-  },
-  {
-    title: 'Utilities',
-    items: [
-      { title: 'basic', link: '/basic', sort: 0 },
-      { title: 'media', link: '/media', sort: 1 },
-    ],
-  },
-];
+// Custom Types
+import type { DocSidebarProps } from 'types/docs';
+export interface DocSidebarComponentProps {
+  sidebar: DocSidebarProps[];
+}
 
 const fixTitle = (title: string) => {
   const withoutDash = title.replaceAll('-', ' ');
@@ -46,27 +31,31 @@ const fixTitle = (title: string) => {
   return withoutDash.slice(0, 1).toUpperCase() + withoutDash.slice(1);
 };
 
-const DocSidebar: FC<DocSidebarProps> = () => {
+const DocSidebar: FC<DocSidebarComponentProps> = (props) => {
+  // Props
+  const { sidebar } = props;
+
   // States
   const [open, setOpen] = useState<{ [key: string]: boolean }>({});
 
   // Hooks
   const asPath = useRouter().asPath;
-  useEffect(() => {
-    initializeCollapse();
-  }, []);
 
-  // Utilities
-  const initializeCollapse = () => {
+  const initializeCollapse = useCallback(() => {
     let newState: { [key: string]: boolean } = {};
 
-    sections.forEach((section, index) => {
+    sidebar.forEach((section, index) => {
       newState[section.title] = index === 0 ? true : false;
     });
 
     setOpen(newState);
-  };
+  }, [sidebar]);
 
+  useEffect(() => {
+    initializeCollapse();
+  }, [initializeCollapse]);
+
+  // Utilities
   const toggleSection = (title: string, isOpen: boolean) => () => {
     const titles = Object.keys(open);
     const newOpen: { [key: string]: boolean } = {};
@@ -99,7 +88,7 @@ const DocSidebar: FC<DocSidebarProps> = () => {
         }}
       >
         <Box sx={({ spacing }) => ({ m: spacing(1, 0) })}>
-          {sections.map((section, index) => (
+          {sidebar.map((section, index) => (
             <List
               key={section.title + index}
               sx={({ spacing }) => ({
