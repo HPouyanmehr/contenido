@@ -5,15 +5,16 @@ import { useRouter } from 'next/router';
 import type { FC } from 'react';
 
 // Custom Core Components
+import AppBarSpacer from 'components/core/AppBarSpacer';
 import BodyTwo from 'components/core/BodyTwo';
 import Box from 'components/core/Box';
 import Collapse from 'components/core/Collapse';
 import Divider from 'components/core/Divider';
 import List from 'components/core/List';
 import ListItemButton from 'components/core/ListItemButton';
+import ListItemButtonLink from 'components/core/LIstItemButtonLink';
 import ListItemIcon from 'components/core/ListItemIcon';
 import ListItemText from 'components/core/ListItemText';
-import AppBarSpacer from 'components/core/AppBarSpacer';
 
 // Custom Icon Components
 import DarkModeIcon from 'components/icon/DarkMode';
@@ -66,7 +67,14 @@ const DocSidebar: FC<DocSidebarComponentProps> = (props) => {
     setOpen(newOpen);
   };
 
-  const selected = (path: string) => asPath === path;
+  const selected = (path: string): boolean => {
+    let base = asPath;
+    if (asPath.includes('#')) {
+      base = base.slice(0, base.indexOf('#'));
+    }
+
+    return base === path;
+  };
 
   return (
     <Box
@@ -104,9 +112,6 @@ const DocSidebar: FC<DocSidebarComponentProps> = (props) => {
                   p: spacing(0.5, 1),
                 })}
               >
-                {/* <ListItemIcon sx={{ minWidth: '2rem' }}>
-                  <ArticleIcon color='primary' />
-                </ListItemIcon> */}
                 <ListItemText primary={fixTitle(section.title)} />
                 {open[section.title] ? (
                   <ChevronRightIcon sx={{ transform: 'rotate(90deg)' }} />
@@ -121,8 +126,9 @@ const DocSidebar: FC<DocSidebarComponentProps> = (props) => {
                 })}
               >
                 {section.items.map((item, index) => (
-                  <ListItemButton
+                  <ListItemButtonLink
                     key={item.title + index}
+                    href={`/docs/${section.title}/${item.title}`}
                     sx={({ spacing }) => ({
                       borderRadius: 2,
                       p: spacing(0.5, 1),
@@ -141,7 +147,7 @@ const DocSidebar: FC<DocSidebarComponentProps> = (props) => {
                         </BodyTwo>
                       }
                     />
-                  </ListItemButton>
+                  </ListItemButtonLink>
                 ))}
               </Collapse>
             </List>
