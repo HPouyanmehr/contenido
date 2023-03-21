@@ -17,6 +17,7 @@ import MarkdownH6 from 'components/common/Markdown/components/H6';
 import MarkdownLink from 'components/common/Markdown/components/Link';
 import Blockquote from './components/Blockquote';
 import MarkdownCode from './components/Code';
+import MarkdownBody1 from './components/Body1';
 
 // Custom Types
 export interface MarkdownProps {
@@ -35,6 +36,7 @@ const Markdown: FC<MarkdownProps> = (props) => {
           blockquote: Blockquote,
           code: InlineCode,
           hr: Divider,
+          p: MarkdownBody1,
           h1: MarkdownH1,
           h2: MarkdownH2,
           h3: MarkdownH3,

@@ -33,9 +33,21 @@ const DocumentLayout: FC<PageLayoutProps> = (props) => {
       </Head>
       <DocHeader />
       <Box sx={{ display: 'flex', gap: 4 }}>
-        <DocSidebar sidebar={sidebar} />
+        <Box
+          sx={({ breakpoints }) => ({
+            [breakpoints.down('md')]: { display: 'none' },
+          })}
+        >
+          <DocSidebar sidebar={sidebar} />
+        </Box>
         <Box sx={{ display: 'flex', gap: 2, flexGrow: 1 }}>
-          <Box component='main' sx={{ flexGrow: 1 }}>
+          <Box
+            component='main'
+            sx={({ breakpoints }) => ({
+              flexGrow: 1,
+              [breakpoints.down('md')]: { mx: 2 },
+            })}
+          >
             <AppBarSpacer />
             <Markdown>{doc?.content}</Markdown>
           </Box>
