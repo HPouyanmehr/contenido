@@ -76,7 +76,8 @@ const OnThisPage: FC<OnThisPageProps> = (props) => {
           href='/'
           variant='caption'
           color='text.secondary'
-          sx={{ marginLeft: 2, textTransform: 'none' }}
+          underline='hover'
+          sx={{ textTransform: 'none' }}
         >
           Edit this page on GitHub &rarr;
         </Link>
