@@ -9,10 +9,15 @@ import { BodyOneProps } from 'components/core/BodyOne';
 
 const MarkdownBody1: FC<BodyOneProps> = (props) => {
   // Props
-  const { children, color = 'rgba(0, 0, 0, 0.8)', ...otherProps } = props;
+  const {
+    children,
+    color = 'rgba(0, 0, 0, 0.8)',
+    gutterBottom = true,
+    ...otherProps
+  } = props;
 
   return (
-    <BodyOne color={color} {...otherProps}>
+    <BodyOne gutterBottom={gutterBottom} color={color} {...otherProps}>
       {children}
     </BodyOne>
   );
