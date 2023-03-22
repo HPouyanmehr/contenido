@@ -1,9 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import dark from 'react-syntax-highlighter/dist/cjs/styles/hljs/atelier-lakeside-dark';
+import light from 'react-syntax-highlighter/dist/cjs/styles/hljs/atelier-lakeside-light';
 
 // Types
 import type { FC, ReactElement } from 'react';
+
+// Custom Contexts
+import { useThemeModeContext } from 'store/context/themeMode';
 
 // Custom Types
 export interface MarkdownCodeProps {
@@ -17,6 +21,9 @@ const MarkdownCode: FC<MarkdownCodeProps> = (props) => {
   // States
   const [code, setCode] = useState<string>('');
   const [lang, setLang] = useState<string>('');
+
+  // Hooks
+  const { mode } = useThemeModeContext();
 
   // Utilities
   const initializeCode = useCallback(() => {
@@ -42,9 +49,9 @@ const MarkdownCode: FC<MarkdownCodeProps> = (props) => {
   return (
     <SyntaxHighlighter
       language={lang}
-      style={dark}
+      style={mode === 'dark' ? dark : light}
       customStyle={{
-        color: '#d4d4d4',
+        color: mode === 'dark' ? '#d4d4d4' : 'rgba(0, 0, 0, 0.77)',
         padding: '1rem',
         borderRadius: '0.5rem',
       }}

@@ -1,15 +1,15 @@
 import * as React from 'react';
 import Head from 'next/head';
 import { CacheProvider, EmotionCache } from '@emotion/react';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
 
 // Types
 import type { AppProps as NextAppProps } from 'next/app';
 
+// Custom Contexts
+import ContextProvider from 'store/Provider';
+
 // Custom Utilities
 import createEmotionCache from 'utilities/styling/emotion';
-import theme from 'utilities/styling/theme';
 
 // Custom Styles
 import cascadiaCode from 'utilities/styling/fonts/cascadiaCode';
@@ -31,12 +31,11 @@ const App = (props: AppProps) => {
       <Head>
         <meta name='viewport' content='initial-scale=1, width=device-width' />
       </Head>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
+      <ContextProvider>
         <div className={cascadiaCode.className}>
           <Component {...pageProps} />
         </div>
-      </ThemeProvider>
+      </ContextProvider>
     </CacheProvider>
   );
 };

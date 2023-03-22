@@ -1,7 +1,13 @@
 import { createTheme } from '@mui/material/styles';
 
-import lightThemeOptions from './light';
+// Custom Utilities
+import darkThemeOptions from 'utilities/styling/theme/dark';
+import lightThemeOptions from 'utilities/styling/theme/light';
 
-const theme = createTheme(lightThemeOptions);
+// Custom Types
+import type { ThemeMode } from 'types/common/theme';
 
-export default theme;
+const makeTheme = (mode?: ThemeMode) =>
+  createTheme(mode === 'light' ? lightThemeOptions : darkThemeOptions);
+
+export default makeTheme;

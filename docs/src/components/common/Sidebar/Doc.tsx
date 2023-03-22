@@ -20,6 +20,9 @@ import ListItemText from 'components/core/ListItemText';
 import DarkModeIcon from 'components/icon/DarkMode';
 import ChevronRightIcon from 'components/icon/ChevronRight';
 
+// Custom Contexts
+import { useThemeModeContext } from 'store/context/themeMode';
+
 // Custom Types
 import type { DocSidebarProps } from 'types/docs';
 export interface DocSidebarComponentProps {
@@ -41,6 +44,7 @@ const DocSidebar: FC<DocSidebarComponentProps> = (props) => {
 
   // Hooks
   const asPath = useRouter().asPath;
+  const { mode, dispatch } = useThemeModeContext();
 
   const initializeCollapse = useCallback(() => {
     let newState: { [key: string]: boolean } = {};
@@ -65,6 +69,12 @@ const DocSidebar: FC<DocSidebarComponentProps> = (props) => {
     });
 
     setOpen(newOpen);
+  };
+
+  const toggleThemeMode = () => {
+    dispatch({
+      type: mode === 'dark' ? '/themeMode/light' : '/themeMode/dark',
+    });
   };
 
   const selected = (path: string): boolean => {
@@ -158,6 +168,7 @@ const DocSidebar: FC<DocSidebarComponentProps> = (props) => {
           <List sx={({ spacing }) => ({ p: spacing(1, 2) })}>
             <ListItemButton
               disableRipple
+              onClick={toggleThemeMode}
               sx={({ spacing }) => ({
                 borderRadius: 2,
                 p: spacing(0.5, 1),

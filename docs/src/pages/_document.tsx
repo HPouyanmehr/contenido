@@ -4,7 +4,9 @@ import createEmotionServer from '@emotion/server/create-instance';
 
 // Custom Utilities
 import createEmotionCache from 'utilities/styling/emotion';
-import theme from 'utilities/styling/theme';
+import makeTheme from 'utilities/styling/theme';
+
+const theme = makeTheme();
 
 export default class MyDocument extends Document {
   render() {
