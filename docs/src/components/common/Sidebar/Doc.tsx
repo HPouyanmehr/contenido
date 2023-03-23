@@ -17,8 +17,9 @@ import ListItemIcon from 'components/core/ListItemIcon';
 import ListItemText from 'components/core/ListItemText';
 
 // Custom Icon Components
-import DarkModeIcon from 'components/icon/DarkMode';
 import ChevronRightIcon from 'components/icon/ChevronRight';
+import DarkModeIcon from 'components/icon/DarkMode';
+import LightModeIcon from 'components/icon/DarkMode';
 
 // Custom Contexts
 import { useThemeModeContext } from 'store/context/themeMode';
@@ -44,7 +45,7 @@ const DocSidebar: FC<DocSidebarComponentProps> = (props) => {
 
   // Hooks
   const asPath = useRouter().asPath;
-  const { mode, dispatch } = useThemeModeContext();
+  const { mode, toggleThemeMode } = useThemeModeContext();
 
   const initializeCollapse = useCallback(() => {
     let newState: { [key: string]: boolean } = {};
@@ -69,12 +70,6 @@ const DocSidebar: FC<DocSidebarComponentProps> = (props) => {
     });
 
     setOpen(newOpen);
-  };
-
-  const toggleThemeMode = () => {
-    dispatch({
-      type: mode === 'dark' ? '/themeMode/light' : '/themeMode/dark',
-    });
   };
 
   const selected = (path: string): boolean => {
@@ -175,9 +170,12 @@ const DocSidebar: FC<DocSidebarComponentProps> = (props) => {
               })}
             >
               <ListItemIcon sx={{ minWidth: '2rem' }}>
-                <DarkModeIcon />
+                {mode === 'light' ? <LightModeIcon /> : <DarkModeIcon />}
               </ListItemIcon>
-              <ListItemText primary='system' />
+              <ListItemText
+                primary={`${mode} mode`}
+                sx={{ textTransform: 'capitalize' }}
+              />
             </ListItemButton>
           </List>
         </Box>

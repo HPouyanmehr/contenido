@@ -14,7 +14,8 @@ interface ThemeModeContextProviderProps {
 }
 
 export const initialThemeModeContext: ThemeModeContextProps = {
-  mode: 'dark',
+  mode: 'light',
+  toggleThemeMode: () => {},
   dispatch: () => null,
 };
 
@@ -37,8 +38,11 @@ export const ThemeModeContextProvider: FC<ThemeModeContextProviderProps> = (
   // Hooks
   const [mode, dispatch] = useThemeModeReducer();
 
+  // Utilities
+  const toggleThemeMode = () => dispatch({ type: '/themeMode/toggle' });
+
   return (
-    <ThemeModeContext.Provider value={{ mode, dispatch }}>
+    <ThemeModeContext.Provider value={{ mode, dispatch, toggleThemeMode }}>
       {children}
     </ThemeModeContext.Provider>
   );

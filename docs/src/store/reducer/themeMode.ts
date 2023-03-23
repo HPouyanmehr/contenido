@@ -9,6 +9,9 @@ type ThemeModeReducerType = (
 
 const themeModeReducer: ThemeModeReducerType = (state, action) => {
   switch (action.type) {
+    case '/themeMode/toggle':
+      return state === 'dark' ? 'light' : 'dark';
+
     case '/themeMode/light':
       return 'light';
 

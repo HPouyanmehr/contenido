@@ -7,5 +7,6 @@ import type { ThemeModeAction } from 'types/actions/themeMode';
 
 export interface ThemeModeContextProps {
   mode: ThemeMode;
+  toggleThemeMode: () => void;
   dispatch: Dispatch<ThemeModeAction>;
 }
