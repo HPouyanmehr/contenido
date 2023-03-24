@@ -17,6 +17,7 @@ import Box from 'components/core/Box';
 import InstallationButton from 'components/common/Button/Installation';
 
 // Custom Types
+import type { CustomTypeBackground } from 'types/common/theme';
 export interface LandingOneProps {}
 
 const LandingOne: FC<LandingOneProps> = (props) => {
@@ -25,7 +26,13 @@ const LandingOne: FC<LandingOneProps> = (props) => {
   const isDownSm = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <Box sx={{ backgroundImage: 'linear-gradient(#fff 60%, #edf7fe)' }}>
+    <Box
+      sx={({ palette }) => ({
+        backgroundImage: `linear-gradient(${
+          (palette.background as CustomTypeBackground).default
+        } 60%, ${(palette.background as CustomTypeBackground).card})`,
+      })}
+    >
       <Container>
         <CenterBox flexDirection='column' minHeight='92vh'>
           <HeadingOne textAlign='center'>

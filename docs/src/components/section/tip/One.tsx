@@ -6,15 +6,21 @@ import CenterBox from 'components/core/CenterBox';
 import Container from 'components/core/Container';
 import HeadingTwo from 'components/core/HeadingTwo';
 
+// Custom Hooks
+import { useThemeModeContext } from 'store/context/themeMode';
+
 // Custom Types
 export interface TipOneProps {}
 
 const TipOne: FC<TipOneProps> = (props) => {
+  // Hooks
+  const { mode } = useThemeModeContext();
+
   return (
     <CenterBox
       sx={({ breakpoints }) => ({
         minHeight: '50vh',
-        bgcolor: '#163649',
+        bgcolor: mode === 'dark' ? '#1C4259' : '#163649',
         '& .tipHighlight': {
           fontWeight: 700,
         },

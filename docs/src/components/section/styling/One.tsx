@@ -1,21 +1,22 @@
 import * as React from 'react';
 
 // Types
-import Stack from 'components/core/Stack';
+import type { FC } from 'react';
+
+// Custom Core Components
 import BodyOne from 'components/core/BodyOne';
+import BodyTwo from 'components/core/BodyTwo';
 import Box from 'components/core/Box';
 import Button from 'components/core/Button';
-import Container from 'components/core/Container';
-import Grid from 'components/core/Grid';
-import HeadingTwo from 'components/core/HeadingTwo';
-import MenuItem from 'components/core/MenuItem';
-import type { FC } from 'react';
-import BodyTwo from 'components/core/BodyTwo';
 import ButtonGroup from 'components/core/ButtonGroup';
-import SpacedBox from 'components/core/SpacedBox';
+import Container from 'components/core/Container';
+import HeadingTwo from 'components/core/HeadingTwo';
 import Link from 'components/core/Link';
+import SpacedBox from 'components/core/SpacedBox';
+import Stack from 'components/core/Stack';
 
 // Custom Types
+import type { CustomTypeBackground } from 'types/common/theme';
 export interface StylingOneProps {}
 type UIMode = 'MUI' | 'Bootstrap' | 'tailwind';
 
@@ -72,11 +73,11 @@ const StylningOne: FC<StylingOneProps> = () => {
         </Stack>
         <Stack
           spacing={0}
-          sx={({ breakpoints }) => ({
+          sx={({ breakpoints, palette }) => ({
             display: 'inline-flex',
             borderRadius: '1rem',
             p: '1rem',
-            background: '#edf7fe',
+            background: (palette.background as CustomTypeBackground).card,
             width: '49%',
             flexDirection: 'column',
             gap: '0.5rem',

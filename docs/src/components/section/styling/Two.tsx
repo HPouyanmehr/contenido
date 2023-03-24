@@ -21,6 +21,7 @@ import ArrowDropDownIcon from 'components/icon/ArrowDropDown';
 import CheckIcon from 'components/icon/Check';
 
 // Custom Types
+import type { CustomTypeBackground } from 'types/common/theme';
 export interface StylingTwoProps {}
 type EditMode = 'size' | 'color' | 'transform' | 'family';
 interface CustomEditorStyles {
@@ -92,8 +93,8 @@ const StylingTwo: FC<StylingTwoProps> = () => {
           </BodyOne>
         </Box>
         <Box
-          sx={({ breakpoints }) => ({
-            background: '#edf7fe',
+          sx={({ breakpoints, palette }) => ({
+            background: (palette.background as CustomTypeBackground).card,
             p: '1rem',
             borderRadius: '1rem',
             display: 'inline-flex',

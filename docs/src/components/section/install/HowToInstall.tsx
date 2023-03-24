@@ -3,20 +3,18 @@ import type { FC } from 'react';
 
 // Custom Core Components
 import BodyOne from 'components/core/BodyOne';
+import Box from 'components/core/Box';
+import ButtonLink from 'components/core/ButtonLink';
 import Container from 'components/core/Container';
 import HeadingTwo from 'components/core/HeadingTwo';
-import Grid from 'components/core/Grid';
-import ButtonLink from 'components/core/ButtonLink';
-import Button from 'components/core/Button';
-import Stack from 'components/core/Stack';
 import Link from 'components/core/Link';
-import Box from 'components/core/Box';
-import IconButton from 'components/core/IconButton';
-import CopyToClip from 'components/common/IconButton/CopyToClip';
 import SpacedBox from 'components/core/SpacedBox';
-import BodyTwo from 'components/core/BodyTwo';
+
+// Custom Common Components
+import CopyToClip from 'components/common/IconButton/CopyToClip';
 
 // Custom Types
+import type { CustomTypeBackground } from 'types/common/theme';
 export interface HowToInstallProps {}
 
 const HowToInstall: FC<HowToInstallProps> = () => {
@@ -44,8 +42,8 @@ const HowToInstall: FC<HowToInstallProps> = () => {
           </BodyOne>
         </Box>
         <Box
-          sx={({ breakpoints }) => ({
-            background: '#edf7fe',
+          sx={({ breakpoints, palette }) => ({
+            background: (palette.background as CustomTypeBackground).card,
             p: '1rem',
             borderRadius: '1rem',
             display: 'inline-flex',
