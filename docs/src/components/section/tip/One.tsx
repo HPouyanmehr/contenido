@@ -38,12 +38,12 @@ const TipOne: FC<TipOneProps> = (props) => {
           variant='body1'
           color='white'
         >
-          Contenido doesn’t aim to give you a ready to use text editor, its odd
-          and you can find some editors that works good and are enough for your
-          needs. The main purpose is to give you{' '}
+          Contenido doesn&apos;t aim to give you a ready-to-use text editor,
+          it&apos;s odd and you can find some editors that work well and are
+          enough for your needs. The main purpose is to give you{' '}
           <span className='tipHighlight'>
-            the ability of creating your own custom look rich text editor a lot
-            faster and easier.
+            the ability to create your custom look rich-text editor a lot faster
+            and easier.
           </span>
         </HeadingTwo>
       </Container>

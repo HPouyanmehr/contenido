@@ -67,8 +67,8 @@ const StylningOne: FC<StylingOneProps> = () => {
           })}
         >
           <BodyOne>
-            You can entireliy mix contenido with UI libraries like MUI,
-            bootstrap, tailwind, ant design, grommet and ...
+            You can entirely mix contenido with UI libraries like MUI,
+            bootstrap, tailwind, ant design, chakra, and ...
           </BodyOne>
         </Stack>
         <Stack
@@ -127,7 +127,7 @@ const StylningOne: FC<StylingOneProps> = () => {
               p: '0.5rem 0.75rem',
             }}
           >
-            Create your editor toolbar with your favorite UI with{' '}
+            Create your editor toolbar with your favorite UI library with{' '}
             <Link href='/' underline='hover'>
               Contenido
             </Link>

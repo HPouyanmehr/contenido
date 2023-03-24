@@ -29,7 +29,7 @@ const HeadingOne: FC<HeadingOneProps> = (props) => {
   return (
     <Typography
       component='h1'
-      fontSize={isDownSM ? '1.6em' : '2em'}
+      fontSize={isDownSM ? '1.6em' : '1.85em'}
       fontWeight={700}
       margin='0.67em 0'
       variant={variant}

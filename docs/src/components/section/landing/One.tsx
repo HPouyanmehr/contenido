@@ -12,9 +12,10 @@ import Link from 'components/core/Link';
 import Stack from 'components/core/Stack';
 
 // Custom Common Components
-import CopyToClip from 'components/common/IconButton/CopyToClip';
 import Box from 'components/core/Box';
-import InstallationButton from 'components/common/Button/Installation';
+
+// Custom Data
+import * as links from 'data/links.json';
 
 // Custom Types
 import type { CustomTypeBackground } from 'types/common/theme';
@@ -36,8 +37,8 @@ const LandingOne: FC<LandingOneProps> = (props) => {
       <Container>
         <CenterBox flexDirection='column' minHeight='92vh'>
           <HeadingOne textAlign='center'>
-            Contenido is a set of tools to help you create your own editor on
-            top of{' '}
+            Contenido is a library with a set of tools to help you create your
+            own rich text editor on top of{' '}
             <Link
               href='https://github.com/facebookarchive/draft-js'
               target='_blank'
@@ -53,14 +54,14 @@ const LandingOne: FC<LandingOneProps> = (props) => {
             justifyContent='center'
           >
             <ButtonLink
-              href='/docs'
+              href={links.docs}
               size='large'
               variant='contained'
               sx={{ borderRadius: '2rem 2rem 0 2rem' }}
             >
               Explore the docs
             </ButtonLink>
-            <Link href='/examples' underline='hover'>
+            <Link href={links.examples} underline='hover'>
               examples &rarr;
             </Link>
           </Stack>

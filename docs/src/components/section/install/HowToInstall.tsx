@@ -13,6 +13,9 @@ import SpacedBox from 'components/core/SpacedBox';
 // Custom Common Components
 import CopyToClip from 'components/common/IconButton/CopyToClip';
 
+// Custom Data
+import * as links from 'data/links.json';
+
 // Custom Types
 import type { CustomTypeBackground } from 'types/common/theme';
 export interface HowToInstallProps {}
@@ -36,9 +39,8 @@ const HowToInstall: FC<HowToInstallProps> = () => {
           })}
         >
           <BodyOne>
-            Simply implement your needs of text styling. Change the text font
-            family, size, color, transform or whatever else that you can do with
-            pure CSS.
+            Install Contenido easily and in one go to explore the features and
+            create your RTE.
           </BodyOne>
         </Box>
         <Box
@@ -61,10 +63,10 @@ const HowToInstall: FC<HowToInstallProps> = () => {
             })}
           >
             <SpacedBox>
-              <ButtonLink href='/docs' variant='outlined'>
+              <ButtonLink href={links.docs} variant='outlined'>
                 Documentation
               </ButtonLink>
-              <Link href='/examples' underline='hover'>
+              <Link href={links.examples} underline='hover'>
                 Examples &rarr;
               </Link>
             </SpacedBox>

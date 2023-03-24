@@ -37,20 +37,19 @@ const cards: CardData[] = [
   {
     Icon: BoltIcon,
     title: 'Easy \nto Use',
-    description:
-      'You can create a rich text editor that you want. The one that fits your website design.',
+    description: `Utilities have been declared clearly, So you won't have any tension in using them.`,
   },
   {
     Icon: AutoFixHighIcon,
     title: 'Utility \nFirst Lib',
     description:
-      'You can create a rich text editor that you want. The one that fits your website design.',
+      'Save your time to make your desired editor, not the repetitive process of handling things.',
   },
   {
     Icon: ArticleIcon,
     title: 'Well \nDocumented',
     description:
-      'You can create a rich text editor that you want. The one that fits your website design.',
+      'Although the library core is on top of draft-js, the documentation will be something else.',
   },
 ];
 
@@ -61,9 +60,10 @@ const WhyContenido: FC<WhyContenidoProps> = (props) => {
       <Stack alignItems='flex-start' direction='column' spacing={2}>
         <Stack alignItems='flex-start' direction='column' spacing={0}>
           <BodyOne>
-            Mainly, you can have the RTE that you&apos;ve ever wanted,
+            Mainly, Contenido helps you to create the editore you&apos;ve ever
+            wanted,
           </BodyOne>
-          <BodyOne>Also these are some of contenido&apos;s benefits.</BodyOne>
+          <BodyOne>Also, these are some of contenido&apos;s benefits.</BodyOne>
         </Stack>
         <Box display='flex' flexWrap='wrap' justifyContent='space-between'>
           {cards.map((card, index) => (

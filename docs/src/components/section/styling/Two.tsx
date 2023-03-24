@@ -87,9 +87,9 @@ const StylingTwo: FC<StylingTwoProps> = () => {
           })}
         >
           <BodyOne>
-            Simply implement your needs of text styling. Change the text font
-            family, size, color, transform or whatever else that you can do with
-            pure CSS.
+            Simply implement your needs for text styling. Change the text font
+            family, size, color, transform, or whatever else that you can do
+            with pure CSS.
           </BodyOne>
         </Box>
         <Box
@@ -236,7 +236,7 @@ const StylingTwo: FC<StylingTwoProps> = () => {
             }}
           >
             This is a basic example of custom text styling. You can create MORE
-            styles base on your needs.
+            styles based on your needs.
           </BodyTwo>
         </Box>
       </Box>
