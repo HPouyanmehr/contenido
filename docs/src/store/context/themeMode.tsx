@@ -14,7 +14,7 @@ interface ThemeModeContextProviderProps {
 }
 
 export const initialThemeModeContext: ThemeModeContextProps = {
-  mode: 'light',
+  mode: 'dark',
   toggleThemeMode: () => {},
   dispatch: () => null,
 };
