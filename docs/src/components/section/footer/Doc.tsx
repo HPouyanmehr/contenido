@@ -12,11 +12,17 @@ import Stack from 'components/core/Stack';
 import GitHubIconButtonLink from 'components/common/Link/GitHub';
 
 // Custom Types
+import type { CustomTypeBackground } from 'types/common/theme';
 export interface DocsOneProps {}
 
 const DocsFooter: FC<DocsOneProps> = () => {
   return (
-    <Box sx={{ marginTop: '2rem', backgroundColor: '#edf7fe' }}>
+    <Box
+      sx={({ palette }) => ({
+        marginTop: '2rem',
+        backgroundColor: (palette.background as CustomTypeBackground).card,
+      })}
+    >
       <Divider />
       <Container maxWidth='xl'>
         <Box
