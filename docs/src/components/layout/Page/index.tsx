@@ -8,7 +8,7 @@ import AppBarSpacer from 'components/core/AppBarSpacer';
 import Header from 'components/common/Header';
 
 // Custom Data
-import * as common from 'data/common/en.json';
+import common from 'data/common/en.json';
 
 // Custom Types
 import Head from 'next/head';

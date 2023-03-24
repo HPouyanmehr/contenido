@@ -15,7 +15,7 @@ import Stack from 'components/core/Stack';
 import Box from 'components/core/Box';
 
 // Custom Data
-import * as links from 'data/links.json';
+import links from 'data/links.json';
 
 // Custom Types
 import type { CustomTypeBackground } from 'types/common/theme';

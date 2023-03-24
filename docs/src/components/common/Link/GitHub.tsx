@@ -8,7 +8,7 @@ import IconButtonLink from 'components/core/IconButtonLink';
 import GitHubIcon from 'components/icon/GitHub';
 
 // Custom Data
-import * as links from 'data/links.json';
+import links from 'data/links.json';
 
 // Custom Types
 import type { IconButtonProps } from 'components/core/IconButton';

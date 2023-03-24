@@ -14,7 +14,7 @@ import SpacedBox from 'components/core/SpacedBox';
 import CopyToClip from 'components/common/IconButton/CopyToClip';
 
 // Custom Data
-import * as links from 'data/links.json';
+import links from 'data/links.json';
 
 // Custom Types
 import type { CustomTypeBackground } from 'types/common/theme';
