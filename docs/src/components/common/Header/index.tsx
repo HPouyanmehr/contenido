@@ -14,9 +14,24 @@ import Logo from 'components/common/Link/Logo';
 import ThemeTogglerIconButton from 'components/common/IconButton/ThemeToggler';
 import MenuToggler from 'components/common/IconButton/MenuToggler';
 
+// Custom Data
+import links from 'data/links.json';
+
 // Custom Types
 import type { AppBarProps } from 'components/core/AppBar';
 export interface HeaderProps extends AppBarProps {}
+
+interface MenuItemProps {
+  title: string;
+  link: string;
+  disabled?: boolean;
+}
+
+const menuItems: MenuItemProps[] = [
+  { title: 'docs', link: links.docs },
+  { title: 'blog', link: links.blog, disabled: true },
+  { title: 'examples', link: links.examples, disabled: true },
+];
 
 const Header: FC<HeaderProps> = (props) => {
   // Props
@@ -36,9 +51,14 @@ const Header: FC<HeaderProps> = (props) => {
           })}
         >
           <Stack>
-            {['Docs', 'Blog', 'Example'].map((item) => (
-              <ButtonLink sx={{ fontWeight: 'bold' }} href='/' key={item}>
-                {item}
+            {menuItems.map((item, index) => (
+              <ButtonLink
+                sx={{ fontWeight: 'bold', textTransform: 'capitalize' }}
+                href={item.link}
+                disabled={item.disabled}
+                key={item.link + item.title + index}
+              >
+                {item.title}
               </ButtonLink>
             ))}
           </Stack>

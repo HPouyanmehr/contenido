@@ -4,6 +4,7 @@ import { useMediaQuery, useTheme } from '@mui/material';
 import type { FC } from 'react';
 
 // Custom Core Components
+import BodyOne from 'components/core/BodyOne';
 import ButtonLink from 'components/core/ButtonLink';
 import CenterBox from 'components/core/CenterBox';
 import Container from 'components/core/Container';
@@ -61,9 +62,7 @@ const LandingOne: FC<LandingOneProps> = (props) => {
             >
               Explore the docs
             </ButtonLink>
-            <Link href={links.examples} underline='hover'>
-              examples &rarr;
-            </Link>
+            <BodyOne color='text.disabled'>examples &rarr;</BodyOne>
           </Stack>
         </CenterBox>
       </Container>

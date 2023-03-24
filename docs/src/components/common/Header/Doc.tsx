@@ -6,20 +6,33 @@ import type { FC } from 'react';
 // Custom Core Components
 import AppBar from 'components/core/AppBar';
 import ButtonLink from 'components/core/ButtonLink';
+import Divider from 'components/core/Divider';
 import Stack from 'components/core/Stack';
-import StackDivider from 'components/core/StackDivider';
 import Toolbar from 'components/core/Toolbar';
 
 // Custom Common Components
 import GitHubIconButtonLink from 'components/common/Link/GitHub';
 import Logo from 'components/common/Link/Logo';
-import ThemeTogglerIconButton from 'components/common/IconButton/ThemeToggler';
 import MenuToggler from 'components/common/IconButton/MenuToggler';
+
+// Custom Data
+import links from 'data/links.json';
 
 // Custom Types
 import type { AppBarProps } from 'components/core/AppBar';
-import Divider from 'components/core/Divider';
 export interface DocHeaderProps extends AppBarProps {}
+
+interface MenuItemProps {
+  title: string;
+  link: string;
+  disabled?: boolean;
+}
+
+const menuItems: MenuItemProps[] = [
+  { title: 'docs', link: links.docs },
+  { title: 'blog', link: links.blog, disabled: true },
+  { title: 'examples', link: links.examples, disabled: true },
+];
 
 const DocHeader: FC<DocHeaderProps> = (props) => {
   // Props
@@ -46,9 +59,14 @@ const DocHeader: FC<DocHeaderProps> = (props) => {
           })}
         >
           <Stack>
-            {['Docs', 'Blog', 'Example'].map((item) => (
-              <ButtonLink sx={{ fontWeight: 'bold' }} href='/' key={item}>
-                {item}
+            {menuItems.map((item, index) => (
+              <ButtonLink
+                sx={{ fontWeight: 'bold', textTransform: 'capitalize' }}
+                href={item.link}
+                disabled={item.disabled}
+                key={item.link + item.title + index}
+              >
+                {item.title}
               </ButtonLink>
             ))}
             <GitHubIconButtonLink />
