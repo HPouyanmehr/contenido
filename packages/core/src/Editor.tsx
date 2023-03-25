@@ -7,12 +7,12 @@ import type { FC, RefObject } from 'react';
 import type { EditorProps as DraftEditorProps } from 'draft-js';
 
 // Custom Utilities
-import isBlockquote from '../utilities/block/isBlockquote';
-import isOL from '../utilities/block/isOL';
-import isUL from '../utilities/block/isUL';
+import isBlockquote from './utilities/block/isBlockquote';
+import isOL from './utilities/block/isOL';
+import isUL from './utilities/block/isUL';
 
 // Custom Styles
-import '../styles/main.css';
+import './styles/main.css';
 
 // Custom Types
 export interface EditorProps extends DraftEditorProps {
