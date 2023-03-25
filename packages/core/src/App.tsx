@@ -7,9 +7,6 @@ import 'draft-js/dist/Draft.css';
 // Custom Components
 import Editor from './components/Editor';
 
-// Custom Styles
-import './App.css';
-
 function App() {
   // States
   const [editorState, setEditorState] = React.useState(
@@ -20,16 +17,11 @@ function App() {
   const ref = React.useRef(null);
 
   return (
-    <div>
-      <p>Hello Contenido</p>
-      <Editor
-        editorState={editorState}
-        editorRef={ref}
-        onChange={setEditorState}
-        placeholder='تایپ کنید...'
-        rtlPlaceholder
-      />
-    </div>
+    <Editor
+      editorState={editorState}
+      editorRef={ref}
+      onChange={setEditorState}
+    />
   );
 }
 
