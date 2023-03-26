@@ -1,6 +1,6 @@
 {
   "name": "contenido",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "private": false,
   "description": "Contenido is a set of tools to help you create your own editor on top of draft-js without thinking about how to handle things.",
   "author": {
@@ -24,6 +24,12 @@
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "start": "vite",
     "build": "eslint src && tsc && vite build",
