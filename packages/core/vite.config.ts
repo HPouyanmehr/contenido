@@ -13,5 +13,13 @@ export default defineConfig({
       formats: ['es', 'cjs'],
       fileName: (format) => `index.${format}.js`,
     },
+    rollupOptions: {
+      external: ['react', 'react-dom'],
+      output: {
+        globals: {
+          react: 'React',
+        },
+      },
+    },
   },
 });
