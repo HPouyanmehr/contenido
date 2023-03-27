@@ -1,6 +1,6 @@
 {
   "name": "contenido",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "private": false,
   "description": "Contenido is a library with a set of tools to help you create your own rich text editor on top of draft-js without thinking about how to handle things.",
   "author": {
@@ -23,20 +23,16 @@
     "url": "https://github.com/HPouyanmehr/contenido/issues"
   },
   "license": "MIT",
-  "files": [
-    "dist/."
-  ],
-  "module": "./dist/index.js",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js"
-    }
-  },
+  "type": "module",
+  "main": "index.ts",
   "scripts": {
-    "start": "vite",
-    "build": "eslint src && tsc && vite build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "build-lib": "rollup -c"
   },
   "eslintConfig": {
     "extends": [
@@ -56,28 +52,49 @@
       "last 1 safari version"
     ]
   },
+  "peerDependencies": {
+    "@types/react": "^17.0.0 || ^18.0.0",
+    "@types/react-dom": "^17.0.0 || ^18.0.0",
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
+  },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@babel/core": "^7.21.3",
+    "@babel/preset-react": "^7.18.6",
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-terser": "^0.4.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@storybook/addon-actions": "^6.5.16",
+    "@storybook/addon-essentials": "^6.5.16",
+    "@storybook/addon-interactions": "^6.5.16",
+    "@storybook/addon-links": "^6.5.16",
+    "@storybook/builder-webpack4": "^6.5.16",
+    "@storybook/builder-webpack5": "^6.5.16",
+    "@storybook/manager-webpack4": "^6.5.16",
+    "@storybook/manager-webpack5": "^6.5.16",
+    "@storybook/react": "^6.5.16",
+    "@storybook/testing-library": "^0.0.13",
     "@types/draft-js": "^0.11.10",
-    "@types/jest": "^27.5.2",
     "@types/node": "^16.18.11",
-    "@types/react": "^18.0.26",
-    "@types/react-dom": "^18.0.10",
-    "@vitejs/plugin-react": "^3.1.0",
-    "@vitejs/plugin-react-refresh": "^1.3.6",
+    "@types/react": "^17.0.0 || ^18.0.0",
+    "@types/react-dom": "^17.0.0 || ^18.0.0",
+    "babel-loader": "^8.3.0",
     "draft-js": "^0.11.7",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "postcss": "^8.4.21",
+    "postcss-loader": "^7.1.0",
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0",
     "react-scripts": "5.0.1",
+    "rollup": "^3.20.2",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
     "typescript": "^4.9.4",
-    "vite": "^4.0.4",
-    "vite-plugin-dts": "^2.1.0",
-    "vite-tsconfig-paths": "^4.0.7",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "webpack": "^5.76.3"
   },
   "dependencies": {
+    "@rollup/plugin-babel": "^6.0.3",
     "classnames": "^2.3.2"
   }
 }
