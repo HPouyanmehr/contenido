@@ -1,7 +1,10 @@
+// Types
+import type { RawDraftContentState } from 'draft-js';
+
 // Core
 import { genKey } from '../../core';
 
-const emptyContentState = {
+const emptyRawContentState: RawDraftContentState = {
   entityMap: {},
   blocks: [
     {
@@ -15,4 +18,4 @@ const emptyContentState = {
   ],
 };
 
-export default emptyContentState;
+export default emptyRawContentState;
