@@ -1,4 +1,8 @@
-import { AtomicBlockUtils, DraftEntityMutability, EditorState } from 'draft-js';
+// Core
+import { AtomicBlockUtils, EditorState } from '../../core';
+
+// Core Types
+import type { DraftEntityMutability } from '../../core';
 
 // Custom Types
 import type { Attributes, State, StateHandler } from '../../types';

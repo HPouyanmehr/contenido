@@ -1,4 +1,5 @@
-import { getDefaultKeyBinding, KeyBindingUtil } from 'draft-js';
+// Core
+import { getDefaultKeyBinding, KeyBindingUtil } from '../../core';
 
 // Custom Utilities
 import initialShortcuts from './initial';

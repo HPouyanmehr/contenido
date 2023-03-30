@@ -1,4 +1,5 @@
-import { EditorState, RichUtils } from 'draft-js';
+// Core
+import { EditorState, RichUtils } from '../../core';
 
 // Custom Types
 import type { LinkAttributes, State, StateHandler } from '../../types';

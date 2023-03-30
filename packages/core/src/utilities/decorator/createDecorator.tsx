@@ -1,4 +1,8 @@
-import { CompositeDecorator, DraftDecorator } from 'draft-js';
+// Core
+import { CompositeDecorator } from '../../core';
+
+// Core Types
+import type { DraftDecorator } from '../../core';
 
 // Custom Hocs
 import withDecoratorComponent from './withDecoratorComponent';

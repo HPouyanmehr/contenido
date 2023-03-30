@@ -1,4 +1,5 @@
-import { RichUtils } from 'draft-js';
+// Core
+import { RichUtils } from '../../core';
 
 // Custom Types
 import type { State, StateHandler } from '../../types';

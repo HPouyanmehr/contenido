@@ -1,4 +1,5 @@
-import { EditorState, Modifier } from 'draft-js';
+// Core
+import { EditorState, Modifier } from '../../core';
 
 // Custom Utilities
 import initialInlineStyles from '../inline/inlineStyles';

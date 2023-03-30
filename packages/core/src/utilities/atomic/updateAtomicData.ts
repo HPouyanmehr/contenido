@@ -1,4 +1,5 @@
-import { EditorState } from 'draft-js';
+// Core
+import { EditorState } from '../../core';
 
 // Types
 import type { Attributes, State, StateHandler } from '../../types';

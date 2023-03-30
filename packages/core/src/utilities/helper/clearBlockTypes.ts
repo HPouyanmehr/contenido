@@ -1,4 +1,5 @@
-import { EditorState, Modifier, SelectionState } from 'draft-js';
+// Core
+import { EditorState, Modifier, SelectionState } from '../../core';
 
 // Custom Utilities
 import getSelectedBlocksMap from './getSelectedBlocksMap';

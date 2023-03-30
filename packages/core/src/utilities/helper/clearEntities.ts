@@ -1,4 +1,5 @@
-import { EditorState, Modifier } from 'draft-js';
+// Core
+import { EditorState, Modifier } from '../../core';
 
 // Custom Types
 import type { State, StateHandler } from '../../types';
