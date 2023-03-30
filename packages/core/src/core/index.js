@@ -10,6 +10,8 @@ const {
   SelectionState,
   KeyBindingUtil,
   convertToRaw,
+  convertFromRaw,
+  genKey,
   getDefaultKeyBinding,
 } = Draft;
 
@@ -23,6 +25,8 @@ module.exports = {
   SelectionState,
   KeyBindingUtil,
   convertToRaw,
+  convertFromRaw,
+  genKey,
   getDefaultKeyBinding,
 };
 module.exports.DraftEntityMutability = Draft.DraftEntityMutability;
