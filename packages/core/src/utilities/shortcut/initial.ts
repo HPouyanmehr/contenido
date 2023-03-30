@@ -1,4 +1,5 @@
-import { KeyBindingUtil } from 'draft-js';
+// Core
+import { KeyBindingUtil } from '../../core';
 
 // Custom Utilities
 import toggleBold from '../inline/toggleBold';

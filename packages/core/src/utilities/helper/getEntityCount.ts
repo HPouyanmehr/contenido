@@ -1,4 +1,4 @@
-import { convertToRaw } from 'draft-js';
+import { convertToRaw } from '../../core';
 
 // Custom Types
 import type { State } from '../../types';
