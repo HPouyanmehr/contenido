@@ -81,6 +81,7 @@ export { default as clear } from './utilities/helper/clear';
 export { default as clearBlockTypes } from './utilities/helper/clearBlockTypes';
 export { default as clearEntities } from './utilities/helper/clearEntities';
 export { default as clearInlineStyles } from './utilities/helper/clearInlineStyles';
+export { default as emptyContentState } from './utilities/helper/emptyContentState';
 export { default as focusOnEditor } from './utilities/helper/focusOnEditor';
 export { default as getAtomicCount } from './utilities/helper/getAtomicCount';
 export { default as getAudioCount } from './utilities/helper/getAudioCount';
