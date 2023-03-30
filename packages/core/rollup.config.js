@@ -1,7 +1,10 @@
-import typescript from 'rollup-plugin-typescript2';
+import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
-import css from 'rollup-plugin-css-only';
+import external from 'rollup-plugin-peer-deps-external';
+import terser from '@rollup/plugin-terser';
+import postcss from 'rollup-plugin-postcss';
+import typescript from 'rollup-plugin-typescript2';
 
 const config = {
   input: './src/index.ts',
@@ -10,23 +13,32 @@ const config = {
       file: './dist/index.js',
       format: 'cjs',
       sourcemap: true,
+      exports: 'named',
     },
     {
-      file: 'dist/index.es.js',
-      format: 'es',
+      file: './dist/index.esm.js',
+      format: 'esm',
       sourcemap: true,
+      exports: 'named',
     },
   ],
-  external: ['react', 'react-dom'],
+  external: ['react', 'react-dom', 'draft-js'],
   plugins: [
-    css(),
+    external(),
     resolve(),
-    commonjs(),
+    babel({
+      exclude: 'node_modules/**',
+      presets: ['@babel/preset-react'],
+    }),
     typescript({
       tsconfig: './tsconfig.json',
-      clean: true,
-      declaration: true,
     }),
+    postcss({
+      plugins: [],
+      minimize: true,
+    }),
+    commonjs(),
+    terser(),
   ],
 };
 
