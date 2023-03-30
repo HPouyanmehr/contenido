@@ -1,38 +1,79 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Contenido - Overview
 
-## Getting Started
+Contenido is a library for building highly customizable rich text editors in React. Check out the documentation and demos [here]('https://contenidojs.com').
 
-First, run the development server:
+## Introduction
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+Contenido is a library with a set of tools to help you create your own editor on top of [draft-js]('https://github.com/facebookarchive/draft-js') without thinking about how to handle things.
+
+Contenido doesn’t aim to give you a ready to use text editor, you can find some editors that works good and are enough for your needs. The main purpose is to give you **the ability of creating your own custom look rich text editor a lot faster and easier**.
+
+## Installation
+
+You can add `contenido` to your project by running the following commands:
+
+React + Typescript:
+
+```shell
+npm i draft-js @types/draft-js contenido@latest
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+React + Javascript:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```shell
+npm i draft-js contenido@latest
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Peer dependencies
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+`react` >= 17.0.0  
+`react-dom` >= 17.0.0  
+`draft-js` >= 0.11.0
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Features
 
-## Learn More
+Contenido provides a ton of ready to use utilities to boost your development speed. Also there are methods to help you customize things in it. Here are some the library features:
 
-To learn more about Next.js, take a look at the following resources:
+- Inline
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  - bold
+  - italic
+  - undeline
+  - line through
+  - overline
+  - superscript
+  - subscript
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Block
 
-## Deploy on Vercel
+  - heading one to six (h1-h6)
+  - ordered list
+  - unordered list
+  - blockquote
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Insertion
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  - image
+  - video
+  - audio
+  - file
+  - link
+
+- Text alignment
+- Inline style clearing
+- Block type clearing
+- Entities clearing
+- Atomic data update
+- Built-in shortcuts
+- Word array
+- Link preview
+- Light and dark mode friendly
+
+- Counter
+  - word counter
+  - character counter
+  - image counter
+  - video counter
+  - file counter
+  - audio counter
+  - link counter
