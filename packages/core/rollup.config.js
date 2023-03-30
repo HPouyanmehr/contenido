@@ -13,7 +13,6 @@ const config = {
       file: './dist/index.js',
       format: 'cjs',
       sourcemap: true,
-      exports: 'named',
     },
     {
       file: './dist/index.esm.js',
