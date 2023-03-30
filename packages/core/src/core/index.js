@@ -1,4 +1,4 @@
-import Draft from 'draft-js';
+const Draft = require('draft-js');
 
 const {
   AtomicBlockUtils,
@@ -11,7 +11,7 @@ const {
   getDefaultKeyBinding,
 } = Draft;
 
-export {
+module.exports = {
   AtomicBlockUtils,
   CompositeDecorator,
   EditorState,
@@ -21,4 +21,5 @@ export {
   KeyBindingUtil,
   getDefaultKeyBinding,
 };
-export type { DraftEntityMutability, DraftDecorator } from 'draft-js';
+module.exports.DraftEntityMutability = Draft.DraftEntityMutability;
+module.exports.DraftDecorator = Draft.DraftDecorator;
