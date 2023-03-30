@@ -1,10 +1,15 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import { Editor as DraftEditor } from 'draft-js';
 
 // Types
 import type { FC, RefObject } from 'react';
-import type { EditorProps as DraftEditorProps } from 'draft-js';
+import type {
+  EditorProps as DraftEditorProps,
+  Editor as DraftEditorType,
+} from 'draft-js';
+
+// Core
+import { Editor as DraftEditor } from './core';
 
 // Custom Utilities
 import isBlockquote from './utilities/block/isBlockquote';
@@ -17,7 +22,7 @@ import './styles/main.css';
 // Custom Types
 export interface EditorProps extends DraftEditorProps {
   rtlPlaceholder?: boolean;
-  editorRef?: RefObject<DraftEditor> | undefined;
+  editorRef?: RefObject<DraftEditorType> | undefined;
 }
 
 const Editor: FC<EditorProps> = (props) => {

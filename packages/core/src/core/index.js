@@ -3,6 +3,7 @@ const Draft = require('draft-js');
 const {
   AtomicBlockUtils,
   CompositeDecorator,
+  Editor,
   EditorState,
   Modifier,
   RichUtils,
@@ -15,6 +16,7 @@ const {
 module.exports = {
   AtomicBlockUtils,
   CompositeDecorator,
+  Editor,
   EditorState,
   Modifier,
   RichUtils,
