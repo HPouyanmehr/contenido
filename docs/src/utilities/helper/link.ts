@@ -26,3 +26,11 @@ export const isExternal = (href?: string | URL | Url | UrlObject): boolean => {
     ? true
     : false;
 };
+
+export const getPurePath = (href?: string): string => {
+  if (!href) return '';
+
+  if (href.includes('#')) return href.slice(0, href.indexOf('#'));
+
+  return href;
+};

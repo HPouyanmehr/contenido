@@ -8,6 +8,7 @@ import type { FC, ReactElement } from 'react';
 
 // Custom Contexts
 import { useThemeModeContext } from 'store/context/themeMode';
+import Box from 'components/core/Box';
 
 // Custom Types
 export interface MarkdownCodeProps {
@@ -47,17 +48,19 @@ const MarkdownCode: FC<MarkdownCodeProps> = (props) => {
   }, [children, initializeCode]);
 
   return (
-    <SyntaxHighlighter
-      language={lang}
-      style={mode === 'dark' ? dark : light}
-      customStyle={{
-        color: mode === 'dark' ? '#d4d4d4' : 'rgba(0, 0, 0, 0.77)',
-        padding: '1rem',
-        borderRadius: '0.5rem',
-      }}
-    >
-      {code}
-    </SyntaxHighlighter>
+    <Box sx={{ overflow: 'auto' }}>
+      <SyntaxHighlighter
+        language={lang}
+        style={mode === 'dark' ? dark : light}
+        customStyle={{
+          color: mode === 'dark' ? '#d4d4d4' : 'rgba(0, 0, 0, 0.77)',
+          padding: '1rem',
+          borderRadius: '0.5rem',
+        }}
+      >
+        {code}
+      </SyntaxHighlighter>
+    </Box>
   );
 };
 

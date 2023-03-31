@@ -4,3 +4,54 @@ sort: 0
 ---
 
 # Bold
+
+Making the text bold help you to emphasize on a specific part of the text.
+
+## toggleBold
+
+To make the selection of your content bold you can use `toggleBold` function. It'll toggle between bold and not bold automatically.
+
+```ts
+toggleBold(state: State, stateHandler: StateHandler, customBoldkey?: string) => void;
+```
+
+## isBold
+
+This function help you to find out if the current character is bold or not. The returend boolean will update on cursor moves.
+
+```ts
+isBold(state: State, customBoldKey?: string) => boolean;
+```
+
+## Example
+
+An example of `toggleBold` and `isBold` usage:
+
+```ts
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, toggleBold } from 'contenido';
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  return (
+    <>
+      <Editor editorState={editorState} onChange={setEditorState}>
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+          toggleBold(editorState, setEditorState)
+        }}
+        style={{color: isBold(editorState) ? 'dodgerblue' : 'black'}}
+      >
+        Bold
+      </button>
+    </>
+  )
+}
+
+export default Demo;
+```
+
+## Custom bold key

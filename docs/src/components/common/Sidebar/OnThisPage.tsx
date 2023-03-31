@@ -1,15 +1,20 @@
+import { useRouter } from 'next/router';
+
 // Types
 import type { FC } from 'react';
 
 // Custom Core
-import BodyOne from 'components/core/BodyOne';
+import AppBarSpacer from 'components/core/AppBarSpacer';
 import BodyTwo from 'components/core/BodyTwo';
 import Box from 'components/core/Box';
-import AppBarSpacer from 'components/core/AppBarSpacer';
-import Link from 'components/core/Link';
-import { fixHref } from 'utilities/helper/link';
-import Stack from 'components/core/Stack';
 import Divider from 'components/core/Divider';
+import Link from 'components/core/Link';
+
+// Custom Utilities
+import { fixHref, getPurePath } from 'utilities/helper/link';
+
+// Custom Data
+import links from 'data/links.json';
 
 // Custom Types
 export interface OnThisPageProps {
@@ -19,6 +24,9 @@ export interface OnThisPageProps {
 const OnThisPage: FC<OnThisPageProps> = (props) => {
   // Props
   const { headings } = props;
+
+  // Hooks
+  const path = useRouter().asPath;
 
   return (
     <Box
@@ -73,10 +81,11 @@ const OnThisPage: FC<OnThisPageProps> = (props) => {
         </Box>
         <Divider />
         <Link
-          href='/'
+          href={`${links.docsEdit}${getPurePath(path)}.mdx`}
           variant='caption'
           color='text.secondary'
           underline='hover'
+          target='_blank'
           sx={{ textTransform: 'none' }}
         >
           Edit this page on GitHub &rarr;

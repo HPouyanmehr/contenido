@@ -2,13 +2,16 @@ import * as React from 'react';
 import { useTheme } from '@mui/material';
 
 // Types
-import Box from 'components/core/Box';
 import type { FC } from 'react';
+
+// Custom Core Components
 import BodyOne from 'components/core/BodyOne';
+import Box from 'components/core/Box';
 import Stack from 'components/core/Stack';
-import KeyboardArrowUpIcon from 'components/icon/KeyboardArrowUp';
+
+// Custom Icon COmponents
 import ContentCopyIcon from 'components/icon/ContentCopy';
-import SpacedBox from 'components/core/SpacedBox';
+import KeyboardArrowUpIcon from 'components/icon/KeyboardArrowUp';
 
 // Custom Types
 export interface InstallationButtonProps {}

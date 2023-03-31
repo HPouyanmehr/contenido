@@ -1,6 +1,7 @@
 {
   "github": "https://github.com/HPouyanmehr/contenido",
   "docs": "/docs/getting-started/overview",
+  "docsEdit": "https://github.com/HPouyanmehr/contenido/tree/main/docs/src",
   "examples": "/examples",
   "blog": "/blog"
 }
