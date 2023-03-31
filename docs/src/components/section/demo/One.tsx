@@ -1,4 +1,29 @@
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { useTheme, useMediaQuery } from '@mui/material';
+import { EditorState, convertFromRaw } from 'draft-js';
+import {
+  Editor,
+  blockStyleFn,
+  emptyRawContentState,
+  focusOnEditor,
+  initialStyleMap,
+  isH2,
+  isH3,
+  isH4,
+  isBold,
+  isItalic,
+  isLineThrough,
+  isUnderline,
+  toggleH2,
+  toggleH3,
+  toggleH4,
+  toggleParagraph,
+  toggleBold,
+  toggleItalic,
+  toggleUnderline,
+  toggleLineThrough,
+  toggleTextAlign,
+} from 'contenido';
 
 // Types
 import type { FC } from 'react';
@@ -11,7 +36,6 @@ import Paper from 'components/core/Paper';
 import Select from 'components/core/Select';
 import Stack from 'components/core/Stack';
 import StackDivider from 'components/core/StackDivider';
-import TextField from 'components/core/TextField';
 
 // Custom Common Components
 import AlignCenterIconButton from 'components/common/IconButton/AlignCenter';
@@ -35,15 +59,59 @@ import UnderlinedIconButton from 'components/common/IconButton/Underline';
 import type { CustomTypeBackground } from 'types/common/theme';
 import type { PaperProps } from 'components/core/Paper';
 
+const contentState = convertFromRaw(emptyRawContentState);
+
 const DemoOne: FC<PaperProps> = (props) => {
   // Props
   const { sx, ...otherProps } = props;
+
+  // States
+  const [editorState, setEditorState] = useState(
+    EditorState.createWithContent(
+      convertFromRaw({
+        entityMap: {},
+        blocks: [
+          {
+            text: '',
+            key: 'test',
+            type: 'unstyled',
+            entityRanges: [],
+            depth: 0,
+            inlineStyleRanges: [],
+          },
+        ],
+      })
+    )
+  );
+  const [blockType, setBlockType] = useState<'p' | 'h2' | 'h3' | 'h4'>('p');
 
   // Hooks
   const theme = useTheme();
   const isUpSm = useMediaQuery(theme.breakpoints.up('sm'));
   const isUpLg = useMediaQuery(theme.breakpoints.up('lg'));
   const isUpXl = useMediaQuery(theme.breakpoints.up('xl'));
+
+  const editorRef = useRef(null);
+
+  const handleBlockTypeChange = useCallback(() => {
+    if (isH2(editorState)) {
+      setBlockType('h2');
+      return;
+    }
+    if (isH3(editorState)) {
+      setBlockType('h3');
+      return;
+    }
+    if (isH4(editorState)) {
+      setBlockType('h4');
+      return;
+    }
+    setBlockType('p');
+  }, [editorState]);
+
+  useEffect(() => {
+    handleBlockTypeChange();
+  }, [editorState, handleBlockTypeChange]);
 
   return (
     <Box
@@ -74,25 +142,94 @@ const DemoOne: FC<PaperProps> = (props) => {
             <Stack>
               <Stack divider={<StackDivider />}>
                 <Stack>
-                  <Select sx={{ width: '10rem', height: '2.5rem' }} value='p'>
-                    <MenuItem value='p'>Paragraph</MenuItem>
-                    <MenuItem value='h2'>Heading Two</MenuItem>
-                    <MenuItem value='h3'>Heading Three</MenuItem>
-                    <MenuItem value='h4'>Heading Four</MenuItem>
+                  <Select
+                    sx={{ width: '10rem', height: '2.5rem' }}
+                    value={blockType}
+                  >
+                    <MenuItem
+                      value='p'
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                        toggleParagraph(editorState, setEditorState);
+                      }}
+                    >
+                      Paragraph
+                    </MenuItem>
+                    <MenuItem
+                      value='h2'
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                        toggleH2(editorState, setEditorState);
+                      }}
+                    >
+                      Heading Two
+                    </MenuItem>
+                    <MenuItem
+                      value='h3'
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                        toggleH3(editorState, setEditorState);
+                      }}
+                    >
+                      Heading Three
+                    </MenuItem>
+                    <MenuItem
+                      value='h4'
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                        toggleH4(editorState, setEditorState);
+                      }}
+                    >
+                      Heading Four
+                    </MenuItem>
                   </Select>
                 </Stack>
                 {isUpSm && (
                   <Stack>
-                    <BoldIconButton />
-                    <ItalicIconButton />
-                    <UnderlinedIconButton />
-                    <StrikethroughIconButton />
+                    <BoldIconButton
+                      color={isBold(editorState) ? 'primary' : 'default'}
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                        toggleBold(editorState, setEditorState);
+                      }}
+                    />
+                    <ItalicIconButton
+                      color={isItalic(editorState) ? 'primary' : 'default'}
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                        toggleItalic(editorState, setEditorState);
+                      }}
+                    />
+                    <UnderlinedIconButton
+                      color={isUnderline(editorState) ? 'primary' : 'default'}
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                        toggleUnderline(editorState, setEditorState);
+                      }}
+                    />
+                    <StrikethroughIconButton
+                      color={isLineThrough(editorState) ? 'primary' : 'default'}
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                        toggleLineThrough(editorState, setEditorState);
+                      }}
+                    />
                   </Stack>
                 )}
                 {isUpSm && (
                   <Stack>
                     <AlignLeftIconButton />
-                    <AlignCenterIconButton />
+                    <AlignCenterIconButton
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+
+                        toggleTextAlign(
+                          editorState,
+                          setEditorState,
+                          'text-align-right'
+                        );
+                      }}
+                    />
                     <AlignRightIconButton />
                     <AlignJustifyIconButton />
                   </Stack>
@@ -115,13 +252,27 @@ const DemoOne: FC<PaperProps> = (props) => {
               </Stack>
               {!isUpXl && <MoreIconButton />}
             </Stack>
-            <TextField
-              placeholder='Contenido is so cool!'
-              fullWidth
-              multiline
-              rows={20}
-              InputProps={{ sx: { borderRadius: '1rem' } }}
-            />
+            <Box
+              dir='auto'
+              sx={{
+                borderRadius: '1rem',
+                border: '1px solid',
+                borderColor: 'divider',
+                width: '100%',
+                p: '0.75rem',
+                height: '28.75rem',
+                cursor: 'text',
+              }}
+              onClick={() => focusOnEditor(editorRef)}
+            >
+              <Editor
+                editorState={editorState}
+                editorRef={editorRef}
+                onChange={setEditorState}
+                customStyleMap={initialStyleMap}
+                blockRendererFn={blockStyleFn}
+              />
+            </Box>
           </Stack>
         </Paper>
       </Container>
