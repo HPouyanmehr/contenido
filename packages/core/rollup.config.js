@@ -4,6 +4,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import external from 'rollup-plugin-peer-deps-external';
 import terser from '@rollup/plugin-terser';
 import postcss from 'rollup-plugin-postcss';
+import postcssImport from 'postcss-import';
 import typescript from 'rollup-plugin-typescript2';
 
 const config = {
@@ -34,8 +35,11 @@ const config = {
       tsconfig: './tsconfig.json',
     }),
     postcss({
-      plugins: [],
       minimize: true,
+      modules: false,
+      extensions: ['.css'],
+      plugins: [postcssImport()],
+      extract: 'styles.css',
     }),
     commonjs(),
     terser(),
