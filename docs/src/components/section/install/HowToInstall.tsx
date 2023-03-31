@@ -3,11 +3,11 @@ import type { FC } from 'react';
 
 // Custom Core Components
 import BodyOne from 'components/core/BodyOne';
+import BodyTwo from 'components/core/BodyTwo';
 import Box from 'components/core/Box';
 import ButtonLink from 'components/core/ButtonLink';
 import Container from 'components/core/Container';
 import HeadingTwo from 'components/core/HeadingTwo';
-import Link from 'components/core/Link';
 import SpacedBox from 'components/core/SpacedBox';
 
 // Custom Common Components
@@ -66,9 +66,7 @@ const HowToInstall: FC<HowToInstallProps> = () => {
               <ButtonLink href={links.docs} variant='outlined'>
                 Documentation
               </ButtonLink>
-              <Link href={links.examples} underline='hover'>
-                Examples &rarr;
-              </Link>
+              <BodyTwo color='text.disabled'>Examples &rarr;</BodyTwo>
             </SpacedBox>
           </Box>
           <SpacedBox

@@ -1,10 +1,9 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useTheme, useMediaQuery } from '@mui/material';
-import { EditorState, convertFromRaw } from 'draft-js';
+import { EditorState } from 'draft-js';
 import {
   Editor,
   blockStyleFn,
-  emptyRawContentState,
   focusOnEditor,
   initialStyleMap,
   isH2,
@@ -23,6 +22,23 @@ import {
   toggleUnderline,
   toggleLineThrough,
   toggleTextAlign,
+  isTextCenterAligned,
+  isTextLeftAligned,
+  isTextRightAligned,
+  isTextJustifyAligned,
+  toggleUL,
+  isUL,
+  isOL,
+  toggleOL,
+  isBlockquote,
+  toggleBlockquote,
+  addLink,
+  createDecorator,
+  DecoratorComponentProps,
+  findEntitiesOfLink,
+  addImage,
+  findEntitiesOf,
+  ImageAttributes,
 } from 'contenido';
 
 // Types
@@ -58,30 +74,46 @@ import UnderlinedIconButton from 'components/common/IconButton/Underline';
 // Custom Types
 import type { CustomTypeBackground } from 'types/common/theme';
 import type { PaperProps } from 'components/core/Paper';
+import Link from 'components/core/Link';
+import Image from 'next/image';
 
-const contentState = convertFromRaw(emptyRawContentState);
+const EditorImage: FC<DecoratorComponentProps> = (props) => {
+  if (props.blockType === 'image') {
+    const { src, alt } = props as ImageAttributes;
+    if (src && alt)
+      return <Image alt={alt} src={src} width={250} height={200} />;
+  }
+  return <p>No supported in this demo!</p>;
+};
+
+const EditorLink: FC<DecoratorComponentProps> = (props) => {
+  return (
+    <Link display='inline-block' underline='hover' href={props.href || '/'}>
+      {props.children}
+    </Link>
+  );
+};
 
 const DemoOne: FC<PaperProps> = (props) => {
   // Props
   const { sx, ...otherProps } = props;
 
+  const findEntitiesOfImage = findEntitiesOf('image');
+
+  const decorators = createDecorator([
+    {
+      component: EditorLink,
+      strategy: findEntitiesOfLink,
+    },
+    {
+      component: EditorImage,
+      strategy: findEntitiesOfImage,
+    },
+  ]);
+
   // States
   const [editorState, setEditorState] = useState(
-    EditorState.createWithContent(
-      convertFromRaw({
-        entityMap: {},
-        blocks: [
-          {
-            text: '',
-            key: 'test',
-            type: 'unstyled',
-            entityRanges: [],
-            depth: 0,
-            inlineStyleRanges: [],
-          },
-        ],
-      })
-    )
+    EditorState.createEmpty(decorators)
   );
   const [blockType, setBlockType] = useState<'p' | 'h2' | 'h3' | 'h4'>('p');
 
@@ -218,8 +250,38 @@ const DemoOne: FC<PaperProps> = (props) => {
                 )}
                 {isUpSm && (
                   <Stack>
-                    <AlignLeftIconButton />
+                    <AlignLeftIconButton
+                      color={
+                        isTextLeftAligned(editorState) ? 'primary' : 'default'
+                      }
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+
+                        toggleTextAlign(
+                          editorState,
+                          setEditorState,
+                          'text-align-left'
+                        );
+                      }}
+                    />
                     <AlignCenterIconButton
+                      color={
+                        isTextCenterAligned(editorState) ? 'primary' : 'default'
+                      }
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+
+                        toggleTextAlign(
+                          editorState,
+                          setEditorState,
+                          'text-align-center'
+                        );
+                      }}
+                    />
+                    <AlignRightIconButton
+                      color={
+                        isTextRightAligned(editorState) ? 'primary' : 'default'
+                      }
                       onMouseDown={(e) => {
                         e.preventDefault();
 
@@ -230,23 +292,75 @@ const DemoOne: FC<PaperProps> = (props) => {
                         );
                       }}
                     />
-                    <AlignRightIconButton />
-                    <AlignJustifyIconButton />
+                    <AlignJustifyIconButton
+                      color={
+                        isTextJustifyAligned(editorState)
+                          ? 'primary'
+                          : 'default'
+                      }
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+
+                        toggleTextAlign(
+                          editorState,
+                          setEditorState,
+                          'text-align-justify'
+                        );
+                      }}
+                    />
                   </Stack>
                 )}
                 {isUpLg && (
                   <Stack>
-                    <ListBulletedIconButton />
-                    <ListNumberedIconButton />
-                    <IndentIncreaseIconButton />
-                    <IndentDecreaseIconButton />
-                    <QuoteIconButton />
+                    <ListBulletedIconButton
+                      color={isUL(editorState) ? 'primary' : 'default'}
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+
+                        toggleUL(editorState, setEditorState);
+                      }}
+                    />
+                    <ListNumberedIconButton
+                      color={isOL(editorState) ? 'primary' : 'default'}
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+
+                        toggleOL(editorState, setEditorState);
+                      }}
+                    />
+                    <IndentIncreaseIconButton disabled />
+                    <IndentDecreaseIconButton disabled />
+                    <QuoteIconButton
+                      color={isBlockquote(editorState) ? 'primary' : 'default'}
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+
+                        toggleBlockquote(editorState, setEditorState);
+                      }}
+                    />
                   </Stack>
                 )}
                 {isUpXl && (
                   <Stack>
-                    <LinkIconButton />
-                    <PhotoIconButton />
+                    <LinkIconButton
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+
+                        addLink(editorState, setEditorState, {
+                          href: 'https://github.com/HPouyanmehr/contenido',
+                        });
+                      }}
+                    />
+                    <PhotoIconButton
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+
+                        addImage(editorState, setEditorState, {
+                          alt: 'An example of images in contenido',
+                          src: '/example-image.jpg',
+                        });
+                      }}
+                    />
                   </Stack>
                 )}
               </Stack>
@@ -261,6 +375,7 @@ const DemoOne: FC<PaperProps> = (props) => {
                 width: '100%',
                 p: '0.75rem',
                 height: '28.75rem',
+                overflow: 'auto',
                 cursor: 'text',
               }}
               onClick={() => focusOnEditor(editorRef)}
@@ -270,7 +385,7 @@ const DemoOne: FC<PaperProps> = (props) => {
                 editorRef={editorRef}
                 onChange={setEditorState}
                 customStyleMap={initialStyleMap}
-                blockRendererFn={blockStyleFn}
+                blockStyleFn={blockStyleFn}
               />
             </Box>
           </Stack>

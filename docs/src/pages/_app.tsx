@@ -5,6 +5,9 @@ import { CacheProvider, EmotionCache } from '@emotion/react';
 // Types
 import type { AppProps as NextAppProps } from 'next/app';
 
+// Styles
+import 'contenido/dist/styles.css';
+
 // Custom Contexts
 import ContextProvider from 'store/Provider';
 
