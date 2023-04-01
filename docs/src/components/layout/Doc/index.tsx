@@ -45,10 +45,16 @@ const DocumentLayout: FC<PageLayoutProps> = (props) => {
         <title>{doc?.title || 'Contenido'}</title>
       </Head>
       <DocHeader />
-      <Box sx={{ display: 'flex', gap: 4 }}>
+      <Box
+        sx={({ breakpoints }) => ({
+          display: 'flex',
+          gap: 4,
+          [breakpoints.between('md', 'xl')]: { gap: 2 },
+        })}
+      >
         <Box
           sx={({ breakpoints }) => ({
-            [breakpoints.down('md')]: { display: 'none' },
+            [breakpoints.down('lg')]: { display: 'none' },
           })}
         >
           <DocSidebar sidebar={sidebar} />
@@ -60,7 +66,12 @@ const DocumentLayout: FC<PageLayoutProps> = (props) => {
               display: 'flex',
               flexDirection: 'column',
               flexGrow: 1,
-              [breakpoints.down('md')]: { mx: 2 },
+              width: '50vw',
+              [breakpoints.between('md', 'xl')]: {
+                width: '50vw',
+                px: 2,
+              },
+              [breakpoints.down('md')]: { mx: 2, width: '80vw' },
             })}
           >
             <Box>
@@ -76,7 +87,7 @@ const DocumentLayout: FC<PageLayoutProps> = (props) => {
                     display: 'flex',
                     flexDirection: 'row',
                     justifyContent: 'space-between',
-                    my: '2rem',
+                    mt: '2rem',
                   })}
                 >
                   {prevDoc.link ? (

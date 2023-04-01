@@ -20,6 +20,7 @@ const DocsFooter: FC<DocsOneProps> = () => {
     <Box
       sx={({ palette }) => ({
         marginTop: '2rem',
+        width: '100%',
         backgroundColor: (palette.background as CustomTypeBackground).card,
       })}
     >
