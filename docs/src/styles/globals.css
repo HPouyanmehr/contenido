@@ -1,1 +1,6 @@
 @import './fonts/cascadia-code.css';
+
+* {
+  scroll-behavior: smooth;
+  scroll-margin-top: 6rem;
+}
