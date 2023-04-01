@@ -18,6 +18,7 @@ import MarkdownLink from 'components/common/Markdown/components/Link';
 import Blockquote from './components/Blockquote';
 import MarkdownCode from './components/Code';
 import MarkdownBody1 from './components/Body1';
+import ColorizeDemo from 'components/section/demo/Colorize';
 
 // Custom Types
 export interface MarkdownProps {
@@ -44,6 +45,7 @@ const Markdown: FC<MarkdownProps> = (props) => {
           h5: MarkdownH5,
           h6: MarkdownH6,
           pre: MarkdownCode,
+          Colorize: ColorizeDemo,
         },
       }}
     >

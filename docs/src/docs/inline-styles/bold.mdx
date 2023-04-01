@@ -1,6 +1,6 @@
 ---
 title: Bold
-sort: 0
+sort: 1
 ---
 
 # Bold
@@ -9,7 +9,8 @@ Making the text bold help you to emphasize on a specific part of the text.
 
 ## toggleBold
 
-To make the selection of your content bold you can use `toggleBold` function. It'll toggle between bold and not bold automatically.
+To make the selection of your content bold you can use `toggleBold` function.
+It'll toggle between bold and not bold automatically.
 
 ```ts
 toggleBold(state: State, stateHandler: StateHandler, customBoldkey?: string) => void;
@@ -17,7 +18,8 @@ toggleBold(state: State, stateHandler: StateHandler, customBoldkey?: string) => 
 
 ## isBold
 
-This function help you to find out if the current character is bold or not. The returend boolean will update on cursor moves.
+This function help you to find out if the current character is bold or not.
+The returend boolean will update on cursor moves.
 
 ```ts
 isBold(state: State, customBoldKey?: string) => boolean;
@@ -30,7 +32,7 @@ An example of `toggleBold` and `isBold` usage:
 ```ts
 import { useState } from 'react';
 import { EditorState } from 'draft-js';
-import { Editor, toggleBold } from 'contenido';
+import { Editor, isBold, toggleBold } from 'contenido';
 
 const Demo = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -43,7 +45,7 @@ const Demo = () => {
           e.preventDefault();
           toggleBold(editorState, setEditorState)
         }}
-        style={{color: isBold(editorState) ? 'dodgerblue' : 'black'}}
+        style={{color: isBold(editorState) ? 'skyblue' : 'black'}}
       >
         Bold
       </button>
@@ -54,4 +56,52 @@ const Demo = () => {
 export default Demo;
 ```
 
-## Custom bold key
+## Customization
+
+By default, the `BOLD` key represent the bold inline style. For any reason
+if you need to change this key to something else, you can pass your custom key
+to the previous functions as the third parameter.
+
+Also if you changed the default key for the bold inline style, you **have to** pass
+the updated version of style map to the editor. Here is an example:
+
+```ts
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, initialStyleMap, isBold, toggleBold } from 'contenido';
+
+const CUSTOM_BOLD_KEY = 'YOUR_CUSTOM_BOLD_KEY';
+
+const CustomizedDemo = () => {
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  const styleMap = {
+    ...initialStyleMap,
+    CUSTOM_BOLD_KEY: {
+      fontWeight: 700
+      // Other styles...
+    }
+  };
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        customStyleMap={styleMap}
+      >
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+          toggleBold(editorState, setEditorState, CUSTOM_BOLD_KEY)
+        }}
+        style={{color: isBold(editorState, CUSTOM_BOLD_KEY) ? 'skyblue' : 'black'}}
+      >
+        Bold
+      </button>
+    </>
+  )
+}
+
+export default CustomizedDemo;
+```

@@ -1,6 +1,109 @@
 ---
 title: Underline
-sort: 0
+sort: 3
 ---
 
 # Underline
+
+Making the text underlined help you to somehow highlight your text. You should be aware
+that the other usecase of the underlined text is to indicate a links and you need to
+keep the styles differences tangible for this two.
+
+## toggleUnderline
+
+To make the selection of your content underlined you can use `toggleUnderline` function.
+It'll toggle between underlined and not underlined automatically.
+
+```ts
+toggleUnderline(state: State, stateHandler: StateHandler, customUnderlinekey?: string) => void;
+```
+
+## isUnderline
+
+This function help you to find out if the current character is underline or not.
+The returend boolean will update on cursor moves.
+
+```ts
+isUnderline(state: State, customUnderlineKey?: string) => boolean;
+```
+
+## Example
+
+An example of `toggleUnderline` and `isUnderline` usage:
+
+```ts
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, isUnderline, toggleUnderline } from 'contenido';
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  return (
+    <>
+      <Editor editorState={editorState} onChange={setEditorState}>
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+          toggleUnderline(editorState, setEditorState)
+        }}
+        style={{color: isUnderline(editorState) ? 'skyblue' : 'black'}}
+      >
+        Underline
+      </button>
+    </>
+  )
+}
+
+export default Demo;
+```
+
+## Customization
+
+By default, the `ITALIC` key represent the underlined inline style. For any reason if you need
+to change this key to something else, you can pass your custom key to the previous functions as
+the third parameter.
+
+Also if you changed the default key for the underline inline style, you **have to** pass the
+updated version of style map to the editor. Here is an example:
+
+```ts
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, initialStyleMap, isUnderline, toggleUnderline } from 'contenido';
+
+const CUSTOM_UNDERLINE_KEY = 'YOUR_CUSTOM_UNDERLINE_KEY';
+
+const CustomizedDemo = () => {
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  const styleMap = {
+    ...initialStyleMap,
+    CUSTOM_UNDERLINE_KEY: {
+       textDecoration: 'underline'
+       // Other styles...
+    }
+  };
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        customStyleMap={styleMap}
+      >
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+          toggleUnderline(editorState, setEditorState, CUSTOM_UNDERLINE_KEY)
+        }}
+        style={{color: isUnderline(editorState, CUSTOM_UNDERLINE_KEY) ? 'skyblue' : 'black'}}
+      >
+        Underline
+      </button>
+    </>
+  )
+}
+
+export default CustomizedDemo;
+```

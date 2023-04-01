@@ -1,0 +1,113 @@
+---
+title: Custom Inline Styles
+sort: 0
+---
+
+import Colorize from 'components/section/demo/Colorize';
+
+# Custom inline styles
+
+While `contenido` try to provide everything for you as a developer, there may be some cases
+that you need to do something that isn't provided. Here is a list of provided utilities to
+manipulate the inline styles:
+
+- Bold
+- Italic
+- Underline
+- Line through
+- Overline
+- Subscript
+- Superscript
+
+There are some other docs in this section (inline styles) like
+[Color](/docs/inline-styles/color) and [Text Transform](/docs/inline-styles/text-transform)
+that are totally based on this.
+
+## Custom style map
+
+When you need to rather than bold, italic and underline; you have to add the style key and the
+relevant css of that to the style map and pass it to the editor. It's a good idea to spread the
+current inline styles first and then add yours.
+
+## toggleInlineStyle
+
+When you added your style key and CSS to the style map you can use the `toggleInlineStyle` utility
+to toggle your style on the selected part of your text.
+
+```ts
+toggleInlineStyle(state: State, stateHandler: StateHandler, key?: string) => void;
+```
+
+## hasInlineStyleOf
+
+This function help you to find out if the current character has your style or not.
+The returend boolean will update on cursor moves.
+
+```ts
+hasInlineStyleOf(state: State, key: string) => boolean;
+```
+
+## Example
+
+This is an example of `toggleInlineStyle` and `hasInlineStyleOf` utilities where we want to
+colorize the selected text with the #4cb5f5 color and make it bold.
+
+<Colorize />
+
+```tsx
+import { useState } from 'react';
+import { ContentState, EditorState } from 'draft-js';
+import {
+  Editor,
+  hasInlineStyleOf,
+  initialStyleMap,
+  toggleInlineStyle,
+} from 'contenido';
+
+const COLORIZE = 'COLORIZE';
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createWithContent(
+      ContentState.createFromText('Colorize the words of this sentence.')
+    )
+  );
+
+  const toggleColorize = () =>
+    toggleInlineStyle(editorState, setEditorState, COLORIZE);
+
+  const isColorize = () => hasInlineStyleOf(editorState, COLORIZE);
+
+  const styleMap = {
+    ...initialStyleMap,
+    COLORIZE: {
+      fontWeight: 'bold',
+      color: '#4cb5f5',
+    },
+  };
+
+  return (
+    <>
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+          toggleColorize();
+        }}
+        style={{
+          color: isColorize() ? 'white' : '#4cb5f5',
+          backgroundColor: isColorize() ? '#4cb5f5' : 'white',
+        }}
+      >
+        Underline
+      </button>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        customStyleMap={styleMap}
+      />
+    </>
+  );
+};
+
+export default Demo;
+```

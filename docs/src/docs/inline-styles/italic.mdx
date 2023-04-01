@@ -1,6 +1,107 @@
 ---
 title: Italic
-sort: 1
+sort: 2
 ---
 
 # Italic
+
+Making the text italic help you to indicate some emotion or tone in your text.
+
+## toggleItalic
+
+To make the selection of your content italic you can use `toggleItalic` function.
+It'll toggle between italic and not italic automatically.
+
+```ts
+toggleItalic(state: State, stateHandler: StateHandler, customItalickey?: string) => void;
+```
+
+## isItalic
+
+This function help you to find out if the current character is italic or not.
+The returend boolean will update on cursor moves.
+
+```ts
+isItalic(state: State, customItalicKey?: string) => boolean;
+```
+
+## Example
+
+An example of `toggleItalic` and `isItalic` usage:
+
+```ts
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, isItalic, toggleItalic } from 'contenido';
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  return (
+    <>
+      <Editor editorState={editorState} onChange={setEditorState}>
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+          toggleItalic(editorState, setEditorState)
+        }}
+        style={{color: isItalic(editorState) ? 'skyblue' : 'black'}}
+      >
+        Italic
+      </button>
+    </>
+  )
+}
+
+export default Demo;
+```
+
+## Customization
+
+By default, the `ITALIC` key represent the italic inline style. For any reason if
+you need to change this key to something else, you can pass your custom key to the
+previous functions as the third parameter.
+
+Also if you changed the default key for the italic inline style, you **have to** pass the
+updated version of style map to the editor. Here is an example:
+
+```ts
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, initialStyleMap, isItalic, toggleItalic } from 'contenido';
+
+const CUSTOM_ITALIC_KEY = 'YOUR_CUSTOM_ITALIC_KEY';
+
+const CustomizedDemo = () => {
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  const styleMap = {
+    ...initialStyleMap,
+    CUSTOM_ITALIC_KEY: {
+       fontStyle: 'italic'
+       // Other styles...
+    }
+  };
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        customStyleMap={styleMap}
+      >
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+          toggleItalic(editorState, setEditorState, CUSTOM_ITALIC_KEY)
+        }}
+        style={{color: isItalic(editorState, CUSTOM_ITALIC_KEY) ? 'skyblue' : 'black'}}
+      >
+        Italic
+      </button>
+    </>
+  )
+}
+
+export default CustomizedDemo;
+```
