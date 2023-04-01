@@ -1,0 +1,112 @@
+---
+title: Overline
+sort: 5
+---
+
+# Overline
+
+The overline will add a line above the text. This can be useful for emphasizing or highlighting
+headings or the other pieces of text.
+
+## toggleOverline
+
+To make the selection of your content overlined you can use `toggleOverline` function.
+It'll toggle between overlined and not overlined automatically.
+
+```ts
+toggleOverline(state: State, stateHandler: StateHandler, customOverlinekey?: string) => void;
+```
+
+## isOverline
+
+This function help you to find out if the current character is overlined or not.
+The returend boolean will update on cursor moves.
+
+```ts
+isOverline(state: State, customOverlinekey?: string) => boolean;
+```
+
+## Example
+
+An example of `toggleOverline` and `isOverline` usage:
+
+```ts
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, initialStyleMap, isOverline, toggleOverline } from 'contenido';
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        customStyleMap={initialStyleMap}
+      >
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+          toggleOverline(editorState, setEditorState)
+        }}
+        style={{color: isOverline(editorState) ? 'skyblue' : 'black'}}
+      >
+        Overline
+      </button>
+    </>
+  )
+}
+
+export default Demo;
+```
+
+## Customization
+
+By default, the `OVERLINE` key represent the overlined inline style. For any reason if you need
+to change this key to something else, you can pass your custom key to the previous functions as
+the third parameter.
+
+Also if you changed the default key for the overline inline style, you **have to** pass the
+updated version of style map to the editor. Here is an example:
+
+```ts
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, initialStyleMap, isOverline, toggleOverline } from 'contenido';
+
+const CUSTOM_OVERLINE_KEY = 'YOUR_CUSTOM_OVERLINE_KEY';
+
+const CustomizedDemo = () => {
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  const styleMap = {
+    ...initialStyleMap,
+    CUSTOM_OVERLINE_KEY: {
+      textDecoration: 'overline',
+      // Other styles...
+    }
+  };
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        customStyleMap={styleMap}
+      >
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+          toggleOverline(editorState, setEditorState, CUSTOM_OVERLINE_KEY)
+        }}
+        style={{color: isOverline(editorState, CUSTOM_OVERLINE_KEY) ? 'skyblue' : 'black'}}
+      >
+        Overline
+      </button>
+    </>
+  )
+}
+
+export default CustomizedDemo;
+```

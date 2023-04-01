@@ -58,7 +58,8 @@ export const getDocsSidebar = (sectionName?: string): DocSidebarProps[] => {
       items.push({
         link: fileName.replace(/\.mdx/, ''),
         title: fileName.replace(/\.mdx/, ''),
-        sort: matterResult.data.sort || index,
+        sort:
+          matterResult.data.sort !== undefined ? matterResult.data.sort : index,
       });
     });
 

@@ -1,0 +1,112 @@
+---
+title: Line Through
+sort: 4
+---
+
+# Line Through
+
+You can use line through (strike through) to inidicate something that isn't valid,
+accurate or recommended anymore.
+
+## toggleLineThrough
+
+To make the selection of your content line through (or strike through) you can use `toggleLineThrough` function.
+You need to pass the `initialStyleMap` to the editor to see the result in the editor.
+
+```ts
+toggleLineThrough(state: State, stateHandler: StateHandler, customLineThroughkey?: string) => void;
+```
+
+## isLineThrough
+
+This function help you to find out if the current character is line through or not.
+The returend boolean will update on cursor moves.
+
+```ts
+isLineThrough(state: State, customLineThroughkey?: string) => boolean;
+```
+
+## Example
+
+An example of `toggleLineThrough` and `isLineThrough` usage:
+
+```ts
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, initialStyleMap, isLineThrough, toggleLineThrough } from 'contenido';
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        customStyleMap={initialStyleMap}
+      >
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+          toggleLineThrough(editorState, setEditorState)
+        }}
+        style={{color: isLineThrough(editorState) ? 'skyblue' : 'black'}}
+      >
+        Line Through
+      </button>
+    </>
+  )
+}
+
+export default Demo;
+```
+
+## Customization
+
+By default, the `LINE_THROUGH` key represent the line through inline style. For any reason if you need
+to change this key to something else, you can pass your custom key to the previous functions as
+the third parameter.
+
+Also if you changed the default key for the line through inline style, you **have to** pass the
+updated version of style map to the editor. Here is an example:
+
+```ts
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, initialStyleMap, isLineThrough, toggleLineThrough } from 'contenido';
+
+const CUSTOM_LINE_THROUGH_KEY = 'YOUR_CUSTOM_LINE_THROUGH_KEY';
+
+const CustomizedDemo = () => {
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  const styleMap = {
+    ...initialStyleMap,
+    CUSTOM_LINE_THROUGH_KEY: {
+      textDecoration: 'line-through',
+      // Other styles...
+    }
+  };
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        customStyleMap={styleMap}
+      >
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+          toggleLineThrough(editorState, setEditorState, CUSTOM_LINE_THROUGH_KEY)
+        }}
+        style={{color: isLineThrough(editorState, CUSTOM_LINE_THROUGH_KEY) ? 'skyblue' : 'black'}}
+      >
+        Line Through
+      </button>
+    </>
+  )
+}
+
+export default CustomizedDemo;
+```
