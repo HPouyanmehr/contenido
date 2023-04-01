@@ -1,4 +1,6 @@
-const extractHeadings = (markdown: string): { [key: string]: string[] } => {
+export const extractHeadings = (
+  markdown: string
+): { [key: string]: string[] } => {
   const headings: { [key: string]: string[] } = {};
   const lines = markdown.split('\n');
   let currnetHeading: string | null = null;
@@ -19,5 +21,3 @@ const extractHeadings = (markdown: string): { [key: string]: string[] } => {
 
   return headings;
 };
-
-export default extractHeadings;

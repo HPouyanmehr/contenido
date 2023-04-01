@@ -4,8 +4,16 @@ import matter from 'gray-matter';
 
 // Types
 import type { ParsedUrlQuery } from 'querystring';
-import { DocProps, DocSdiebarItemProps, DocSidebarProps } from 'types/docs';
-import extractHeadings from 'utilities/helper/markdown';
+
+// Custom Utilities
+import { extractHeadings } from 'utilities/helper/markdown';
+
+// Custom Types
+import type {
+  DocProps,
+  DocSdiebarItemProps,
+  DocSidebarProps,
+} from 'types/docs';
 
 const docsDirectory = path.join(process.cwd(), '/src/docs');
 
