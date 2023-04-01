@@ -31,12 +31,13 @@ export const getAllDocsPaths = (): { params: ParsedUrlQuery }[] => {
   return allDocsPaths;
 };
 
-export const getDocsSidebar = (): DocSidebarProps[] => {
+export const getDocsSidebar = (sectionName?: string): DocSidebarProps[] => {
   const sidebar: DocSidebarProps[] = [];
 
   const sections = fs.readdirSync(docsDirectory);
 
   sections.forEach((section) => {
+    const selected: boolean = sectionName === section ? true : false;
     const docsDir = path.join(docsDirectory, section);
     const fileNames = fs.readdirSync(docsDir);
     const items: DocSdiebarItemProps[] = [];
@@ -55,7 +56,7 @@ export const getDocsSidebar = (): DocSidebarProps[] => {
 
     items.sort((a, b) => (a.sort > b.sort ? 1 : -1));
 
-    sidebar.push({ title: section, items });
+    sidebar.push({ title: section, selected, items });
   });
 
   return sidebar;

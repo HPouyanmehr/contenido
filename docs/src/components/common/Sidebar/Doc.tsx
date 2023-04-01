@@ -51,7 +51,7 @@ const DocSidebar: FC<DocSidebarComponentProps> = (props) => {
     let newState: { [key: string]: boolean } = {};
 
     sidebar.forEach((section, index) => {
-      newState[section.title] = index === 0 ? true : false;
+      newState[section.title] = section.selected;
     });
 
     setOpen(newState);

@@ -34,7 +34,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { section, id } = params as { section: string; id: string };
 
   const doc = getDocData(section, id);
-  const sidebar = getDocsSidebar();
+  const sidebar = getDocsSidebar(section);
 
   return {
     props: { doc, sidebar },
