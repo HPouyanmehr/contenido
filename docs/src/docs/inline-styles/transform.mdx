@@ -3,107 +3,107 @@ title: Text Transform
 sort: 9
 ---
 
-# Underline
+# Text transform
 
-Making the text underlined help you to somehow highlight your text. You should be aware
-that the other usecase of the underlined text is to indicate a links and you need to
-keep the styles differences tangible for this two.
+With the help of text transform you can simply make your text stand out. Text transform can help
+you show the importance of a part of your text and improve the legibility.
 
-## toggleUnderline
+## Custom style map
 
-To make the selection of your content underlined you can use `toggleUnderline` function.
-It'll toggle between underlined and not underlined automatically.
+Custom style map is an object that help you to create your desired styles and assign a key to
+that. There is an `initialStyleMap` map provided by `Contenido`. It's a better practice to spread
+the initial value in your final style map to use the built-in styles.
+
+## Toggle text transform
+
+To toggle the text transform, you can use [`toggleInlineStyle`](/docs/inline-styles/custom-styles#toggleinlinestyle).
 
 ```ts
-toggleUnderline(state: State, stateHandler: StateHandler, customUnderlinekey?: string) => void;
+toggleInlineStyle(state: State, stateHandler: StateHandler, key?: string) => void;
 ```
 
-## isUnderline
+## hasInlineStyleOf
 
-This function help you to find out if the current character is underline or not.
+This function help you to find out if the current character has your style or not.
 The returend boolean will update on cursor moves.
 
 ```ts
-isUnderline(state: State, customUnderlineKey?: string) => boolean;
+hasInlineStyleOf(state: State, key: string) => boolean;
 ```
 
 ## Example
 
-An example of `toggleUnderline` and `isUnderline` usage:
+This example uses `toggleInlineStyle` and `hasInlineStyleOf` utilities to change the
+text transform.
 
-```ts
+<TextTransformDemo />
+
+```tsx
 import { useState } from 'react';
-import { EditorState } from 'draft-js';
-import { Editor, isUnderline, toggleUnderline } from 'contenido';
+import { ContentState, EditorState } from 'draft-js';
+import {
+  Editor,
+  hasInlineStyleOf,
+  initialStyleMap,
+  toggleInlineStyle
+} from 'contenido';
+
+const CAPITALIZE = 'CAPITALIZE';
+const LOWERCASE = 'LOWERCASE';
+const UPPERCASE = 'UPPERCASE';
+const INITIAL = 'INITIAL';
 
 const Demo = () => {
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const [editorState, setEditorState] = useState(
+    EditorState.createWithContent(
+      ContentState.createFromText('Modify this tExT to See DIFFERENCES.')
+    )
+  );
 
-  return (
-    <>
-      <Editor editorState={editorState} onChange={setEditorState}>
-      <button
-        onMouseDown={(e) => {
-          e.preventDefault();
-          toggleUnderline(editorState, setEditorState)
-        }}
-        style={{color: isUnderline(editorState) ? 'skyblue' : 'black'}}
-      >
-        Underline
-      </button>
-    </>
-  )
-}
-
-export default Demo;
-```
-
-## Customization
-
-By default, the `UNDERLINE` key represent the underlined inline style. For any reason if you need
-to change this key to something else, you can pass your custom key to the previous functions as
-the third parameter.
-
-Also if you changed the default key for the underline inline style, you **have to** pass the
-updated version of style map to the editor. Here is an example:
-
-```ts
-import { useState } from 'react';
-import { EditorState } from 'draft-js';
-import { Editor, initialStyleMap, isUnderline, toggleUnderline } from 'contenido';
-
-const CUSTOM_UNDERLINE_KEY = 'YOUR_CUSTOM_UNDERLINE_KEY';
-
-const CustomizedDemo = () => {
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const styleMap = {
     ...initialStyleMap,
-    CUSTOM_UNDERLINE_KEY: {
-       textDecoration: 'underline'
-       // Other styles...
-    }
+    CAPITALIZE: {
+      textTransform: 'capitalize'
+    },
+    LOWERCASE: {
+      textTransform: 'lowercase'
+    },
+    UPPERCASE: {
+      textTransform: 'uppercase'
+    },
+    INITIAL: {
+      textTransform: 'initial'
+    },
   };
 
   return (
     <>
+      <div style={{display: 'flex', gap: 1}}>
+        {[CAPITALIZE, LOWERCASE, UPPERCASE, INITIAL].map((textTransform, index) => (
+          <button
+            key={textTransform + index}
+            onMouseDown={(e) => {
+              e.preventDefault();
+              toggleInlineStyle(editorState, setEditorState, textTransform)
+            }}
+          style={{
+            color: hasInlineStyleOf(editorState, textTransform) ? 'white' : '#4cb5f5',
+            backgroundColor: hasInlineStyleOf(editorState, textTransform) ? '#4cb5f5' : 'white',
+          }}
+          >
+          {textTransform}
+          <button>
+        ))}
+      </div>
       <Editor
         editorState={editorState}
         onChange={setEditorState}
         customStyleMap={styleMap}
-      >
-      <button
-        onMouseDown={(e) => {
-          e.preventDefault();
-          toggleUnderline(editorState, setEditorState, CUSTOM_UNDERLINE_KEY)
-        }}
-        style={{color: isUnderline(editorState, CUSTOM_UNDERLINE_KEY) ? 'skyblue' : 'black'}}
-      >
-        Underline
-      </button>
+      />
     </>
-  )
-}
+  );
+};
 
-export default CustomizedDemo;
+export default Demo;
 ```

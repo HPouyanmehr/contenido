@@ -22,6 +22,7 @@ import MarkdownLink from 'components/common/Markdown/components/Link';
 // Custom Section Components
 import CustomInlineStyleDemo from 'components/section/demo/CustomInlineStyle';
 import ColorDemo from 'components/section/demo/Color';
+import TextTransformDemo from 'components/section/demo/TextTransform';
 
 // Custom Types
 export interface MarkdownProps {
@@ -51,6 +52,7 @@ const Markdown: FC<MarkdownProps> = (props) => {
           // Editor Demo Copmonents
           CustomInlineStyleDemo: CustomInlineStyleDemo,
           ColorDemo: ColorDemo,
+          TextTransformDemo: TextTransformDemo,
         },
       }}
     >
