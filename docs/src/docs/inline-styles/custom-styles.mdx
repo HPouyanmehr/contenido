@@ -23,7 +23,7 @@ that are totally based on this.
 
 ## Custom style map
 
-When you need to rather than bold, italic and underline; you have to add the style key and the
+When you need inline styles rather than bold, italic and underline; you have to add the style key and the
 relevant css of that to the style map and pass it to the editor. It's a good idea to spread the
 current inline styles first and then add yours.
 
@@ -50,7 +50,7 @@ hasInlineStyleOf(state: State, key: string) => boolean;
 This is an example of `toggleInlineStyle` and `hasInlineStyleOf` utilities where we want to
 colorize the selected text with the #4cb5f5 color and make it bold.
 
-<Colorize />
+<CustomInlineStyleDemo />
 
 ```tsx
 import { useState } from 'react';
@@ -96,7 +96,7 @@ const Demo = () => {
           backgroundColor: isColorize() ? '#4cb5f5' : 'white',
         }}
       >
-        Underline
+        Colorize
       </button>
       <Editor
         editorState={editorState}

@@ -7,7 +7,10 @@ import type { FC } from 'react';
 import Divider from 'components/core/Divider';
 
 // Custom Common Components
+import Blockquote from 'components/common/Markdown/components/Blockquote';
 import InlineCode from 'components/common/Markdown/components/InlineCode';
+import MarkdownBody1 from 'components/common/Markdown/components/Body1';
+import MarkdownCode from 'components/common/Markdown/components/Code';
 import MarkdownH1 from 'components/common/Markdown/components/H1';
 import MarkdownH2 from 'components/common/Markdown/components/H2';
 import MarkdownH3 from 'components/common/Markdown/components/H3';
@@ -15,10 +18,10 @@ import MarkdownH4 from 'components/common/Markdown/components/H4';
 import MarkdownH5 from 'components/common/Markdown/components/H5';
 import MarkdownH6 from 'components/common/Markdown/components/H6';
 import MarkdownLink from 'components/common/Markdown/components/Link';
-import Blockquote from './components/Blockquote';
-import MarkdownCode from './components/Code';
-import MarkdownBody1 from './components/Body1';
-import ColorizeDemo from 'components/section/demo/Colorize';
+
+// Custom Section Components
+import CustomInlineStyleDemo from 'components/section/demo/CustomInlineStyle';
+import ColorDemo from 'components/section/demo/Color';
 
 // Custom Types
 export interface MarkdownProps {
@@ -45,7 +48,9 @@ const Markdown: FC<MarkdownProps> = (props) => {
           h5: MarkdownH5,
           h6: MarkdownH6,
           pre: MarkdownCode,
-          Colorize: ColorizeDemo,
+          // Editor Demo Copmonents
+          CustomInlineStyleDemo: CustomInlineStyleDemo,
+          ColorDemo: ColorDemo,
         },
       }}
     >

@@ -19,7 +19,7 @@ import { CustomTypeBackground } from 'types/common/theme';
 
 const COLORIZE = 'COLORIZE';
 
-const ColorizeDemo: FC = () => {
+const CustomInlineStyleDemo: FC = () => {
   // States
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
@@ -91,4 +91,4 @@ const ColorizeDemo: FC = () => {
   );
 };
 
-export default ColorizeDemo;
+export default CustomInlineStyleDemo;
