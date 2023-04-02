@@ -3,53 +3,54 @@ title: Superscript
 sort: 6
 ---
 
-# Underline
+# Superscript
 
-Making the text underlined help you to somehow highlight your text. You should be aware
-that the other usecase of the underlined text is to indicate a links and you need to
-keep the styles differences tangible for this two.
+Superscript can be used in a wide range such as references and symbols and also in equations.
 
-## toggleUnderline
+## toggleSuperscript
 
-To make the selection of your content underlined you can use `toggleUnderline` function.
-It'll toggle between underlined and not underlined automatically.
+To make the selection of your content as a superscript you can use `toggleSuperscript` function.
 
 ```ts
-toggleUnderline(state: State, stateHandler: StateHandler, customUnderlinekey?: string) => void;
+toggleSuperscript(state: State, stateHandler: StateHandler, customSuperscriptkey?: string) => void;
 ```
 
-## isUnderline
+## isSuperscript
 
-This function help you to find out if the current character is underline or not.
+This function help you to find out if the current character is superscript or not.
 The returend boolean will update on cursor moves.
 
 ```ts
-isUnderline(state: State, customUnderlineKey?: string) => boolean;
+isSuperscript(state: State, customSuperscriptkey?: string) => boolean;
 ```
 
 ## Example
 
-An example of `toggleUnderline` and `isUnderline` usage:
+An example of `toggleSuperscript` and `isSuperscript` usage:
 
 ```ts
 import { useState } from 'react';
 import { EditorState } from 'draft-js';
-import { Editor, isUnderline, toggleUnderline } from 'contenido';
+import { Editor, initialStyleMap, isSuperscript, toggleSuperscript } from 'contenido';
 
 const Demo = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   return (
     <>
-      <Editor editorState={editorState} onChange={setEditorState}>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        customStyleMap={initialStyleMap}
+      >
       <button
         onMouseDown={(e) => {
           e.preventDefault();
-          toggleUnderline(editorState, setEditorState)
+          toggleSuperscript(editorState, setEditorState)
         }}
-        style={{color: isUnderline(editorState) ? 'skyblue' : 'black'}}
+        style={{color: isSuperscript(editorState) ? 'skyblue' : 'black'}}
       >
-        Underline
+        Superscript
       </button>
     </>
   )
@@ -60,28 +61,29 @@ export default Demo;
 
 ## Customization
 
-By default, the `UNDERLINE` key represent the underlined inline style. For any reason if you need
+By default, the `SUPERSCRIPT` key represent the superscript inline style. For any reason if you need
 to change this key to something else, you can pass your custom key to the previous functions as
 the third parameter.
 
-Also if you changed the default key for the underline inline style, you **have to** pass the
+Also if you changed the default key for the superscript inline style, you **have to** pass the
 updated version of style map to the editor. Here is an example:
 
 ```ts
 import { useState } from 'react';
 import { EditorState } from 'draft-js';
-import { Editor, initialStyleMap, isUnderline, toggleUnderline } from 'contenido';
+import { Editor, initialStyleMap, isSuperscript, toggleSuperscript } from 'contenido';
 
-const CUSTOM_UNDERLINE_KEY = 'YOUR_CUSTOM_UNDERLINE_KEY';
+const CUSTOM_SUPERSCRIPT_KEY = 'YOUR_CUSTOM_SUPERSCRIPT_KEY';
 
 const CustomizedDemo = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const styleMap = {
     ...initialStyleMap,
-    CUSTOM_UNDERLINE_KEY: {
-       textDecoration: 'underline'
-       // Other styles...
+    CUSTOM_SUPERSCRIPT_KEY: {
+      verticalAlign: 'top',
+      fontSize: '0.75em',
+      // Other styles...
     }
   };
 
@@ -95,11 +97,11 @@ const CustomizedDemo = () => {
       <button
         onMouseDown={(e) => {
           e.preventDefault();
-          toggleUnderline(editorState, setEditorState, CUSTOM_UNDERLINE_KEY)
+          toggleSuperscript(editorState, setEditorState, CUSTOM_SUPERSCRIPT_KEY)
         }}
-        style={{color: isUnderline(editorState, CUSTOM_UNDERLINE_KEY) ? 'skyblue' : 'black'}}
+        style={{color: isSuperscript(editorState, CUSTOM_SUPERSCRIPT_KEY) ? 'skyblue' : 'black'}}
       >
-        Underline
+        Superscript
       </button>
     </>
   )
