@@ -49,10 +49,18 @@ export const getDocsSidebar = (sectionName?: string): DocSidebarProps[] => {
     const docsDir = path.join(docsDirectory, section);
     const fileNames = fs.readdirSync(docsDir);
     const items: DocSdiebarItemProps[] = [];
+    let sort = 0;
 
     fileNames.forEach((fileName, index) => {
       const fullPath = path.join(docsDir, fileName);
       const content = fs.readFileSync(fullPath, 'utf-8');
+      if (fileName === 'conf.json') {
+        const config = JSON.parse(content) as { sort: number };
+        sort = config.sort;
+
+        return;
+      }
+
       const matterResult = matter(content);
 
       items.push({
@@ -64,9 +72,10 @@ export const getDocsSidebar = (sectionName?: string): DocSidebarProps[] => {
     });
 
     items.sort((a, b) => (a.sort > b.sort ? 1 : -1));
-
-    sidebar.push({ title: section, selected, items });
+    sidebar.push({ title: section, sort, selected, items });
   });
+
+  sidebar.sort((a, b) => (a.sort > b.sort ? 1 : -1));
 
   return sidebar;
 };
@@ -84,7 +93,7 @@ export const getDocData = (
 
     const id = docNames.find((id) => id.replace(/\.mdx$/, '') === docId);
 
-    if (id) {
+    if (id && id !== 'conf.json') {
       const fullPath = path.join(docsDir, id);
       const fileContents = fs.readFileSync(fullPath, 'utf-8');
 

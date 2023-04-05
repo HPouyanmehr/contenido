@@ -14,6 +14,7 @@ export interface DocSdiebarItemProps {
 
 export interface DocSidebarProps {
   title: string;
+  sort: number;
   selected: boolean;
   items: DocSdiebarItemProps[];
 }
