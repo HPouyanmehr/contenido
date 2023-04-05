@@ -11,6 +11,4 @@ const initialBlockTypes = {
   Blockquote: 'blockquote',
 };
 
-export type InitialBlockType = keyof typeof initialBlockTypes;
-
 export default initialBlockTypes;

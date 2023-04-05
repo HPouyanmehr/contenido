@@ -1,7 +1,5 @@
-// Types
-import type { CSSProperties } from 'react';
-
-export type StyleMapType = { [key: string]: CSSProperties };
+// Custom Types
+import type { StyleMapType } from '../../types/inline';
 
 const initialStyleMap: StyleMapType = {
   LINE_THROUGH: {
