@@ -1,0 +1,47 @@
+---
+title: Get Plain Text
+sort: 3
+---
+
+# Get plain text
+
+You can extract the plain text of the editor with the help of `getPlainText`.
+
+## Usage
+
+To extract the plain text use the `getPlainText` function.
+
+```ts
+getPlainText(state: State) => string
+```
+
+## Example
+
+An example of `getPlainText` usage:
+
+```ts
+import { useState, useEffect } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, getPlainText } from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  useEffect(() => {
+    console.log(getPlainText(editorState))
+  }, [editorState])
+
+  return (
+    <Editor
+      editorState={editorState}
+      onChange={setEditorState}
+      editorRef={editorRef}
+    >
+  )
+}
+
+export default Demo;
+```

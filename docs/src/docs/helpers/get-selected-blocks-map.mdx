@@ -1,0 +1,49 @@
+---
+title: Get Selected Block Maps
+sort: 4
+---
+
+# Get selected blocks map
+
+The `getSelectedBlocksMap` utilitis is useful when you need to have access
+to the selected blocks and not all of the available blocks.
+
+## Usage
+
+To get the array of selected blocks use `getSelectedBlocksMap` function.
+
+```ts
+getSelectedBlocksMap(state: State) => ContentBlock[]
+```
+
+## Example
+
+An example of `getSelectedBlocksMap` usage:
+(Select multiple blocks to see the difference)
+
+```ts
+import { useState, useEffect } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, getSelectedBlocksMap } from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  useEffect(() => {
+    console.log(getSelectedBlocksMap(editorState))
+  }, [editorState])
+
+  return (
+    <Editor
+      editorState={editorState}
+      onChange={setEditorState}
+      editorRef={editorRef}
+    >
+  )
+}
+
+export default Demo;
+```

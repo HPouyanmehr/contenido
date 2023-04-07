@@ -1,0 +1,53 @@
+---
+title: Has Block Type Of
+sort: 5
+---
+
+# hasBlockTypeOf
+
+To find out if the current content block has your desired block type, you
+can use this function
+
+## Usage
+
+The `hasBlockTypeOf` utility will check to see if the current block has the
+type that you've passed to it or not. The returned value will be updated on
+block changes.
+
+```ts
+hasBlockTypeOf(state: State, blockType: string) => boolean
+```
+
+This utility will be useful whenever you have a custom block type and need to
+update the styles of the toggler button.
+
+## Example
+
+An example of `hasBlockTypeOf` usage:
+
+```ts
+import { useState, useEffect } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, hasBlockTypeOf } from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  useEffect(() => {
+    console.log(hasBlockTypeOf(editorState, 'custom-block-type'))
+  }, [editorState])
+
+  return (
+    <Editor
+      editorState={editorState}
+      onChange={setEditorState}
+      editorRef={editorRef}
+    >
+  )
+}
+
+export default Demo;
+```

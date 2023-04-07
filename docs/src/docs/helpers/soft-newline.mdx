@@ -1,0 +1,57 @@
+---
+title: Insertion Of Soft Newline
+sort: 6
+---
+
+# insertSoftNewline
+
+By default, there will be a new content block whenever you press the enter key.
+However in some cases you need to override this behaviour to avoid living the
+current block.
+
+## Usage
+
+The `insertSoftNewline` utility will add a soft newline and will help you to
+continue editing in current content block.
+
+```ts
+insertSoftNewline(state: State, stateHanlder: StateHandler) => State
+```
+
+## Example
+
+An example of `insertSoftNewline` usage:
+
+```ts
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, insertSoftNewline } from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+
+          insertSoftNewline(editorState, setEditorState)
+        }}
+      >
+        Soft Newline
+      </button>
+    </>
+  )
+}
+
+export default Demo;
+```
