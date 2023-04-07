@@ -1,0 +1,51 @@
+---
+title: Focus On The Editor
+sort: 0
+---
+
+# Focus on the editor
+
+There some cases that you need to return the user focus on the editor. For
+example there may be an upload box and you need to jump back to the editor
+just right after the upload process.
+
+## focusOnEditor
+
+To return the focus on the editor you can use `focusOnEditor` utility.
+
+```ts
+focusOnEditor(ref: EditorRef) => void;
+```
+
+## Example
+
+An example of `focusOnEditor` usage:
+
+```ts
+import { useState, useRef } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, focusOnEditor } from 'contenido';
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  const editorRef = useRef(null);
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+      <button
+        onClick={() => focusOnEditor(editorRef)}
+      >
+        Focus on editor
+      </button>
+    </>
+  )
+}
+
+export default Demo;
+```

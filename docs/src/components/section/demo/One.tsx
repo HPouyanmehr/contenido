@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 import { useTheme, useMediaQuery } from '@mui/material';
 import { EditorState } from 'draft-js';
 import {
@@ -47,6 +48,7 @@ import type { FC } from 'react';
 // Custom Core Components
 import Box from 'components/core/Box';
 import Container from 'components/core/Container';
+import Link from 'components/core/Link';
 import MenuItem from 'components/core/MenuItem';
 import Paper from 'components/core/Paper';
 import Select from 'components/core/Select';
@@ -74,8 +76,6 @@ import UnderlinedIconButton from 'components/common/IconButton/Underline';
 // Custom Types
 import type { CustomTypeBackground } from 'types/common/theme';
 import type { PaperProps } from 'components/core/Paper';
-import Link from 'components/core/Link';
-import Image from 'next/image';
 
 const EditorImage: FC<DecoratorComponentProps> = (props) => {
   if (props.blockType === 'image') {

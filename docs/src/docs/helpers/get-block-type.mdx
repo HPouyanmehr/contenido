@@ -1,0 +1,56 @@
+---
+title: Get Block Type
+sort: 2
+---
+
+# Get block type
+
+You can find the block type of the currently focused or selected block. This is the list of default
+block types provided by `draft-js`, You can also get your custom block types with the `getBlockType`:
+
+- unstyled
+- header-1 to header-6
+- unordered-list-item
+- ordered-list-item
+- blockquote
+- code-block
+- atomic
+
+## Usage
+
+To find out what is the type of the selected or focused block use `getBlockType` utility:
+
+```ts
+getBlockType(state: State) => string
+```
+
+## Example
+
+An example of `getBlockType` usage:
+
+```ts
+import { useState, useEffect } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, getBlockType } from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  useEffect(() => {
+    console.log(getBlockType(editorState))
+  }, [editorState])
+
+  return (
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+  )
+}
+
+export default Demo;
+```

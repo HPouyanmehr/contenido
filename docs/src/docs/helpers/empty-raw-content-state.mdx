@@ -1,0 +1,68 @@
+---
+title: Empty Raw Content State
+sort: 1
+---
+
+# Empty raw content state
+
+A raw content state that you can use to initialize an empty state in SSR.
+
+## Usage
+
+When you're implementing your editor with SSR (like [Next.js](https://github.com/vercel/next.js))
+there could be some issues with the very first content state that you use
+in your editor (The one that you create with `EditorState.createEmpty()`).
+This commonly because of the key difference of the content state on the server
+and the client side. To fix this issue and have a clean state in SSR you may need
+to pass the very first content state with the same key on both server and client side.
+The following constant is an empty and raw content state that you can easily store and pass
+it to the editor as the first state
+
+```ts
+// Types
+import type { RawDraftContentState } from 'draft-js';
+
+const emptyRawContentState: RawDraftContentState = {
+  entityMap: {},
+  blocks: [
+    {
+      text: '',
+      key: 'LG6AABOZOBAMJ',
+      type: 'unstyled',
+      entityRanges: [],
+      depth: 0,
+      inlineStyleRanges: [],
+    },
+  ],
+};
+
+export default emptyRawContentState;
+```
+
+## Example
+
+An example of `emptyRawContentState` usage:
+
+```ts
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, emptyRawContentState } from 'contenido';
+
+const emptyContentState = convertFromRaw(emptyRawContentState)
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createWithContent(emptyContentState)
+  );
+
+  return (
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+  )
+}
+
+export default Demo;
+```
