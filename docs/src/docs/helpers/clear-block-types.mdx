@@ -1,0 +1,68 @@
+---
+title: Clear Block Types
+sort: 8
+---
+
+# clearBlockTypes
+
+To remove the whole applied block types such as headings or lists from the current
+selection you can use the `clearBlockTypes` function.
+
+## Usage
+
+The `clearBlockTypes` utility will clear the block types from your selection. It'll
+automatically remove your custom block types as well.
+
+```ts
+clearBlockTypes(
+  state: State,
+  stateHandler: StateHandler,
+) => State
+```
+
+## Example
+
+An example of `clearBlockTypes` usage:
+
+```ts
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, clearBlockTypes, toggleH1, isH1 } from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+          toggleH1(editorState, setEditorState)
+        }}
+        style={{color: isH1(editorState) ? 'skyblue' : 'black'}}
+      >
+        Bold
+      </button>
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+
+          clearBlockTypes(editorState, setEditorState)
+        }}
+      >
+        Clear BlockTypes
+      </button>
+    </>
+  )
+}
+
+export default Demo;
+```

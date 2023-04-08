@@ -1,0 +1,58 @@
+---
+title: Clear
+sort: 10
+---
+
+# clear
+
+To remove everything (inline styles, block types and entities) from the
+current selection you can use the `clear` function.
+
+## Usage
+
+The `clear` utility will clear everything that is selected.
+
+```ts
+clear(
+  state: State,
+  stateHandler: StateHandler,
+) => State
+```
+
+## Example
+
+An example of `clear` usage:
+
+```ts
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, clear } from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+
+          clear(editorState, setEditorState)
+        }}
+      >
+        Clear All
+      </button>
+    </>
+  )
+}
+
+export default Demo;
+```

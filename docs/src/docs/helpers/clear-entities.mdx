@@ -1,0 +1,59 @@
+---
+title: Clear Entities
+sort: 9
+---
+
+# clearEntities
+
+To remove entities like image or video from the current selection you can use the
+`clearEntities` function.
+
+## Usage
+
+The `clearEntities` utility will clear entities from your selection. It'll
+automatically remove your custom entities as well.
+
+```ts
+clearEntities(
+  state: State,
+  stateHandler: StateHandler,
+) => State
+```
+
+## Example
+
+An example of `clearEntities` usage:
+
+```ts
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, clearEntities } from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+
+          clearEntities(editorState, setEditorState)
+        }}
+      >
+        Clear Entities
+      </button>
+    </>
+  )
+}
+
+export default Demo;
+```
