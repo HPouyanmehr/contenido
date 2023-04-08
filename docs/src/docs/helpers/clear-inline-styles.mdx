@@ -1,0 +1,112 @@
+---
+title: Clear Inline Styles
+sort: 7
+---
+
+# clearInlineStyles
+
+To remove the whole applied inline styles from the current selection you can
+use the `clearInlineStyles` function.
+
+## Usage
+
+The `clearInlineStyles` utility will clear the inline styles from your selection.
+Checkout the [customization](#customization) section if you are using custom inline
+styles.
+
+```ts
+clearInlineStyles(
+  state: State,
+  stateHandler: StateHandler,
+  customInlineStyles?: string[]
+) => State
+```
+
+## Example
+
+An example of `clearInlineStyles` usage:
+
+```ts
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, clearInlineStyles } from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+          toggleBold(editorState, setEditorState)
+        }}
+        style={{color: isBold(editorState) ? 'skyblue' : 'black'}}
+      >
+        Bold
+      </button>
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+
+          clearInlineStyles(editorState, setEditorState)
+        }}
+      >
+        Clear Inline Styles
+      </button>
+    </>
+  )
+}
+
+export default Demo;
+```
+
+## Customization
+
+The `clearInlineStyles` will only remove the default provided styles key like `BOLD`,
+`ITALIC` and `UNDERLINE`. If you have used more inline styles in your editor you **have to**
+pass your `customStyleMap` constant to the utility as the third argument.
+
+```ts
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, clearInlineStyles, initialStyleMap } from 'contenido';
+
+const CustomizedDemo = () => {
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  const styleMap = {
+    ...initialStyleMap,
+    // other styles
+  };
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        customStyleMap={styleMap}
+      >
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+
+          clearInlineStyles(editorState, setEditorState, styleMap)
+        }}
+      >
+        Clear Inline Styles
+      </button>
+    </>
+  )
+}
+
+export default CustomizedDemo;
+```
