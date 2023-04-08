@@ -19,7 +19,7 @@ import ListItemText from 'components/core/ListItemText';
 // Custom Icon Components
 import ChevronRightIcon from 'components/icon/ChevronRight';
 import DarkModeIcon from 'components/icon/DarkMode';
-import LightModeIcon from 'components/icon/DarkMode';
+import LightModeIcon from 'components/icon/LightMode';
 
 // Custom Contexts
 import { useThemeModeContext } from 'store/context/themeMode';
@@ -100,7 +100,31 @@ const DocSidebar: FC<DocSidebarComponentProps> = (props) => {
           justifyContent: 'space-between',
         }}
       >
-        <Box sx={({ spacing }) => ({ m: spacing(1, 0) })}>
+        <Box
+          sx={({ palette, spacing }) => ({
+            m: spacing(1, 0),
+            flexGrow: 1,
+            overflowY: 'hidden',
+            pr: '8px',
+            ':hover': {
+              overflowY: 'scroll',
+              pr: '0px',
+            },
+            '::-webkit-scrollbar': {
+              width: '8px',
+              height: '6px',
+            },
+            '::-webkit-scrollbar-track': {
+              background: palette.background.paper,
+              borderRadius: '8px',
+              overflow: 'hidden',
+            },
+            '::-webkit-scrollbar-thumb': {
+              background: '#e6e6e6',
+              borderRadius: '8px',
+            },
+          })}
+        >
           {sidebar.map((section, index) => (
             <List
               key={section.title + index}
@@ -170,10 +194,14 @@ const DocSidebar: FC<DocSidebarComponentProps> = (props) => {
               })}
             >
               <ListItemIcon sx={{ minWidth: '2rem' }}>
-                {mode === 'light' ? <LightModeIcon /> : <DarkModeIcon />}
+                {mode === 'light' ? (
+                  <LightModeIcon fontSize='small' />
+                ) : (
+                  <DarkModeIcon fontSize='small' />
+                )}
               </ListItemIcon>
               <ListItemText
-                primary={`${mode} mode`}
+                primary={<BodyTwo>{`${mode} mode`}</BodyTwo>}
                 sx={{ textTransform: 'capitalize' }}
               />
             </ListItemButton>
