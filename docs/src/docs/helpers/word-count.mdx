@@ -1,0 +1,50 @@
+---
+title: Word Count
+sort: 11
+---
+
+# getWordCount
+
+You can find the number of words in your current state. This method will be
+helpful in some cases like monitoring or limiting the user inputs.
+
+## Usage
+
+Use `getWordCount` utility to extract the plain text of your content .
+
+```ts
+getWordCount( state: State ) => number
+```
+
+## Example
+
+An example of `getWordCount` usage:
+
+```ts
+import { useState, useEffect } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, getWordCount } from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  useEffect(() => {
+    console.log(getWordCount(editorState))
+  }, [editorState])
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+    </>
+  )
+}
+
+export default Demo;
+```

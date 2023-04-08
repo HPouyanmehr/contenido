@@ -1,18 +1,19 @@
 ---
-title: Get Plain Text
-sort: 3
+title: Plain Text
+sort: 9
 ---
 
-# Get plain text
+# getPlainText
 
-You can extract the plain text of the editor with the help of `getPlainText`.
+You can extract the plain text of your current state for some custom usecases like
+generating content summary.
 
 ## Usage
 
-To extract the plain text use the `getPlainText` function.
+Use `getPlainText` utility to extract the plain text of your content .
 
 ```ts
-getPlainText(state: State) => string
+getPlainText( state: State ) => string
 ```
 
 ## Example
@@ -35,11 +36,13 @@ const Demo = () => {
   }, [editorState])
 
   return (
-    <Editor
-      editorState={editorState}
-      onChange={setEditorState}
-      editorRef={editorRef}
-    >
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+    </>
   )
 }
 

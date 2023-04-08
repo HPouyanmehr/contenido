@@ -1,0 +1,50 @@
+---
+title: Word Array
+sort: 10
+---
+
+# getWordArray
+
+You can extract the word array of your current state for some custom usecases like
+generating keywords of the content.
+
+## Usage
+
+Use `getWordArray` utility to extract the plain text of your content .
+
+```ts
+getWordArray( state: State ) => string[]
+```
+
+## Example
+
+An example of `getWordArray` usage:
+
+```ts
+import { useState, useEffect } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, getWordArray } from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  useEffect(() => {
+    console.log(getWordArray(editorState))
+  }, [editorState])
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+    </>
+  )
+}
+
+export default Demo;
+```

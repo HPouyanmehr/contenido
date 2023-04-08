@@ -1,0 +1,50 @@
+---
+title: Character Count
+sort: 8
+---
+
+# getCharCount
+
+You can find the number of charachters in your current state. This method is
+useful to implement monitoring on the state and also to limit the user inputs.
+
+## Usage
+
+The `getCharCount` utility will return the amount of charachters of your state.
+
+```ts
+getCharCount( state: State ) => number
+```
+
+## Example
+
+An example of `getCharCount` usage:
+
+```ts
+import { useState, useEffect } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, getCharCount } from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  useEffect(() => {
+    console.log(getCharCount(editorState))
+  }, [editorState])
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+    </>
+  )
+}
+
+export default Demo;
+```
