@@ -1,0 +1,50 @@
+---
+title: Audio Entities Count
+sort: 12
+---
+
+# getAudioCount
+
+You can find the number of audios in your current state. This method is
+useful to implement monitoring on the state and also to limit the user inputs.
+
+## Usage
+
+The `getAudioCount` utility will return the amount of audio entities.
+
+```ts
+getAudioCount( state: State ) => number
+```
+
+## Example
+
+An example of `getAudioCount` usage:
+
+```ts
+import { useState, useEffect } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, getAudioCount } from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  useEffect(() => {
+    console.log(getAudioCount(editorState))
+  }, [editorState])
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+    </>
+  )
+}
+
+export default Demo;
+```

@@ -1,0 +1,50 @@
+---
+title: Image Entities Count
+sort: 14
+---
+
+# getImageCount
+
+You can find the number of images in your current state. This method is
+useful to implement monitoring on the state and also to limit the user inputs.
+
+## Usage
+
+The `getImageCount` utility will return the amount of image entities.
+
+```ts
+getImageCount( state: State ) => number
+```
+
+## Example
+
+An example of `getImageCount` usage:
+
+```ts
+import { useState, useEffect } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, getImageCount } from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  useEffect(() => {
+    console.log(getImageCount(editorState))
+  }, [editorState])
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+    </>
+  )
+}
+
+export default Demo;
+```

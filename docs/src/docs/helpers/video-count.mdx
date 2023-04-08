@@ -1,0 +1,50 @@
+---
+title: Image Entities Count
+sort: 15
+---
+
+# getVideoCount
+
+You can find the number of videos in your current state. This method is
+useful to implement monitoring on the state and also to limit the user inputs.
+
+## Usage
+
+The `getVideoCount` utility will return the amount of video entities.
+
+```ts
+getVideoCount( state: State ) => number
+```
+
+## Example
+
+An example of `getVideoCount` usage:
+
+```ts
+import { useState, useEffect } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, getVideoCount } from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  useEffect(() => {
+    console.log(getVideoCount(editorState))
+  }, [editorState])
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+    </>
+  )
+}
+
+export default Demo;
+```

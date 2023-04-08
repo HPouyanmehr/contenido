@@ -1,0 +1,50 @@
+---
+title: File Entities Count
+sort: 13
+---
+
+# getFileCount
+
+You can find the number of file entities your current state. This method is
+useful to implement monitoring on the state and also to limit the user inputs.
+
+## Usage
+
+The `getFileCount` utility will return the amount of file entities.
+
+```ts
+getFileCount( state: State ) => number
+```
+
+## Example
+
+An example of `getFileCount` usage:
+
+```ts
+import { useState, useEffect } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, getFileCount } from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  useEffect(() => {
+    console.log(getFileCount(editorState))
+  }, [editorState])
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+    </>
+  )
+}
+
+export default Demo;
+```

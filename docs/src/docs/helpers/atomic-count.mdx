@@ -1,0 +1,51 @@
+---
+title: Atomic Entities Count
+sort: 11
+---
+
+# getAtomicCount
+
+You can find the number of atomic entities in your current state. This method is
+useful to implement monitoring on the state and also to limit the user inputs.
+
+## Usage
+
+The `getAtomicCount` utility will return the amount of atomic entities with the given
+block type.
+
+```ts
+getAtomicCount( state: State, blockType: string ) => number
+```
+
+## Example
+
+An example of `getAtomicCount` usage:
+
+```ts
+import { useState, useEffect } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, getAtomicCount } from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  useEffect(() => {
+    console.log(getAtomicCount(editorState))
+  }, [editorState])
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+    </>
+  )
+}
+
+export default Demo;
+```
