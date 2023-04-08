@@ -1,15 +1,12 @@
 // Types
 import type { RawDraftContentState } from 'draft-js';
 
-// Core
-import { genKey } from '../../core';
-
 const emptyRawContentState: RawDraftContentState = {
   entityMap: {},
   blocks: [
     {
       text: '',
-      key: genKey(),
+      key: 'LG6AABOZOBAMJ',
       type: 'unstyled',
       entityRanges: [],
       depth: 0,
