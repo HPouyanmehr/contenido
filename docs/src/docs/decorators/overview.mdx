@@ -1,0 +1,111 @@
+---
+title: Decorators
+sort: 0
+---
+
+# Decorators
+
+You can use decorators to modify the rendering behaviour of your content.
+
+## Usage
+
+The decorator find your custom patterns and will decorate them with the
+component that you want.
+
+You can use `createDecorator` utility to create your custom decorators.
+
+```ts
+createDecorator( rules: DecoratorProps[] ) => CompositeDraftDecorator
+```
+
+Each decorator can have three parts:
+
+- strategy
+- component
+- props
+
+### Strategy
+
+The decorator strategy help you to find the patterns that needs
+to be replaced.
+
+You can define easily your strategies with the help of
+[`findEntitiesOf`](/entity/find-entities) utility.
+
+### Component
+
+After finding the matches of your pattern in the editor state,
+they'll be replaced by the provided component.
+
+### props(optional)
+
+You can optionally pass some default props to your component. The props value should
+be an object.
+
+As an example, you can define a decorator that find all link entities and replace those
+entities with the link component.
+
+## Example
+
+An example of `createDecorator` to add images to the editor:
+
+```ts
+import { useState, useEffect, FC } from 'react';
+import { EditorState } from 'draft-js';
+import {
+  Editor,
+  addImage,
+  createDecorator,
+  findEntitiesOf,
+  DecoratorComponentProps,
+  ImageAttributes
+} from 'contenido';
+
+const EditorImageComponent: FC<DecoratorComponentProps> = (props) => {
+  if (props.blockType === 'image') {
+    const { src, alt, ...otherProps } = props as ImageAttributes;
+    if (src && alt)
+      return <img alt={alt} src={src}} {......otherProps} />;
+  }
+
+  return <p>Not an image!</p>;
+};
+
+const Demo = () => {
+  const imageStrategy = findEntitiesOf('image')
+
+  const decorators = createDecorator([
+    {
+      component: EditorImageComponent,
+      strategy: imageStrategy
+    }
+  ])
+
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty(decorators)
+  );
+
+  const handleAddImage = () => {
+    addImage(editorState, setEditorState, {
+      alt: 'Some alt text.',
+      src: 'image-src',
+      styles: {width: '250px', height: '200px'}
+    })
+  }
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+      <button onClick={handleAddImage}>
+        Add Image
+      </button>
+    </>
+  )
+}
+
+export default Demo;
+```
