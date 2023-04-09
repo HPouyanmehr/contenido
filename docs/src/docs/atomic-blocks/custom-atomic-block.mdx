@@ -1,0 +1,27 @@
+---
+title: Custom Atomic Block
+sort: 0
+---
+
+# addAtomicBlock
+
+You can use atomic blocks in order to embed non-text content within your editor. The
+atomic content is useful for usecases such as images, videos, audios, mentions, hashtags
+and more.
+
+## addAtomicBlock
+
+The `addAtomicBlock` utility will add a non-text content in your editor.
+
+```ts
+addAtomicBlock(
+  state: State,
+  stateHandler: StateHandler,
+  fileType: string,
+  attributes?: Attributes,
+  mutibility?: DraftEntityMutability
+) => void
+```
+
+The `addImage`, `addVideo`, `addFile` or `addAudio` utilities are based on
+addAtomicBlock above.

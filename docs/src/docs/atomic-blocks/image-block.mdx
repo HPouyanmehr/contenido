@@ -1,0 +1,57 @@
+---
+title: Image Block
+sort: 1
+---
+
+# addImage
+
+Images are atomic (non-text) blocks that can be added to the contnet.
+
+## Usage
+
+The `addImage` utility will help you to add image to the editor.
+Image attributes can be either `image` or `picture` ones.
+
+```ts
+addImage(
+  state: State,
+  stateHandler: StateHandler,
+  attributes?: ImageAttributes
+) => void
+```
+
+Whenever you use an atomic block in your content, You need to decorate your
+state to make it available to render your custom non-text content.
+
+## Example
+
+An example of `addImage` usage:
+
+```ts
+import { useState, useEffect } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, addImage } from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  useEffect(() => {
+    console.log(getAtomicCount(editorState))
+  }, [editorState])
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+    </>
+  )
+}
+
+export default Demo;
+```
