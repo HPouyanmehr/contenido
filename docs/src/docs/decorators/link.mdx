@@ -1,0 +1,101 @@
+---
+title: Link
+sort: 1
+---
+
+# Link
+
+Hyperlinks are one of the key elements of each content on the web.
+
+## addLink
+
+You can convert a text to a link using the `addLink` utility. In order to make
+the link visible in your content you need to add relevant decorator for that,
+you'll see an example of adding and removing links at the bottom of this page.
+
+```ts
+  addLink(
+    state: State,
+    stateHandler: StateHandler,
+    attributes?: LinkAttributes
+  ) => void
+```
+
+## removeLink
+
+In order to toggle from a link to a simple text you can use `removeLink` utility.
+
+```ts
+  removeLink(state: State, stateHandler: StateHandler) => void
+```
+
+## Link display
+
+To make your link visible in your content, you need to define a decorator for that.
+You can define your custom link component and use the `findEntitiesOfLink` utility
+as the decorator strategy. Check out the example below.
+
+## Example
+
+An example of handling links in `contenido`:
+
+```ts
+import { useState, useEffect, FC } from 'react';
+import { EditorState } from 'draft-js';
+import {
+  Editor,
+  addLink,
+  removeLink,
+  createDecorator,
+  findEntitiesOfLink,
+  DecoratorComponentProps,
+  ImageAttributes
+} from 'contenido';
+
+const EditorLink: FC<DecoratorComponentProps> = (props) => {
+  return (
+    <a href={props.href || '/'}>
+      {props.children}
+    </a>
+  );
+};
+
+const Demo = () => {
+  const decorators = createDecorator([
+    {
+      component: EditorLink,
+      strategy: findEntitiesOfLink
+    }
+  ])
+
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty(decorators)
+  );
+
+  const handleAddLink = () => {
+    addLink(editorState, setEditorState, {
+      href: 'https://contenidojs.com'
+    })
+  }
+
+  const handleRemoveLink = () => removeLink(editorState, setEditorState)
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+      <button onClick={handleAddLink}>
+        Add Link
+      </button>
+      <button onClick={handleRemoveLink}>
+        Remove Link
+      </button>
+    </>
+  )
+}
+
+export default Demo;
+```
