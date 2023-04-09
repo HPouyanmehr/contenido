@@ -54,7 +54,7 @@ export const getDocsSidebar = (sectionName?: string): DocSidebarProps[] => {
     fileNames.forEach((fileName, index) => {
       const fullPath = path.join(docsDir, fileName);
       const content = fs.readFileSync(fullPath, 'utf-8');
-      if (fileName === 'conf.json') {
+      if (fileName === '_conf.json') {
         const config = JSON.parse(content) as { sort: number };
         sort = config.sort;
 
@@ -93,7 +93,7 @@ export const getDocData = (
 
     const id = docNames.find((id) => id.replace(/\.mdx$/, '') === docId);
 
-    if (id && id !== 'conf.json') {
+    if (id && id !== '_conf.json') {
       const fullPath = path.join(docsDir, id);
       const fileContents = fs.readFileSync(fullPath, 'utf-8');
 
