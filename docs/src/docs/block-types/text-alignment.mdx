@@ -77,32 +77,33 @@ const Demo = () => {
   );
 
   return (
-    <Editor
-      editorState={editorState}
-      onChange={setEditorState}
-      editorRef={editorRef}
-      blockStyleFn={blockStyleFn}
-    >
-    {
-      [
-        {name: 'text-align-left', detector: isTextLeftAligned},
-        {name: 'text-align-center', detector: isTextCenterAligned},
-        {name: 'text-align-justify', detector: isTextJustifyAligned},
-        {name: 'text-align-right', detector: isTextRightAligned},
-      ].map((alignment) => (
-        <button
-          key={alignment.name}
-          onMouseDown={(e) => {
-            e.preventDefault();
-            toggleTextAlign(editorState, setEditorState, alignment.name)
-          }}
-          style={{color: detector(editorState) ? 'skyblue' : 'black'}}
-        >
-          {alignment.name.replaceAll('-', ' ')}
-        </button>
-      ))
-    }
-
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+        blockStyleFn={blockStyleFn}
+      >
+      {
+        [
+          {name: 'text-align-left', detector: isTextLeftAligned},
+          {name: 'text-align-center', detector: isTextCenterAligned},
+          {name: 'text-align-justify', detector: isTextJustifyAligned},
+          {name: 'text-align-right', detector: isTextRightAligned},
+        ].map((alignment) => (
+          <button
+            key={alignment.name}
+            onMouseDown={(e) => {
+              e.preventDefault();
+              toggleTextAlign(editorState, setEditorState, alignment.name)
+            }}
+            style={{color: detector(editorState) ? 'skyblue' : 'black'}}
+          >
+            {alignment.name.replaceAll('-', ' ')}
+          </button>
+        ))
+      }
+    </>
   )
 }
 

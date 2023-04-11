@@ -56,29 +56,31 @@ const Demo = () => {
   );
 
   return (
-    <Editor
-      editorState={editorState}
-      onChange={setEditorState}
-      editorRef={editorRef}
-    >
-    <button
-      onMouseDown={(e) => {
-        e.preventDefault();
-        toggleOL(editorState, setEditorState)
-      }}
-      style={{color: isOL(editorState) ? 'skyblue' : 'black'}}
-    >
-      Ordered List
-    </button>
-    <button
-      onMouseDown={(e) => {
-        e.preventDefault();
-        toggleUL(editorState, setEditorState)
-      }}
-      style={{color: isUL(editorState) ? 'skyblue' : 'black'}}
-    >
-      Unordered List
-    </button>
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+          toggleOL(editorState, setEditorState)
+        }}
+        style={{color: isOL(editorState) ? 'skyblue' : 'black'}}
+      >
+        Ordered List
+      </button>
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+          toggleUL(editorState, setEditorState)
+        }}
+        style={{color: isUL(editorState) ? 'skyblue' : 'black'}}
+      >
+        Unordered List
+      </button>
+    </>
   )
 }
 

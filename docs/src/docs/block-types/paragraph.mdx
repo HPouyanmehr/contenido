@@ -46,20 +46,22 @@ const Demo = () => {
   );
 
   return (
-    <Editor
-      editorState={editorState}
-      onChange={setEditorState}
-      editorRef={editorRef}
-    >
-    <button
-      onMouseDown={(e) => {
-        e.preventDefault();
-        toggleParagraph(editorState, setEditorState)
-      }}
-      style={{color: isParagraph(editorState) ? 'skyblue' : 'black'}}
-    >
-      Paragraph
-    </button>
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+          toggleParagraph(editorState, setEditorState)
+        }}
+        style={{color: isParagraph(editorState) ? 'skyblue' : 'black'}}
+      >
+        Paragraph
+      </button>
+    </>
   )
 }
 

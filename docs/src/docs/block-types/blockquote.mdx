@@ -55,20 +55,22 @@ const Demo = () => {
   );
 
   return (
-    <Editor
-      editorState={editorState}
-      onChange={setEditorState}
-      editorRef={editorRef}
-    >
-    <button
-      onMouseDown={(e) => {
-        e.preventDefault();
-        toggleBlockquote(editorState, setEditorState)
-      }}
-      style={{color: isBlockquote(editorState) ? 'skyblue' : 'black'}}
-    >
-      Toggle Blockquote
-    </button>
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+          toggleBlockquote(editorState, setEditorState)
+        }}
+        style={{color: isBlockquote(editorState) ? 'skyblue' : 'black'}}
+      >
+        Toggle Blockquote
+      </button>
+    </>
   )
 }
 

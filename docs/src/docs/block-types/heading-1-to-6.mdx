@@ -67,20 +67,22 @@ const Demo = () => {
   );
 
   return (
-    <Editor
-      editorState={editorState}
-      onChange={setEditorState}
-      editorRef={editorRef}
-    >
-    <button
-      onMouseDown={(e) => {
-        e.preventDefault();
-        toggleH1(editorState, setEditorState)
-      }}
-      style={{color: isH1(editorState) ? 'skyblue' : 'black'}}
-    >
-      Heading One
-    </button>
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+      <button
+        onMouseDown={(e) => {
+          e.preventDefault();
+          toggleH1(editorState, setEditorState)
+        }}
+        style={{color: isH1(editorState) ? 'skyblue' : 'black'}}
+      >
+        Heading One
+      </button>
+    </>
   )
 }
 
