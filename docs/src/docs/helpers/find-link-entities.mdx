@@ -1,0 +1,25 @@
+---
+title: Find Entities Of Link
+sort: 13
+---
+
+# findEntitiesOfLink
+
+This is a custom utility based on `findEntitiesOf` that helps you to find link entities
+in your content.
+
+## Usage
+
+Use `findEntitiesOfLink` utility to find entities with the block type of link.
+
+```ts
+findEntitiesOfLink(
+  contentBlock: ContentBlock,
+  callback: (start: number, end: number) => void,
+  contentState: ContentState
+) => void
+```
+
+## Example
+
+Check out `findEntitiesOfLink` example in the [link doc](/docs/decorators/link#example)

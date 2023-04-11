@@ -1,0 +1,51 @@
+---
+title: Entity Count
+sort: 14
+---
+
+# getEntityCount
+
+You can find the number of an entity type in your current state.
+This method will be helpful in some cases like monitoring or limiting
+the user inputs.
+
+## Usage
+
+Use `getEntityCount` utility to get the number of a certain entity type.
+
+```ts
+getEntityCount(state: State, type: string) => number
+```
+
+## Example
+
+An example of `getEntityCount` usage:
+
+```ts
+import { useState, useEffect } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, getEntityCount } from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  useEffect(() => {
+    console.log(getEntityCount(editorState, 'custom-entity-type'))
+  }, [editorState])
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+    </>
+  )
+}
+
+export default Demo;
+```

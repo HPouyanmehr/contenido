@@ -1,0 +1,76 @@
+---
+title: Find Entities Of A Certain Type
+sort: 12
+---
+
+# findEntitiesOf
+
+Finding entities can be usefull in cases like decorator strategies or custom
+utilities that need to know about a certain type of entity.
+
+## Usage
+
+Use `findEntitiesOf` utility to find the entities of your desired block type.
+
+```ts
+findEntitiesOf(entityType: string) => (
+  contentBlock: ContentBlock,
+  callback: (start: number, end: number) => void,
+  contentState: ContentState
+) => void
+```
+
+## Example
+
+An example of `findEntitiesOf` usage:
+
+```ts
+import { useState, useEffect, FC } from 'react';
+import { EditorState } from 'draft-js';
+import {
+  Editor,
+  addImage,
+  createDecorator,
+  findEntitiesOf,
+  DecoratorComponentProps,
+  ImageAttributes
+} from 'contenido';
+
+const Image: FC<DecoratorComponentProps> = (props) => {
+  return <img alt={props.alt} src={props.src}>
+}
+
+
+const Demo = () => {
+  const imageStrategy = findEntitiesOf('image');
+
+  const decorators = createDecorator([
+    component: Image,
+    strategy: imageStrategy,
+  ])
+
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty(decorators)
+  );
+
+  return (
+    <>
+      <Editor
+        editorState={editorState}
+        onChange={setEditorState}
+        editorRef={editorRef}
+      >
+      <button onClick={() => {
+        addImage(editorState, setEditorState, {
+          src: 'https://picsum.photos/200/200',
+          alt: 'Random image'
+        })
+      }}>
+        Add Image
+      </button>
+    </>
+  )
+}
+
+export default Demo;
+```
