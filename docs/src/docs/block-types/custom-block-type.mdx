@@ -1,14 +1,31 @@
 ---
-title: Has Block Type Of
-sort: 3
+title: Define and Handle Custom Block Types
+sort: 0
 ---
 
-# hasBlockTypeOf
+# Get block type
 
-To find out if the current content block has your desired block type, you
-can use this function
+You can find the block type of the currently focused or selected block. This is list of default
+block types provided by `draft-js`. You can find the relevant utility for each one in the
+documentation.
 
-## Usage
+- unstyled
+- header-1 to header-6
+- unordered-list-item
+- ordered-list-item
+- blockquote
+- code-block
+- atomic
+
+## getBlockType
+
+To find out what is the type of the selected or focused block use `getBlockType` utility:
+
+```ts
+getBlockType(state: State) => string
+```
+
+## hasBlockTypeOf
 
 The `hasBlockTypeOf` utility will check to see if the current block has the
 type that you've passed to it or not. The returned value will be updated on
@@ -23,12 +40,12 @@ update the styles of the toggler button.
 
 ## Example
 
-An example of `hasBlockTypeOf` usage:
+An example of `getBlockType` usage:
 
 ```ts
 import { useState, useEffect } from 'react';
 import { EditorState } from 'draft-js';
-import { Editor, hasBlockTypeOf } from 'contenido';
+import { Editor, getBlockType, hasBlockTypeOf } from 'contenido';
 
 
 const Demo = () => {
@@ -37,6 +54,7 @@ const Demo = () => {
   );
 
   useEffect(() => {
+    console.log(getBlockType(editorState))
     console.log(hasBlockTypeOf(editorState, 'custom-block-type'))
   }, [editorState])
 

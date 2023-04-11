@@ -1,0 +1,86 @@
+---
+title: List
+sort: 4
+---
+
+# List
+
+You can use the list HTML element to group a set of items that are related to
+each other. This relation can be ordered or unordered.
+
+## Toggle list
+
+In order to have a list in your content you can use following utilities base on
+your needs:
+
+- ordered list: toggleOL
+- unordered list: toggleUL
+
+```ts
+toggleOL(state: State, stateHandler: StateHandler, customOLType?: string) => void;
+toggleUL(state: State, stateHandler: StateHandler, customOLType?: string) => void;
+```
+
+## List type detection
+
+You can also use the available utilities to find out if the current block is list or
+not.
+
+- ordered list: isOL
+- unordered list: isUL
+
+```ts
+isOL(state: State) => boolean;
+isUL(state: State) => boolean;
+```
+
+## Example
+
+An example of list utilities:
+
+```ts
+import { useState, useEffect } from 'react';
+import { EditorState } from 'draft-js';
+import {
+  Editor,
+  isOL,
+  isUL,
+  toggleOL,
+  toggleUL
+} from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  return (
+    <Editor
+      editorState={editorState}
+      onChange={setEditorState}
+      editorRef={editorRef}
+    >
+    <button
+      onMouseDown={(e) => {
+        e.preventDefault();
+        toggleOL(editorState, setEditorState)
+      }}
+      style={{color: isOL(editorState) ? 'skyblue' : 'black'}}
+    >
+      Ordered List
+    </button>
+    <button
+      onMouseDown={(e) => {
+        e.preventDefault();
+        toggleUL(editorState, setEditorState)
+      }}
+      style={{color: isUL(editorState) ? 'skyblue' : 'black'}}
+    >
+      Unordered List
+    </button>
+  )
+}
+
+export default Demo;
+```

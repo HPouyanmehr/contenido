@@ -1,0 +1,67 @@
+---
+title: Paragraph
+sort: 2
+---
+
+# Paragraph
+
+Normal text will be rendered by the `p` tag in HTML.
+
+## toggleParagraph
+
+In order to change the block type into paragraph you can use `toggleParagraph` utility:
+
+```ts
+toggleParagraph(
+  state: State,
+  stateHandler: StateHandler,
+  customParagraphType?: string
+) => void
+```
+
+## isParagraph
+
+This utility helps you to find out if the current block is a paragraph block or not which
+can be handy in styling.
+
+```ts
+isParagraph: (state: State) => boolean;
+```
+
+NOTE: If the block type is unstyled, the `isParagraph` utility will return true as well.
+
+## Example
+
+An example of `toggleParagraph` and `isParagraph` usage:
+
+```ts
+import { useState, useEffect } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, isParagraph, toggleParagraph } from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  return (
+    <Editor
+      editorState={editorState}
+      onChange={setEditorState}
+      editorRef={editorRef}
+    >
+    <button
+      onMouseDown={(e) => {
+        e.preventDefault();
+        toggleParagraph(editorState, setEditorState)
+      }}
+      style={{color: isParagraph(editorState) ? 'skyblue' : 'black'}}
+    >
+      Paragraph
+    </button>
+  )
+}
+
+export default Demo;
+```

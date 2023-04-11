@@ -1,0 +1,88 @@
+---
+title: Heading
+sort: 1
+---
+
+# Heading
+
+HTML headings (h1 to h6) indicate the importance of text content and are used
+to define the hirerarchical structure of a webpage.
+
+## Toggle headings
+
+In order to make your text h1 to h6, you can use the ready to use `contenido`'s
+utilities. For each heading:
+
+- heading 1: toggleH1
+- heading 2: toggleH2
+- heading 3: toggleH3
+- heading 4: toggleH4
+- heading 5: toggleH5
+- heading 6: toggleH6
+
+```ts
+toggleH1(state: State, stateHandler: StateHandler, customH1Type?: string) => void;
+toggleH2(state: State, stateHandler: StateHandler, customH2Type?: string) => void;
+toggleH3(state: State, stateHandler: StateHandler, customH3Type?: string) => void;
+toggleH4(state: State, stateHandler: StateHandler, customH4Type?: string) => void;
+toggleH5(state: State, stateHandler: StateHandler, customH5Type?: string) => void;
+toggleH6(state: State, stateHandler: StateHandler, customH6Type?: string) => void;
+```
+
+## Heading detection
+
+You can also use the available utilities to find out if the text is in your desired
+heading or not.For each heading:
+
+- heading 1: isH1
+- heading 2: isH2
+- heading 3: isH3
+- heading 4: isH4
+- heading 5: isH5
+- heading 6: isH6
+
+```ts
+isH1(state: State, customH1Type?: string) => void;
+isH2(state: State, customH2Type?: string) => void;
+isH3(state: State, customH3Type?: string) => void;
+isH4(state: State, customH4Type?: string) => void;
+isH5(state: State, customH5Type?: string) => void;
+isH6(state: State, customH6Type?: string) => void;
+```
+
+## Example
+
+An example of `toggleH1` and `isH1` usage. The idea will be the same for
+other headings.
+
+```ts
+import { useState, useEffect } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, isH1, toggleH1 } from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  return (
+    <Editor
+      editorState={editorState}
+      onChange={setEditorState}
+      editorRef={editorRef}
+    >
+    <button
+      onMouseDown={(e) => {
+        e.preventDefault();
+        toggleH1(editorState, setEditorState)
+      }}
+      style={{color: isH1(editorState) ? 'skyblue' : 'black'}}
+    >
+      Heading One
+    </button>
+  )
+}
+
+export default Demo;
+```

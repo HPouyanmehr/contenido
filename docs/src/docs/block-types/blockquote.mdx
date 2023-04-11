@@ -1,0 +1,76 @@
+---
+title: Blockquote
+sort: 5
+---
+
+# Blockquote
+
+Blockquote indicates that the section contents are quoted from another source.
+
+## toggleBlockquote
+
+In order to insert a quote in your content you can use `toggleBlockquote1` utility.
+
+```ts
+toggleBlockquote(
+  state: State,
+  stateHandler: StateHandler,
+  customBlockquoteType?: string
+) => void
+```
+
+## isBlockquote
+
+You can also use `isBlockquote` utility to find out if the current section is
+blockquote or not.
+
+```ts
+isBlockquote: (state: State) => boolean;
+```
+
+## Multi-line blockquote
+
+By default, pressing enter will create another block in the editor. This can be
+annoying when you try to write some text in the blockquote. The combination of
+`shortcuts` and `insertSoftNewline` will help you to override that behaviour. Check
+out the relevant documentation for more details.
+
+## Example
+
+An example of `toggleBlockquote` and `isBlockquote` utilities:
+
+```ts
+import { useState, useEffect } from 'react';
+import { EditorState } from 'draft-js';
+import {
+  Editor,
+  isBlockquote,
+  toggleBlockquote,
+} from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  return (
+    <Editor
+      editorState={editorState}
+      onChange={setEditorState}
+      editorRef={editorRef}
+    >
+    <button
+      onMouseDown={(e) => {
+        e.preventDefault();
+        toggleBlockquote(editorState, setEditorState)
+      }}
+      style={{color: isBlockquote(editorState) ? 'skyblue' : 'black'}}
+    >
+      Toggle Blockquote
+    </button>
+  )
+}
+
+export default Demo;
+```

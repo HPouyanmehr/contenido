@@ -1,0 +1,110 @@
+---
+title: Text Alignment
+sort: 6
+---
+
+# Text Alignment
+
+Text alignment is used to display your content in your desired appearance.
+
+## toggleTextAlign
+
+In order to toggle between different text alignment, you can use `toggleTextAlign`
+utility.
+
+```ts
+toggleTextAlign(
+  state: State,
+  stateHandler: StateHandler,
+  key?: string
+) => void
+```
+
+You can completely create your custom keys for the text alignments. Here are the
+default ones:
+
+- text-align-left
+- text-align-center
+- text-align-right
+- text-align-justify
+
+The default value for `toggleTextAlign` is `text-align-right`.
+
+## Alignment detection
+
+You can find the text alignment with these utilities:
+
+- isTextLeftAligned
+- isTextRightAligned
+- isTextCenterAligned
+- isTextJustifyAligned
+
+```ts
+isTextLeftAligned(state: State, customKey?: string) => boolean
+isTextRightAligned(state: State, customKey?: string) => boolean
+isTextCenterAligned(state: State, customKey?: string) => boolean
+isTextJustifyAligned(state: State, customKey?: string) => boolean
+```
+
+## Block style function
+
+When you add custom block types to your content, you need to define a utility to
+detecet and style the block type in the way you want. `blockStyleFn` is a ready to
+use utility that should be used whenever you need to render alignment or blockquotes
+properly.
+
+## Example
+
+An example of text alignment:
+
+```ts
+import { useState, useEffect } from 'react';
+import { EditorState } from 'draft-js';
+import {
+  Editor,
+  blockStyleFn,
+  isTextLeftAligned,
+  isTextRightAligned,
+  isTextCenterAligned,
+  isTextJustifyAligned,
+  toggleTextAlign
+} from 'contenido';
+
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(
+    EditorState.createEmpty()
+  );
+
+  return (
+    <Editor
+      editorState={editorState}
+      onChange={setEditorState}
+      editorRef={editorRef}
+      blockStyleFn={blockStyleFn}
+    >
+    {
+      [
+        {name: 'text-align-left', detector: isTextLeftAligned},
+        {name: 'text-align-center', detector: isTextCenterAligned},
+        {name: 'text-align-justify', detector: isTextJustifyAligned},
+        {name: 'text-align-right', detector: isTextRightAligned},
+      ].map((alignment) => (
+        <button
+          key={alignment.name}
+          onMouseDown={(e) => {
+            e.preventDefault();
+            toggleTextAlign(editorState, setEditorState, alignment.name)
+          }}
+          style={{color: detector(editorState) ? 'skyblue' : 'black'}}
+        >
+          {alignment.name.replaceAll('-', ' ')}
+        </button>
+      ))
+    }
+
+  )
+}
+
+export default Demo;
+```
