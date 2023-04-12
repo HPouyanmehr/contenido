@@ -40,6 +40,8 @@ import {
   addImage,
   findEntitiesOf,
   ImageAttributes,
+  shortcutHandler,
+  getDefaultKeyBindingFn,
 } from 'contenido';
 
 // Types
@@ -386,6 +388,8 @@ const DemoOne: FC<PaperProps> = (props) => {
                 onChange={setEditorState}
                 customStyleMap={initialStyleMap}
                 blockStyleFn={blockStyleFn}
+                handleKeyCommand={shortcutHandler(setEditorState)}
+                keyBindingFn={getDefaultKeyBindingFn}
               />
             </Box>
           </Stack>

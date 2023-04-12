@@ -39,19 +39,19 @@ const Demo = () => {
 
   return (
     <>
-      <Editor editorState={editorState} onChange={setEditorState}>
+      <Editor editorState={editorState} onChange={setEditorState} />
       <button
         onMouseDown={(e) => {
           e.preventDefault();
-          toggleItalic(editorState, setEditorState)
+          toggleItalic(editorState, setEditorState);
         }}
-        style={{color: isItalic(editorState) ? 'skyblue' : 'black'}}
+        style={{ color: isItalic(editorState) ? 'skyblue' : 'black' }}
       >
         Italic
       </button>
     </>
-  )
-}
+  );
+};
 
 export default Demo;
 ```

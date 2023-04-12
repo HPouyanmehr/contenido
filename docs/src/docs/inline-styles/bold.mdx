@@ -78,9 +78,9 @@ const CustomizedDemo = () => {
   const styleMap = {
     ...initialStyleMap,
     CUSTOM_BOLD_KEY: {
-      fontWeight: 700
+      fontWeight: 700,
       // Other styles...
-    }
+    },
   };
 
   return (
@@ -89,19 +89,21 @@ const CustomizedDemo = () => {
         editorState={editorState}
         onChange={setEditorState}
         customStyleMap={styleMap}
-      >
+      />
       <button
         onMouseDown={(e) => {
           e.preventDefault();
-          toggleBold(editorState, setEditorState, CUSTOM_BOLD_KEY)
+          toggleBold(editorState, setEditorState, CUSTOM_BOLD_KEY);
         }}
-        style={{color: isBold(editorState, CUSTOM_BOLD_KEY) ? 'skyblue' : 'black'}}
+        style={{
+          color: isBold(editorState, CUSTOM_BOLD_KEY) ? 'skyblue' : 'black',
+        }}
       >
         Bold
       </button>
     </>
-  )
-}
+  );
+};
 
 export default CustomizedDemo;
 ```

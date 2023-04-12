@@ -1,0 +1,136 @@
+---
+title: Shortcuts
+sort: 0
+---
+
+# Shortcuts
+
+Shortcuts or hotkeys are combination of computer keyboard keys that allow users to
+perform actions and operations quickly without having to use the mouse or touchpad.
+
+## Usage
+
+You can add the shortcut ability to your editor with the help of `contenido`'s utilities.
+To have shortcut enabled in your editor you have to provide to functions. The first one
+helps editor to bind the key combinations and the second one will translate that combination
+to a meaningful editor action.
+
+NOTE: The default value provided as shortcut map for the following utilities only supports
+`BOLD`, `ITALIC`, `UNDERLINE` and `SOFT_NEWLINE`. If you need a complete shortcut support
+pass the `shortcutMap` to as the `customShortcuts`. There is a default list of key combination
+provided by `contenido` and you can check it [here](/docs/shortcuts/shortcuts-map).
+
+## getDefaultKeyBindingFn
+
+The `getDefaultKeyBindingFn` utility helps you to bind key combinations.
+
+```ts
+getDefaultKeyBindingFn(
+  event: SyntheticKeyboardEvent,
+  customShortcuts?: ShortcutMap[]
+) => string | null
+```
+
+## shortcutHandler
+
+The `shortcutHandler` utility will handle the action returned by `getDefaultKeyBindingFn` and
+updates the editor state.
+
+```ts
+shortcutHandler(
+  stateHandler: StateHandler,
+  customShortcutsMap?: ShortcutMap[]
+) => (
+  command: string,
+  state: State
+) => DraftHandleValue
+```
+
+## Example
+
+An example of shortcuts usage:
+
+```ts
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, getDefaultKeyBindingFn, shortcutHandler } from 'contenido';
+
+const Demo = () => {
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  return (
+    <Editor
+      editorState={editorState}
+      onChange={setEditorState}
+      handleKeyCommand={shortcutHandler(setEditorState)}
+      keyBindingFn={getDefaultKeyBindingFn}
+    />
+  );
+};
+
+export default Demo;
+```
+
+## Customization
+
+You can create a custom shortcut map of `ShortcutMap` type and then pass it as a new shortcut
+to the default one.
+
+```ts
+interface ShortcutMap {
+  style: string;
+  shortcut: string[] | ((event: SyntheticKeyboardEvent) => string);
+  handler: (state: State, stateHandler: StateHandler, ...rest: any) => any;
+}
+```
+
+This is `BOLD` style shortcut object as an example:
+
+```ts
+...
+  {
+    style: 'BOLD',
+    shortcut: ['ctrl', 'b'],
+    handler: toggleBold
+  }
+...
+
+```
+
+The `ctrl`, `control`, `cmd`, `command`, 'shift', 'alt' and 'option' keywords are meaningful
+for the handler. You can also write your own function as shortcut handler.
+
+Here is an example of shortcuts customization:
+
+```ts
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import {
+  Editor,
+  getDefaultKeyBindingFn,
+  shortcutHandler,
+  shortcutMap,
+} from 'contenido';
+
+const CUSTOM_UNDERLINE_KEY = 'YOUR_CUSTOM_UNDERLINE_KEY';
+
+const CustomizedDemo = () => {
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  const customShortcutsMap = {
+    ...shortcutsMap,
+    { style: 'BOLD', shortcut: ['ctrl', 'shift', 'b'], handler: toggleBold },
+  };
+
+  return (
+    <Editor
+      editorState={editorState}
+      onChange={setEditorState}
+      handleKeyCommand={shortcutHandler(setEditorState, customShortcutsMap)}
+      keyBindingFn={(getDefaultKeyBindingFn, customShortcutsMap)}
+    />
+  );
+};
+
+export default CustomizedDemo;
+```

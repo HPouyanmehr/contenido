@@ -1,0 +1,40 @@
+---
+title: Shortcuts Map
+sort: 0
+---
+
+# Shortcuts Map
+
+Here you can find `initial` and `default` shortcut maps. For customization and enabling
+shortcuts checkout [this doc](/docs/shortcuts/shortcuts).
+
+## Initial shortcuts
+
+This is the initial values that are used by `getDefaultKeyBindingFn` and `shortcutHandler`
+utility
+
+| style         | shortcut                                                                   | handler           |
+| ------------- | -------------------------------------------------------------------------- | ----------------- |
+| BOLD          | ctrl + b / cmd + b                                                         | toggleBold        |
+| ITALIC        | ctrl + i / cmd + i                                                         | toggleItalic      |
+| UNDERLINE     | ctrl + u / cmd + u                                                         | toggleUnderline   |
+| SOFT_NEW_LINE | (event) => KeyBindingUtil.isSoftNewlineEvent(event) ? 'SOFT_NEW_LINE' : '' | insertSoftNewline |
+
+## Default shortcuts
+
+Default shortcuts provide a larger support for hotkeys and extends the ability of initial
+shortcuts.
+
+| style              | shortcut                             | handler                                                                             |
+| ------------------ | ------------------------------------ | ----------------------------------------------------------------------------------- |
+| LINE_THROUGH       | ctrl + shift + x / cmd + shift + x   | toggleLineThrough                                                                   |
+| SUPERSCRIPT        | ctrl + shift + + / cmd + shift + +   | toggleSuperscript                                                                   |
+| SUBSCRIPT          | ctrl + = / cmd + =                   | toggleSubscript                                                                     |
+| text-align-right   | ctrl + shift + R / cmd + shift + R   | (state, stateHandler) => toggleTextAlign(state, stateHandler, 'text-align-right')   |
+| text-align-center  | ctrl + shift + E / cmd + shift + E   | (state, stateHandler) => toggleTextAlign(state, stateHandler, 'text-align-center')  |
+| text-align-left    | ctrl + shift + L / cmd + shift + L   | (state, stateHandler) => toggleTextAlign(state, stateHandler, 'text-align-left')    |
+| text-align-justify | ctrl + shift + J / cmd + shift + J   | (state, stateHandler) => toggleTextAlign(state, stateHandler, 'text-align-justify') |
+| OL                 | ctrl + shift + & / cmd + shift + &   | toggleOL                                                                            |
+| UL                 | ctrl + shift + \* / cmd + shift + \* | toggleUL                                                                            |
+| blockquote         | ctrl + shift + ( / cmd + shift + (   | toggleBlockquote                                                                    |
+| unstyled           | ctrl + shift + \ / cmd + shift + \   | clear                                                                               |

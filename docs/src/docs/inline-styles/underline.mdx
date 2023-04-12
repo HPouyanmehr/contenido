@@ -41,19 +41,19 @@ const Demo = () => {
 
   return (
     <>
-      <Editor editorState={editorState} onChange={setEditorState}>
+      <Editor editorState={editorState} onChange={setEditorState} />
       <button
         onMouseDown={(e) => {
           e.preventDefault();
-          toggleUnderline(editorState, setEditorState)
+          toggleUnderline(editorState, setEditorState);
         }}
-        style={{color: isUnderline(editorState) ? 'skyblue' : 'black'}}
+        style={{ color: isUnderline(editorState) ? 'skyblue' : 'black' }}
       >
         Underline
       </button>
     </>
-  )
-}
+  );
+};
 
 export default Demo;
 ```

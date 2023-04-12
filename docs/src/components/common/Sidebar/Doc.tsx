@@ -24,6 +24,9 @@ import LightModeIcon from 'components/icon/LightMode';
 // Custom Contexts
 import { useThemeModeContext } from 'store/context/themeMode';
 
+// Custom Utilities
+import getScrollbarStyles from 'styles/scrollbar';
+
 // Custom Types
 import type { DocSidebarProps } from 'types/docs';
 export interface DocSidebarComponentProps {
@@ -83,13 +86,13 @@ const DocSidebar: FC<DocSidebarComponentProps> = (props) => {
 
   return (
     <Box
-      sx={({}) => ({
+      sx={{
         height: '100vh',
         top: 0,
         minWidth: '17rem',
         maxWidth: '17rem',
         position: 'sticky',
-      })}
+      }}
     >
       <AppBarSpacer />
       <Box
@@ -110,19 +113,7 @@ const DocSidebar: FC<DocSidebarComponentProps> = (props) => {
               overflowY: 'scroll',
               pr: '0px',
             },
-            '::-webkit-scrollbar': {
-              width: '8px',
-              height: '6px',
-            },
-            '::-webkit-scrollbar-track': {
-              background: palette.background.paper,
-              borderRadius: '8px',
-              overflow: 'hidden',
-            },
-            '::-webkit-scrollbar-thumb': {
-              background: '#e6e6e6',
-              borderRadius: '8px',
-            },
+            ...getScrollbarStyles(palette),
           })}
         >
           {sidebar.map((section, index) => (

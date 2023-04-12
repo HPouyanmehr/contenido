@@ -23,6 +23,13 @@ import MarkdownLink from 'components/common/Markdown/components/Link';
 import CustomInlineStyleDemo from 'components/section/demo/CustomInlineStyle';
 import ColorDemo from 'components/section/demo/Color';
 import TextTransformDemo from 'components/section/demo/TextTransform';
+import Table from 'components/core/Table';
+import TableBody from 'components/core/TableBody';
+import TableCell from 'components/core/TableCell';
+import TableFooter from 'components/core/TableFooter';
+import TableHead from 'components/core/TableHead';
+import TableRow from 'components/core/TableRow';
+import TableWrapper from './components/TableWrapper';
 
 // Custom Types
 export interface MarkdownProps {
@@ -49,6 +56,13 @@ const Markdown: FC<MarkdownProps> = (props) => {
           h5: MarkdownH5,
           h6: MarkdownH6,
           pre: MarkdownCode,
+          table: TableWrapper,
+          tbody: TableBody,
+          td: TableCell,
+          tfoot: TableFooter,
+          thead: TableHead,
+          th: TableCell,
+          tr: TableRow,
           // Editor Demo Copmonents
           CustomInlineStyleDemo: CustomInlineStyleDemo,
           ColorDemo: ColorDemo,
