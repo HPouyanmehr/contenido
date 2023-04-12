@@ -1,22 +1,21 @@
 ---
-title: Image Block
-sort: 1
+title: Audio Block
+sort: 3
 ---
 
-# addImage
+# addAudio
 
-Images are atomic (non-text) blocks that are used to embed image on the webpage.
+Audios are atomic (non-text) blocks that are used to embed audio on the webpage.
 
 ## Usage
 
-The `addImage` utility will help you to add image to the editor.
-Image attributes can be either `image` or `picture` ones.
+The `addAudio` utility will help you to add audio to the editor.
 
 ```ts
-addImage(
+addAudio(
   state: State,
   stateHandler: StateHandler,
-  attributes?: ImageAttributes
+  attributes?: AudioAttributes
 ) => void
 ```
 
@@ -25,22 +24,27 @@ your state to make it available to render your custom non-text content.
 
 ## Example
 
-An example of `addImage` usage:
+An example of `addAudio` usage:
 
 ```ts
 import { useState, useEffect } from 'react';
 import { EditorState } from 'draft-js';
-import { Editor, addImage, createDecorator, findEntitiesOf } from 'contenido';
+import { Editor, addAudio, createDecorator, findEntitiesOf } from 'contenido';
 
-const Image = (props) => {
-  return <img alt={props.alt} src={props.src} />;
+const Audio = (props) => {
+  return (
+    <audio controls>
+      <source src={props.src} type="audio/ogg">
+      Your browser does not support the audio element.
+    </audio>
+  );
 };
 
 const Demo = () => {
   const decorators = createDecorator([
     {
-      component: Image,
-      strategy: findEntitiesOf('image'),
+      component: Audio,
+      strategy: findEntitiesOf('audio'),
     },
   ]);
 
@@ -57,14 +61,12 @@ const Demo = () => {
       />
       <button
         onClick={() => {
-          addImage(editorState, setEditorState, {
-            src: 'https://picsum.photos/200/200',
-            alt: 'Random image',
-            style: { width: 200, height: 200 },
+          addAudio(editorState, setEditorState, {
+            src: '', // Audio source here
           });
         }}
       >
-        Add Image
+        Add Audio
       </button>
     </>
   );

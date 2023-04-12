@@ -1,22 +1,21 @@
 ---
-title: Image Block
-sort: 1
+title: File Block
+sort: 4
 ---
 
-# addImage
+# addFile
 
-Images are atomic (non-text) blocks that are used to embed image on the webpage.
+Files are atomic (non-text) blocks that are used to embed downloadable links on the webpage.
 
 ## Usage
 
-The `addImage` utility will help you to add image to the editor.
-Image attributes can be either `image` or `picture` ones.
+The `addFile` utility will help you to add file to the editor.
 
 ```ts
-addImage(
+addFile(
   state: State,
   stateHandler: StateHandler,
-  attributes?: ImageAttributes
+  attributes?: FileAttributes
 ) => void
 ```
 
@@ -25,22 +24,26 @@ your state to make it available to render your custom non-text content.
 
 ## Example
 
-An example of `addImage` usage:
+An example of `addFile` usage:
 
 ```ts
 import { useState, useEffect } from 'react';
 import { EditorState } from 'draft-js';
-import { Editor, addImage, createDecorator, findEntitiesOf } from 'contenido';
+import { Editor, addFile, createDecorator, findEntitiesOf } from 'contenido';
 
-const Image = (props) => {
-  return <img alt={props.alt} src={props.src} />;
+const File = (props) => {
+  return (
+    <a href={props.href} download>
+      Download File
+    </a>
+  );
 };
 
 const Demo = () => {
   const decorators = createDecorator([
     {
-      component: Image,
-      strategy: findEntitiesOf('image'),
+      component: File,
+      strategy: findEntitiesOf('file'),
     },
   ]);
 
@@ -57,14 +60,12 @@ const Demo = () => {
       />
       <button
         onClick={() => {
-          addImage(editorState, setEditorState, {
-            src: 'https://picsum.photos/200/200',
-            alt: 'Random image',
-            style: { width: 200, height: 200 },
+          addFile(editorState, setEditorState, {
+            href: '', // File link here
           });
         }}
       >
-        Add Image
+        Add File
       </button>
     </>
   );

@@ -1,22 +1,21 @@
 ---
-title: Image Block
-sort: 1
+title: Video Block
+sort: 2
 ---
 
-# addImage
+# addVideo
 
-Images are atomic (non-text) blocks that are used to embed image on the webpage.
+Videos are atomic (non-text) blocks that are used to embed video on the webpage.
 
 ## Usage
 
-The `addImage` utility will help you to add image to the editor.
-Image attributes can be either `image` or `picture` ones.
+The `addVideo` utility will help you to add video to the editor.
 
 ```ts
-addImage(
+addVideo(
   state: State,
   stateHandler: StateHandler,
-  attributes?: ImageAttributes
+  attributes?: VideoAttributes
 ) => void
 ```
 
@@ -25,22 +24,27 @@ your state to make it available to render your custom non-text content.
 
 ## Example
 
-An example of `addImage` usage:
+An example of `addVideo` usage:
 
 ```ts
 import { useState, useEffect } from 'react';
 import { EditorState } from 'draft-js';
-import { Editor, addImage, createDecorator, findEntitiesOf } from 'contenido';
+import { Editor, addVideo, createDecorator, findEntitiesOf } from 'contenido';
 
-const Image = (props) => {
-  return <img alt={props.alt} src={props.src} />;
+const Video = (props) => {
+  return (
+    <video width="320" height="240" controls>
+      <source src={props.src} type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  );
 };
 
 const Demo = () => {
   const decorators = createDecorator([
     {
-      component: Image,
-      strategy: findEntitiesOf('image'),
+      component: Video,
+      strategy: findEntitiesOf('video'),
     },
   ]);
 
@@ -57,14 +61,12 @@ const Demo = () => {
       />
       <button
         onClick={() => {
-          addImage(editorState, setEditorState, {
-            src: 'https://picsum.photos/200/200',
-            alt: 'Random image',
-            style: { width: 200, height: 200 },
+          addVideo(editorState, setEditorState, {
+            src: '', // Video source here
           });
         }}
       >
-        Add Image
+        Add Video
       </button>
     </>
   );

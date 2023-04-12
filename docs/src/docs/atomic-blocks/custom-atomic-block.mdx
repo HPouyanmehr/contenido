@@ -25,3 +25,16 @@ addAtomicBlock(
 
 The `addImage`, `addVideo`, `addFile` or `addAudio` utilities are based on
 addAtomicBlock above.
+
+## updateAtomicData
+
+This utility helps you to modify the added atomic data.
+
+```ts
+updateAtomicData(
+  state: State,
+  stateHandler: StateHandler,
+  entityKey: string,
+  newData: NewEntityData
+) => void
+```
