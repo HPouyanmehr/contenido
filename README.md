@@ -2,6 +2,8 @@
 
 Contenido is a library for building highly customizable rich text editors in React. Check out the documentation and demos [here](https://contenidojs.com).
 
+![Contenido Demo](./.github/assets/contenido-demo-image.jpg 'Contenido')
+
 ## Introduction
 
 Contenido is a library with a set of tools to help you create your own editor on top of [draft-js](https://github.com/facebookarchive/draft-js) without thinking about how to handle things.
