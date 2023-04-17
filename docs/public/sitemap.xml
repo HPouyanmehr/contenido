@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+		<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+	<loc>https://contenidojs.com/</loc>
+	<lastmod>2023-04-17T21:22:50+01:00</lastmod>
+	<priority>1.0</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/getting-started/overview</loc>
+	<lastmod>2023-04-17T21:22:50+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/getting-started/installation</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/inline-styles/custom-styles</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/inline-styles/bold</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/inline-styles/italic</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/inline-styles/underline</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/inline-styles/line-through</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/inline-styles/overline</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/inline-styles/superscript</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/inline-styles/subscript</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/inline-styles/color</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/inline-styles/transform</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/block-types/custom-block-type</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/block-types/heading-1-to-6</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/block-types/paragraph</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/block-types/list</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/block-types/blockquote</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/block-types/text-alignment</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/decorators/overview</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/decorators/link</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/atomic-blocks/custom-atomic-block</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/atomic-blocks/image-block</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/atomic-blocks/video-block</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/atomic-blocks/audio-block</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/atomic-blocks/file-block</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/atomic-blocks/atomic-count</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/atomic-blocks/image-count</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/atomic-blocks/video-count</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/atomic-blocks/audio-count</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/atomic-blocks/file-count</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/helpers/focus-on-editor</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/helpers/empty-raw-content-state</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/helpers/selected-blocks-map</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/helpers/clear-inline-styles</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/helpers/clear-block-types</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/helpers/soft-newline</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/helpers/clear-entities</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/helpers/clear</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/helpers/character-count</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/helpers/plain-text</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/helpers/word-array</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/helpers/word-count</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/helpers/find-entities</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/helpers/find-link-entities</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/helpers/entity-count</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/helpers/generate-key</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/shortcuts/shortcuts</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/shortcuts/shortcuts-map</loc>
+	<lastmod>2023-04-17T21:22:52+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+<url>
+	<loc>https://contenidojs.com/docs/inline-styles/text-transform</loc>
+	<lastmod>2023-04-17T21:22:53+01:00</lastmod>
+	<priority>0.6</priority>
+</url>
+</urlset>
