@@ -15,6 +15,8 @@ const cascadiaCode = localFont({
       path: './woff2/CascadiaCodeItalic.woff2',
     },
   ],
+  display: 'swap',
+  preload: true,
 });
 
 export default cascadiaCode;
