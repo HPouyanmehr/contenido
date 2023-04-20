@@ -8,6 +8,7 @@ import Paper from 'components/core/Paper';
 
 // Custom Types
 import type { CustomTypeBackground } from 'types/common/theme';
+import BlogPostCard from 'components/common/Card/BlogPost';
 export interface BlogPostsProps {}
 
 const BlogPosts: FC<BlogPostsProps> = (props) => {
@@ -22,6 +23,9 @@ const BlogPosts: FC<BlogPostsProps> = (props) => {
       <Container>
         <Box
           sx={({ breakpoints }) => ({
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 2,
             position: 'relative',
             py: 1,
             [breakpoints.up('md')]: {
@@ -29,7 +33,11 @@ const BlogPosts: FC<BlogPostsProps> = (props) => {
               p: 1,
             },
           })}
-        ></Box>
+        >
+          <BlogPostCard hideDescription sx={{ flexBasis: '30%' }} />
+          <BlogPostCard sx={{ flexBasis: '68%' }} />
+          <BlogPostCard />
+        </Box>
       </Container>
     </Box>
   );

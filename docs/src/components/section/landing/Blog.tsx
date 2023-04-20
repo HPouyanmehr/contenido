@@ -31,12 +31,11 @@ const BlogLanding: FC<BlogLandingProps> = (props) => {
     >
       <Container>
         <CenterBox flexDirection='column' minHeight='92vh'>
-          <HeadingOne textAlign='center'>
-            Learn, inspire, and get notified!
+          <HeadingOne textAlign='left'>
+            Discover, Build,
+            <br />
+            Get notified and be up to date...
           </HeadingOne>
-          <BodyOne>
-            You can find tutorials, changelogs, and release notes here.
-          </BodyOne>
         </CenterBox>
       </Container>
     </Box>
