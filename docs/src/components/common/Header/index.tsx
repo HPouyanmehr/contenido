@@ -29,7 +29,7 @@ interface MenuItemProps {
 
 const menuItems: MenuItemProps[] = [
   { title: 'docs', link: links.docs },
-  { title: 'blog', link: links.blog, disabled: true },
+  { title: 'blog', link: links.blog },
   { title: 'examples', link: links.examples, disabled: true },
 ];
 

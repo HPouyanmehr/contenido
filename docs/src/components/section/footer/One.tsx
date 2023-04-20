@@ -12,47 +12,53 @@ import Stack from 'components/core/Stack';
 import GitHubIconButtonLink from 'components/common/Link/GitHub';
 
 // Custom Types
-export interface FooterOneProps {}
+import type { BoxProps } from 'components/core/Box';
+export interface FooterOneProps extends BoxProps {}
 
-const FooterOne: FC<FooterOneProps> = () => {
+const FooterOne: FC<FooterOneProps> = (props) => {
+  // Props
+  const { sx, ...otherProps } = props;
+
   return (
-    <Container sx={{ marginTop: '2rem' }}>
-      <Divider />
-      <Box
-        sx={{
-          pt: '3rem',
-          pb: '2rem',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 2,
-        }}
-      >
+    <Box sx={sx} {...otherProps}>
+      <Container>
+        <Divider />
         <Box
-          sx={({ breakpoints }) => ({
+          sx={{
+            pt: '3rem',
+            pb: '2rem',
             display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            [breakpoints.down('md')]: {
-              flexDirection: 'column',
-            },
-          })}
+            flexDirection: 'column',
+            gap: 2,
+          }}
         >
-          <BodyTwo
+          <Box
             sx={({ breakpoints }) => ({
-              [breakpoints.down('md')]: { textAlign: 'center' },
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              [breakpoints.down('md')]: {
+                flexDirection: 'column',
+              },
             })}
           >
-            Made with ❤ for a better experience
+            <BodyTwo
+              sx={({ breakpoints }) => ({
+                [breakpoints.down('md')]: { textAlign: 'center' },
+              })}
+            >
+              Made with ❤ for a better experience
+            </BodyTwo>
+            <Stack>
+              <GitHubIconButtonLink />
+            </Stack>
+          </Box>
+          <BodyTwo textAlign='center' color='text.secondary'>
+            MIT &copy; 2023 - This site does not track you.
           </BodyTwo>
-          <Stack>
-            <GitHubIconButtonLink />
-          </Stack>
         </Box>
-        <BodyTwo textAlign='center' color='text.secondary'>
-          MIT &copy; 2023 - This site does not track you.
-        </BodyTwo>
-      </Box>
-    </Container>
+      </Container>
+    </Box>
   );
 };
 

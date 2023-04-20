@@ -5,7 +5,7 @@ import PageLayout from 'components/layout/Page';
 
 // Custom Section Components
 import LandingOne from 'components/section/landing/One';
-import StylningOne from 'components/section/styling/One';
+import StylingOne from 'components/section/styling/One';
 import StylingTwo from 'components/section/styling/Two';
 import TipOne from 'components/section/tip/One';
 import WhyContenido from 'components/section/why/One';
@@ -21,7 +21,7 @@ const Home = () => {
       <LandingOne />
       <DemoOne />
       <WhyContenido />
-      <StylningOne />
+      <StylingOne />
       <TipOne />
       <StylingTwo />
       <HowToInstall />
