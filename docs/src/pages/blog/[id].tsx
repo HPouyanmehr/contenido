@@ -41,7 +41,13 @@ const BlogPostPage: FC<BlogPostPageProps> = (props) => {
   }, [post]);
 
   return (
-    <PageLayout>
+    <PageLayout
+      meta={{
+        title: data?.title,
+        description: data?.description,
+        keywords: data?.tags,
+      }}
+    >
       {loading ? (
         <Box />
       ) : data ? (

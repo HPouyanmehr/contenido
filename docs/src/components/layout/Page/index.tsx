@@ -1,3 +1,5 @@
+import Head from 'next/head';
+
 // Types
 import type { FC, ReactNode } from 'react';
 
@@ -11,21 +13,25 @@ import Header from 'components/common/Header';
 import common from 'data/common/en.json';
 
 // Custom Types
-import Head from 'next/head';
+import type { PageMetaProps } from 'types/common/page';
 export interface PageLayoutProps {
   children?: ReactNode;
+  meta?: Partial<PageMetaProps>;
 }
 
 const PageLayout: FC<PageLayoutProps> = (props) => {
   // Props
-  const { children } = props;
+  const { children, meta } = props;
 
   return (
     <>
       <Head>
-        <title>{common.title}</title>
-        <meta name='description' content={common.description} />
-        <meta name='keywords' content={common.keywords} />
+        <title>{meta?.title || common.title}</title>
+        <meta
+          name='description'
+          content={meta?.description || common.description}
+        />
+        <meta name='keywords' content={meta?.keywords || common.keywords} />
       </Head>
       <Header />
       <AppBarSpacer />
