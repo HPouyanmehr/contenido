@@ -39,7 +39,15 @@ const PostDetails: FC<PostDetailsProps> = (props) => {
               Published at {getDateString(post.date)}
             </BodyOne>
           </Box>
-          <Box sx={{ position: 'relative', width: '100%', height: '27rem' }}>
+          <Box
+            sx={{
+              position: 'relative',
+              width: '100%',
+              height: '27rem',
+              borderRadius: '0.5rem',
+              overflow: 'hidden',
+            }}
+          >
             <Image
               alt={post.title}
               src={`/assets/images/blog/${post.cover}.jpg`}
