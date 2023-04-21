@@ -13,6 +13,7 @@ import GitHubIconButtonLink from 'components/common/Link/GitHub';
 
 // Custom Types
 import type { BoxProps } from 'components/core/Box';
+import NPMIconButtonLink from 'components/common/Link/NPM';
 export interface FooterOneProps extends BoxProps {}
 
 const FooterOne: FC<FooterOneProps> = (props) => {
@@ -50,6 +51,7 @@ const FooterOne: FC<FooterOneProps> = (props) => {
               Made with ❤ for a better experience
             </BodyTwo>
             <Stack>
+              <NPMIconButtonLink />
               <GitHubIconButtonLink />
             </Stack>
           </Box>

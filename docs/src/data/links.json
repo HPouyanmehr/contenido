@@ -1,5 +1,6 @@
 {
   "github": "https://github.com/HPouyanmehr/contenido",
+  "npm": "https://www.npmjs.com/package/contenido",
   "docs": "/docs/getting-started/overview",
   "docsEdit": "https://github.com/HPouyanmehr/contenido/tree/main/docs/src",
   "examples": "/examples",

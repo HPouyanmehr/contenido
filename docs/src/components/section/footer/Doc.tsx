@@ -13,6 +13,7 @@ import GitHubIconButtonLink from 'components/common/Link/GitHub';
 
 // Custom Types
 import type { CustomTypeBackground } from 'types/common/theme';
+import NPMIconButtonLink from 'components/common/Link/NPM';
 export interface DocsOneProps {}
 
 const DocsFooter: FC<DocsOneProps> = () => {
@@ -53,6 +54,7 @@ const DocsFooter: FC<DocsOneProps> = () => {
               Made with ❤ for a better experience
             </BodyTwo>
             <Stack>
+              <NPMIconButtonLink />
               <GitHubIconButtonLink />
             </Stack>
           </Box>
