@@ -13,15 +13,20 @@ import Link from 'components/core/Link';
 // Custom Icon Components
 import HourglassTopIcon from 'components/icon/HourglassTop';
 
+// Custom Utilities
+import { getDateString } from 'utilities/helper/date';
+
 // Custom Types
 import type { BoxProps } from 'components/core/Box';
-export interface BlogPostCardProps extends BoxProps {
+import type { BlogPostCardProps } from 'types/blog';
+export interface BlogPostCardComponentProps extends BoxProps {
+  post: BlogPostCardProps;
   hideDescription?: boolean;
 }
 
-const BlogPostCard: FC<BlogPostCardProps> = (props) => {
+const BlogPostCard: FC<BlogPostCardComponentProps> = (props) => {
   // Props
-  const { hideDescription, sx } = props;
+  const { post, hideDescription, sx } = props;
 
   return (
     <Box
@@ -57,7 +62,7 @@ const BlogPostCard: FC<BlogPostCardProps> = (props) => {
           }}
         >
           <HourglassTopIcon sx={{ color: 'white' }} />
-          <BodyTwo sx={{ color: 'white' }}>2 min</BodyTwo>
+          <BodyTwo sx={{ color: 'white' }}>{post.readTime} min</BodyTwo>
         </Box>
         <Image
           alt=''
@@ -67,14 +72,8 @@ const BlogPostCard: FC<BlogPostCardProps> = (props) => {
         />
       </Box>
       <Box sx={{ p: '0 1rem 1rem' }}>
-        <HeadingTwo>An introduction to draft-js</HeadingTwo>
-        {!hideDescription && (
-          <BodyOne>
-            In this post we&apos;re going to get familiar with web editors, and
-            take a look at different approaches for implementing editors for the
-            web.
-          </BodyOne>
-        )}
+        <HeadingTwo>{post.title}</HeadingTwo>
+        {!hideDescription && <BodyOne>{post.description}</BodyOne>}
       </Box>
       <Box
         sx={{
@@ -83,7 +82,7 @@ const BlogPostCard: FC<BlogPostCardProps> = (props) => {
           justifyContent: 'space-between',
         }}
       >
-        <BodyTwo>2023-04-20</BodyTwo>
+        <BodyTwo>{getDateString(post.date)}</BodyTwo>
         <Link href='/' underline='hover'>
           Read &rarr;
         </Link>

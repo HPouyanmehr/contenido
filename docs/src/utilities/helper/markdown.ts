@@ -21,3 +21,11 @@ export const extractHeadings = (
 
   return headings;
 };
+
+export const calcReadingTime = (content: string): number => {
+  const wpm = 200;
+
+  const wordCount = content.split(/\s+/g).length;
+
+  return Math.ceil(wordCount / wpm);
+};

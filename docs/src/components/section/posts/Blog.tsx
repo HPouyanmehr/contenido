@@ -1,17 +1,24 @@
 // Types
 import type { FC } from 'react';
 
+// Custom Common Components
+import BlogPostCard from 'components/common/Card/BlogPost';
+
 // Custom Core Components
 import Box from 'components/core/Box';
 import Container from 'components/core/Container';
-import Paper from 'components/core/Paper';
 
 // Custom Types
 import type { CustomTypeBackground } from 'types/common/theme';
-import BlogPostCard from 'components/common/Card/BlogPost';
-export interface BlogPostsProps {}
+import type { BlogPostProps } from 'types/blog';
+export interface BlogPostsProps {
+  posts: Omit<BlogPostProps, 'body'>[];
+}
 
 const BlogPosts: FC<BlogPostsProps> = (props) => {
+  // Props
+  const { posts } = props;
+
   return (
     <Box
       sx={({ breakpoints, palette }) => ({
@@ -34,9 +41,9 @@ const BlogPosts: FC<BlogPostsProps> = (props) => {
             },
           })}
         >
-          <BlogPostCard hideDescription sx={{ flexBasis: '30%' }} />
-          <BlogPostCard sx={{ flexBasis: '68%' }} />
-          <BlogPostCard />
+          {posts.map((post) => (
+            <BlogPostCard key={post.title} post={post} />
+          ))}
         </Box>
       </Container>
     </Box>
