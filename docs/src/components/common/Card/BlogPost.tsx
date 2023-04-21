@@ -83,7 +83,7 @@ const BlogPostCard: FC<BlogPostCardComponentProps> = (props) => {
         }}
       >
         <BodyTwo>{getDateString(post.date)}</BodyTwo>
-        <Link href='/' underline='hover'>
+        <Link href={`/blog/${post.id}`} underline='hover'>
           Read &rarr;
         </Link>
       </Box>

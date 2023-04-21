@@ -6,12 +6,11 @@ import matter from 'gray-matter';
 import type { ParsedUrlQuery } from 'querystring';
 
 // Custom Utilities
-import { calcReadingTime, extractHeadings } from 'utilities/helper/markdown';
+import { calcReadingTime } from 'utilities/helper/markdown';
 import { sortByDate } from 'utilities/helper/sort';
 
 // Custom Types
-import type { DocProps } from 'types/docs';
-import type { BlogPostCardProps } from 'types/blog';
+import type { BlogPostCardProps, BlogPostProps } from 'types/blog';
 
 const blogPostsDir = path.join(process.cwd(), '/src/posts');
 
@@ -54,34 +53,24 @@ export const getPostCardsData = (): BlogPostCardProps[] => {
   return postCards;
 };
 
-export const getDocData = (
-  sectionName: string,
-  docId: string
-): DocProps | null => {
-  const sections = fs.readdirSync(blogPostsDir);
-  const section = sections.find((section) => section === sectionName);
+export const getBlogData = (postId: string): BlogPostProps | null => {
+  const fileNames = fs.readdirSync(blogPostsDir);
 
-  if (section) {
-    const docsDir = path.join(blogPostsDir, section);
-    const docNames = fs.readdirSync(docsDir);
+  const id = fileNames.find(
+    (fileName) => fileName.replace(/\.mdx$/, '') === postId
+  );
 
-    const id = docNames.find((id) => id.replace(/\.mdx$/, '') === docId);
+  if (id) {
+    const fullPath = path.join(blogPostsDir, id);
+    const content = fs.readFileSync(fullPath, 'utf-8');
+    const matterResult = matter(content);
+    const data = matterResult.data as BlogPostCardProps;
 
-    if (id && id !== '_conf.json') {
-      const fullPath = path.join(docsDir, id);
-      const fileContents = fs.readFileSync(fullPath, 'utf-8');
-
-      const matterResult = matter(fileContents);
-      const headings = extractHeadings(matterResult.content);
-
-      return {
-        id: docId,
-        section: sectionName,
-        title: matterResult.data.title,
-        content: matterResult.content,
-        headings,
-      };
-    }
+    return {
+      ...data,
+      body: matterResult.content,
+      readTime: calcReadingTime(matterResult.content),
+    };
   }
 
   return null;
