@@ -1,0 +1,138 @@
+---
+title: An Introduction to text editors
+description: In this post, we're going to get familiar with text editors and take a look at different approaches for implementing editors on the web.
+tags: texteditor,wysiwyg,draftjs,contenido,editor,rte
+cover: an-introduction-to-text-editors
+type: tutorial
+date: 2023-04-20
+update: 2023-04-20
+---
+
+## What is this post about?
+
+In this post, we're going to get familiar with text editors and take a look at different approaches
+for implementing editors on the web.
+
+## Table of Contents
+
+- What is a text editor?
+- Basic text Editors
+- WYSIWYG
+- Integrated development environments
+- Code editors
+- Markdown language editors
+- Online text editing
+- Common issues in building wysiwyg text editors
+- Conclusion
+
+## What is a text editor?
+
+Generally, a text editor is a program that lets the user edit text. Whenever you're able to type some
+text in the input, you are editing the text, and that input is somehow a text editor. By this definition,
+we can call the HTML input element a basic text editor. However, no one is going to use that as a text
+editor. Here is a list of different types of text editors that we're going to check one by one:
+
+- Basic Text Editors
+- WYSIWYG (What You See Is What You Get)
+- Integrated Development Environments (IDEs)
+- Code Editors
+- Markup Language Editors
+
+## Basic text editors
+
+The simplest form of text editors is the basic one. In a basic text editor, you can create and edit plain
+text without any styling or formatting. This type of editor will give you a lightweight method to make
+notes, simple to-do lists, and other basic tasks. Here are some of the basic ones for different
+platforms:
+
+- TextEdit (Mac)
+- Notepad (Windows)
+- Nano (Linux)
+- HTML `textarea` (Web)
+
+## WYSIWYG
+
+The WYSIWYG (wi·zee·wig) editors are visual editors that allow users to create and modify the
+content using a GUI. As the name indicates, what you see in the text editor is as same as the final result.
+So these sorts of editors are handy if you have to pay attention to both content and its display.
+
+- Google Docs
+- Microsoft word
+
+## Integrated Development Environments
+
+IDEs are some sort of special text editors that are designed for the programming and software development
+purposes. Syntax highlighting, intelligence and code completion, version controlling and debugging are the
+benefits of integrated development environments.
+
+- Visual Studio
+- Eclipse
+- Jet Brains Products like PyCharm and WebStorm
+
+## Code Editors
+
+Just like IDEs, code editors are designed for programming and software development. The difference is that
+these types of editors are lightweight, and they are generally for coding and editing source codes. Code editors
+aren't that specific for just one or a few programming languages like IDEs. You'll have features
+like syntax highlighting, code completion, and version controlling here as well.
+
+- Visual Studio Code
+- Atom
+- Sublime Text
+
+## Markup Language Editors
+
+With these editors, you can create, edit, and manipulate documents written in markup languages like HTML, XML,
+Markdown, or LaTeX. Markup language editors use special symbols or tags to define the format and structure of
+a document. This sort of editor also comes with features like syntax highlighting, auto-completion, and validation.
+
+- StackEdit, a Markdown editor
+- Overleaf, a LaTeX editor
+
+## Online Text Editing
+
+These days almost everything is online or going to become online and cloud base. So, traditional editors
+where you need to install on your device are fading out. Users prefer to have the whole pack of tools in one
+place, and shifting between software is getting less common. If your job or interests are related to online
+services, you may need a correct approach to managing your content and service.
+
+It depends on the needs of the editor to choose the correct type for your application but generally
+implementing online IDEs and code editors is much more difficult than the other types. So, If you need an IDE
+or a lightweight code editor in your application, you can use integrations with some ready-to-use online editors
+like CodeSandbox.
+
+Basic editors, where you need neither styling nor formatting, can be easily implemented by `textarea` in HTML.
+Also, if your needs are about a markup language editor and you need to have a custom look editor, you can choose
+between 3rd party libraries or implementing the whole editor by yourself based on your time and budget.
+
+WYSIWYG editors are the most common editor type in online applications as they can fulfill a wide range
+of tasks and needs, also they're available in GUI (Graphical User Interface) so they're easy to use. The
+approach you choose, if you need a WYSIWYG editor, depends on your time and budget as well as the project stack.
+Implementing a rich text editor from zero may be time-consuming and buggy at first in most cases because you need
+to support different browsers as well as OSs (Operation Systems). So it's a better approach to choose a library
+available out there that gives you the basic set of utils and tools to create your own.
+
+## Common Issues In Building WYSIWYG Text Editors
+
+If you're going to add a rich text editor to your app, here are the most common issues and limitations:
+
+- Styling and customization are limited to simple stuff like color or background color
+- Repetitive utilities need to be implemented in most cases on your own
+- The editor can't follow your UI principles that well
+
+## Conclusion
+
+So we discussed the text editor definition and different types of it. The best approach for you depends on
+your needs. Here is a comparison table of different online editor types:
+
+| Editor Type             | Examples        | Tips                                                                            |
+| ----------------------- | --------------- | ------------------------------------------------------------------------------- |
+| Basic Editor            | HTML `textarea` | Simple implementation, Customizable, No need to 3rd party libs                  |
+| WYSIWYG                 | Google Docs     | Customization needs efforts, Creating everything from ground takes so much time |
+| IDEs                    | StackBlitz      | It's better to integrate with available options                                 |
+| Code Editor             | CodePen         | It's better to integrate with available options                                 |
+| Markup Language Editors | StackEdit       | Time-consuming if you wanna build it on yourself                                |
+
+<br />
+<br />
+Thanks for reading, We'll talk about web editors in React in the next post.

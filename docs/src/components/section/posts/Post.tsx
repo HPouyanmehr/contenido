@@ -36,7 +36,7 @@ const PostDetails: FC<PostDetailsProps> = (props) => {
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0, mb: 4 }}>
             <HeadingOne textAlign='center'>{post.title}</HeadingOne>
             <BodyOne textAlign='center'>
-              Published at {getDateString(post.date)}
+              Published on {getDateString(post.date)}
             </BodyOne>
           </Box>
           <Box
