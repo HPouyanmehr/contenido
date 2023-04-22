@@ -65,8 +65,8 @@ const BlogPostCard: FC<BlogPostCardComponentProps> = (props) => {
           <BodyTwo sx={{ color: 'white' }}>{post.readTime} min</BodyTwo>
         </Box>
         <Image
-          alt=''
-          src='/assets/images/blog/an-introduction-to-draft-js.jpg'
+          alt={post.title}
+          src={`/assets/images/blog/${post.cover}.jpg`}
           fill
           style={{ objectFit: 'cover' }}
         />
