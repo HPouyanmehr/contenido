@@ -6,4 +6,5 @@
   > div.public-DraftEditorPlaceholder-root
   > div.public-DraftEditorPlaceholder-inner {
   direction: rtl;
+  position: absolute;
 }
