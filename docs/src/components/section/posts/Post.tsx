@@ -3,6 +3,9 @@ import Image from 'next/image';
 // Types
 import type { FC } from 'react';
 
+// Custom Common Components
+import Markdown from 'components/common/Markdown';
+
 // Custom Core Components
 import AppBarSpacer from 'components/core/AppBarSpacer';
 import BodyOne from 'components/core/BodyOne';
@@ -15,10 +18,6 @@ import { getDateString } from 'utilities/helper/date';
 
 // Custom Types
 import type { BlogPostProps } from 'types/blog';
-import Markdown from 'components/common/Markdown';
-import { CustomTypeBackground } from 'types/common/theme';
-import GitHubIcon from 'components/icon/GitHub';
-import GitHubIconButtonLink from 'components/common/Link/GitHub';
 import CopyToClip from 'components/common/IconButton/CopyToClip';
 export interface PostDetailsProps {
   post: BlogPostProps;
@@ -70,7 +69,12 @@ const PostDetails: FC<PostDetailsProps> = (props) => {
               <CopyToClip color='inherit' />
             </Box>
             <Box>
-              <BodyOne sx={{ mt: '0.5rem' }}>{post.readTime} min read</BodyOne>
+              <BodyOne sx={{ mt: '0.5rem' }}>
+                {post.readTime} min read{' '}
+                {post.date !== post.update
+                  ? `- updated on ${getDateString(post.update)}`
+                  : ''}
+              </BodyOne>
               <Markdown blog>{post.body}</Markdown>
             </Box>
           </Box>
