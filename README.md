@@ -28,8 +28,8 @@ npm i draft-js contenido@latest
 
 ## Peer dependencies
 
-`react` >= 17.0.0  
-`react-dom` >= 17.0.0  
+`react` >= 18.0.0  
+`react-dom` >= 18.0.0  
 `draft-js` >= 0.11.0
 
 ## Features
