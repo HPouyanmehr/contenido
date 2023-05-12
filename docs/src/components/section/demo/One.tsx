@@ -42,6 +42,8 @@ import {
   ImageAttributes,
   shortcutHandler,
   getDefaultKeyBindingFn,
+  isLink,
+  removeLink,
 } from 'contenido';
 
 // Types
@@ -345,12 +347,17 @@ const DemoOne: FC<PaperProps> = (props) => {
                 {isUpXl && (
                   <Stack>
                     <LinkIconButton
+                      mode={isLink(editorState) ? 'remove' : 'add'}
                       onMouseDown={(e) => {
                         e.preventDefault();
 
-                        addLink(editorState, setEditorState, {
-                          href: 'https://github.com/HPouyanmehr/contenido',
-                        });
+                        if (!isLink(editorState))
+                          addLink(editorState, setEditorState, {
+                            href: 'https://github.com/HPouyanmehr/contenido',
+                          });
+                        else {
+                          removeLink(editorState, setEditorState);
+                        }
                       }}
                     />
                     <PhotoIconButton
