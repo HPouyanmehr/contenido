@@ -65,10 +65,20 @@ const PostDetails: FC<PostDetailsProps> = (props) => {
               position: 'relative',
             }}
           >
-            <Box sx={{ position: 'sticky', top: '1rem' }}>
+            <Box
+              sx={({ breakpoints }) => ({
+                position: 'sticky',
+                top: '1rem',
+                [breakpoints.down('sm')]: { display: 'none' },
+              })}
+            >
               <CopyToClip color='inherit' />
             </Box>
-            <Box>
+            <Box
+              sx={({ breakpoints }) => ({
+                [breakpoints.down('sm')]: { px: '1rem' },
+              })}
+            >
               <BodyOne sx={{ mt: '0.5rem' }}>
                 {post.readTime} min read{' '}
                 {post.date !== post.update

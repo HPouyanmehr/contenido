@@ -32,7 +32,7 @@ const BlogPosts: FC<BlogPostsProps> = (props) => {
           sx={({ breakpoints }) => ({
             display: 'flex',
             flexWrap: 'wrap',
-            gap: 2,
+            gap: 3,
             position: 'relative',
             py: 1,
             [breakpoints.up('md')]: {

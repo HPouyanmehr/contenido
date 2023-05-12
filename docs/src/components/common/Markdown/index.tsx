@@ -22,6 +22,7 @@ import MarkdownH6 from 'components/common/Markdown/components/H6';
 import MarkdownLink from 'components/common/Markdown/components/Link';
 import TableWrapper from './components/TableWrapper';
 import BlogH2 from './components/BlogH2';
+import BlogSuggest from 'components/common/Card/BlogSuggest';
 
 // Custom Core Components
 import Divider from 'components/core/Divider';
@@ -68,6 +69,7 @@ const Markdown: FC<MarkdownProps> = (props) => {
           CustomInlineStyleDemo: CustomInlineStyleDemo,
           ColorDemo: ColorDemo,
           TextTransformDemo: TextTransformDemo,
+          BlogSuggest: BlogSuggest,
         },
       }}
     >
