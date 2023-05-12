@@ -77,6 +77,7 @@ export { default as withDecoratorComponent } from './utilities/decorator/withDec
 export { default as findEntitiesOf } from './utilities/entity/findEntitiesOf';
 export { default as findEntitiesOfLink } from './utilities/entity/findEntitiesOfLink';
 export { default as generateKey } from './utilities/entity/generateKey';
+export { default as isLink } from './utilities/entity/isLink';
 export { default as clear } from './utilities/helper/clear';
 export { default as clearBlockTypes } from './utilities/helper/clearBlockTypes';
 export { default as clearEntities } from './utilities/helper/clearEntities';
