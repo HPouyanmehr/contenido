@@ -31,6 +31,7 @@ const withDecoratorComponent =
       <Wrapped
         blockType={blockType}
         mutability={mutability}
+        entityKey={entityKey}
         {...otherProps}
         {...attributes}
       />

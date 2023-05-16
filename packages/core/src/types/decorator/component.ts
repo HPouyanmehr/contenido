@@ -9,5 +9,6 @@ export interface DecoratorComponentProps extends LinkAttributes {
   children?: ReactNode;
   blockType: string;
   decoratedText: string;
+  entityKey: string;
   mutability: DraftEntityMutability;
 }
