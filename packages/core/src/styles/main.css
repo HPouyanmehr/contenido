@@ -9,3 +9,11 @@
   color: rgba(126, 125, 126, 0.6);
   position: absolute;
 }
+
+.DraftEditor-root
+  > div.public-DraftEditorPlaceholder-root
+  > div.public-DraftEditorPlaceholder-inner {
+  direction: rtl;
+  color: rgba(126, 125, 126, 0.6);
+  position: absolute;
+}
