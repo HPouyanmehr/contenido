@@ -23,7 +23,7 @@ const MarkdownH2: FC<HeadingTwoProps> = (props) => {
           borderBottom: '1px solid',
           borderColor: 'divider',
           ':hover': {
-            '& a': {
+            '.hash': {
               display: 'inline-block',
             },
           },
@@ -34,6 +34,7 @@ const MarkdownH2: FC<HeadingTwoProps> = (props) => {
         {children}{' '}
         {children && (
           <Link
+            className='hash'
             color='divider'
             href={`#${fixHref(children.toString())}`}
             sx={{ display: 'none' }}

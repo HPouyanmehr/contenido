@@ -32,6 +32,9 @@ import TableFooter from 'components/core/TableFooter';
 import TableHead from 'components/core/TableHead';
 import TableRow from 'components/core/TableRow';
 
+// Demo Editors
+import InlineStylesEditor from 'components/examples/InlineStyles';
+
 // Custom Types
 export interface MarkdownProps {
   children?: string;
@@ -70,6 +73,8 @@ const Markdown: FC<MarkdownProps> = (props) => {
           ColorDemo: ColorDemo,
           TextTransformDemo: TextTransformDemo,
           BlogSuggest: BlogSuggest,
+          // Example Editors
+          InlineStylesEditor,
         },
       }}
     >

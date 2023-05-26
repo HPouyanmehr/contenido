@@ -2,10 +2,10 @@
 title: Inline styles in draft-js
 description: In this post, we'll check out the contenido library that helps you use draft-js efficiently and save the time.
 tags: texteditor,wysiwyg,draftjs,contenido,editor,rte,react
-cover: a-brief-introduction-to-contenido
+cover: inline-styles-in-draft-js
 type: tutorial,example
 date: 2023-05-22
-update: 2023-05-22
+update: 2023-05-26
 ---
 
 ## What is this post about?
@@ -18,6 +18,11 @@ implement an editor for your comment box or similar use cases.
 
 - [Requirements](#requirements)
 - [Installation](#installation)
+- [Create Editor Component](#create-editor-component)
+- [Add Placeholder](#add-placeholder)
+- [Add Toolbar Buttons](#add-toolbar-buttons)
+- [Custom Inline Styles](#custom-inline-style)
+- [Result and Demo](#result-demo)
 
 ## <a name='requirements'></a> Requirements
 
@@ -61,59 +66,398 @@ npm i draft-js @types/draft-js contenido@latest
 npm i draft-js  contenido@latest
 ```
 
-## What is contenido?
+## <a name='create-editor-component'></a> Create Editor component
 
-Draft-js has a lot of potential that can make your work outstanding. However most of the time, its downsides persuade the developers to
-choose another library for their project. As mentioned earlier, you may end up repeating yourself in a lot of similar situations and
-that leads you to ask why should I use my time incorrectly like this? If you have some experience in Redux, the feeling can be the same.
-Redux on its own is a really powerful state management library, But the efforts, the time, the repetition, and the complexity can make you
-choose an alternative.
+After setting up the project, create a `components` folder in the `src` directory and then create the `Editor` component:
 
-Contenido is something like `redux-toolkit` to `redux`. You can skip the repetitions and be out of the complexity, saving a lot of time for
-your other tasks and have a clean sight of what you're doing.
+Typescript:
 
-As the [official documentation](https://www.contenidojs.com/docs/getting-started/overview) says:
+```tsx
+// src > components > Editor.tsx
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor } from 'contenido';
 
-> Contenido is a library with a set of tools to help you create your own editor on top of draft-js without thinking about
-> how to handle things.
+// Types
+import type { FC } from 'react';
 
-## Features of contenido
+// Custom Types
+export interface InlineStylesEditorProps {}
 
-These are some of contenido's features. For each section you'll also have utilities to implement your desired style or functionality.
+const InlineStylesEditor: FC<InlineStylesEditorProps> = (props) => {
+  // States
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
-- Inline Styles (Bold, italic, underline , ...) + Customization
-- Block Types (H1 to H6, OL, UL, Blockquote, ...) + Customization
-- Insertion (Media and File, Link) + Customization
-- Built-in Text Alignment
-- Counters and Limitation utilities
+  return (
+    <div>
+      <div>// We'll add the toolbar here</div>
+      <div>
+        <Editor editorState={editorState} onChange={setEditorState} />
+      </div>
+    </div>
+  );
+};
+```
 
-To see the complete list of its utilities checkout this [page](https://www.contenidojs.com/docs/getting-started/overview).
+Javascript:
 
-## Why to use contenido?
+```jsx
+// src > components > Editor.jsx
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor } from 'contenido';
 
-`Contenido` will be your agent to handle stuff in building a rich react text editor. These are some of the key benefits of using
-contenido with `draft-js`:
+const InlineStylesEditor = (props) => {
+  // States
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
-### Time Saver
+  return (
+    <div>
+      <div>// We'll add the toolbar here</div>
+      <div>
+        <Editor editorState={editorState} onChange={setEditorState} />
+      </div>
+    </div>
+  );
+};
+```
 
-Using contenido helps you save a lot of time. You don't need to write every single editor's behavior on yourself. In 99% of
-situations there is a ready-to-use utility for you.
+to make the editor much more visible add the border styles to the div:
 
-### Simplicity
+```tsx
+...
+      <div style={{
+         border: '1px solid #252525',
+         borderRadius: '0.5rem',
+         padding: '0.5rem 1rem',
+        }}
+      >
+        <Editor editorState={editorState} onChange={setEditorState} />
+      </div>
+...
+```
 
-The job is done for you in contenido, and there is no complexity to ruin your focus or coding principles.
+## <a name='add-placeholder'></a> Add Placeholder
 
-### Light Weight and Tree Shakeable
+Also adding a placeholder can be useful, so:
 
-Contenido is written in a modular way. Each utility has its module and there is no unusual connection between those modules which
-leads to a very small import size.
+```tsx
+...
+        <Editor
+          editorState={editorState}
+          onChange={setEditorState}
+         placeholder='Write here...'
+        />
+...
+```
 
-### <a name='typescript'></a> Typescript
+## <a name='add-toolbar-buttons'></a> Add Toolbar Buttons
 
-Contenido is written in typescript so unlike the draft-js you have the benefits of types as well.
+Now, it's time to add the buttons to the toolbar. First we will create an array of buttons to map them in the toolbar. After that,
+we use JS `map` to render the buttons.
 
-### Compatible with UI Libs
+Added lines are the same for both Javascript and Typescript:
 
-If you choose a ready-to-use text editor (even if it's on top of the draft-js), you should accept the incompatible components' appearances
-in your application. With contenido, you have the functionality and can completely mix it with your UI library like MUI, BootStrap,
-Tailwind or even your UI principles.
+```tsx
+// src > components > Editor.tsx
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor } from 'contenido';
+
+// Types
+import type { FC } from 'react';
+
+// Custom Types
+export interface InlineStylesEditorProps {}
+
+const buttons = [
+  { title: 'Bold' },
+  { title: 'Italic' },
+  { title: 'Underline' },
+  { title: 'Line Through' },
+  { title: 'Overline' },
+  { title: 'Sup' },
+  { title: 'Sub' },
+];
+
+const InlineStylesEditor: FC<InlineStylesEditorProps> = (props) => {
+  // States
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  return (
+    <div>
+      <div>
+        {buttons.map((button) => (
+          <button
+            key={button.title}
+            style={{
+              minWidth: '2rem',
+              padding: '0.5rem',
+              borderRadius: '0.5rem',
+              border: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            {button.title}
+          </button>
+        ))}
+      </div>
+      <div>
+        <Editor
+          editorState={editorState}
+          onChange={setEditorState}
+          placeholder='Write here...'
+        />
+      </div>
+    </div>
+  );
+};
+```
+
+For all of these buttons, there is a utility in `contenido` so we just need to import and add the handler for each button.
+
+```tsx
+// src > components > Editor.tsx
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import {
+  Editor,
+  initialStyleMap,
+  toggleBold,
+  toggleItalic,
+  toggleLineThrough,
+  toggleOverline,
+  toggleSub,
+  toggleSup,
+  toggleUnderline,
+} from 'contenido';
+
+// Types
+import type { FC } from 'react';
+
+// Custom Types
+export interface InlineStylesEditorProps {}
+
+const buttons = [
+  { title: 'Bold', handler: toggleBold },
+  { title: 'Italic', handler: toggleItalic },
+  { title: 'Underline', handler: toggleUnderline },
+  { title: 'Line Through', handler: toggleLineThrough },
+  { title: 'Overline', handler: toggleOverline },
+  { title: 'Sup', handler: toggleSup },
+  { title: 'Sub', handler: toggleSub },
+];
+
+const InlineStylesEditor: FC<InlineStylesEditorProps> = (props) => {
+  // States
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  return (
+    <div>
+      <div>
+        {buttons.map((button) => (
+          <button
+            key={button.title}
+            style={{
+              minWidth: '2rem',
+              padding: '0.5rem',
+              borderRadius: '0.5rem',
+              border: 'none',
+              cursor: 'pointer',
+            }}
+            onMouseDown={(e) => {
+              e.preventDefault();
+              button.handler(editorState, setEditorState);
+            }}
+          >
+            {button.title}
+          </button>
+        ))}
+      </div>
+      <div>
+        <Editor
+          editorState={editorState}
+          onChange={setEditorState}
+          customStyleMap={initialStyleMap}
+          placeholder='Write here...'
+        />
+      </div>
+    </div>
+  );
+};
+```
+
+The editor basic inline style tools should work properly up to this point, but as an improvement we can change the style of selected
+button to illustrate the difference. There is also a function for each of this inline styles to find out if it is the selected style
+or not.
+
+```tsx
+// src > components > Editor.tsx
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import {
+  Editor,
+  initialStyleMap,
+  isBold,
+  isItalic,
+  isLineThrough,
+  isOverline,
+  isSub,
+  isSup,
+  isUnderline,
+  toggleBold,
+  toggleItalic,
+  toggleLineThrough,
+  toggleOverline,
+  toggleSub,
+  toggleSup,
+  toggleUnderline,
+} from 'contenido';
+
+// Types
+import type { FC } from 'react';
+
+// Custom Types
+export interface InlineStylesEditorProps {}
+
+const buttons = [
+  { title: 'Bold', handler: toggleBold, checker: isBold },
+  { title: 'Italic', handler: toggleItalic, checker: isItalic },
+  { title: 'Underline', handler: toggleUnderline, checker: isUnderline },
+  { title: 'Line Through', handler: toggleLineThrough, checker: isLineThrough },
+  { title: 'Overline', handler: toggleOverline, checker: isOverline },
+  { title: 'Sup', handler: toggleSup, checker: isSup },
+  { title: 'Sub', handler: toggleSub, checker: isSub },
+];
+
+const InlineStylesEditor: FC<InlineStylesEditorProps> = (props) => {
+  // States
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  return (
+    <div>
+      <div>
+        {buttons.map((button) => (
+          <button
+            key={button.title}
+            style={{
+              minWidth: '2rem',
+              padding: '0.5rem',
+              backgroundColor: button.checker(editorState)
+                ? '#4cb5f5'
+                : 'rgba(125, 125, 125, 0.25)',
+              color: button.checker(editorState) ? '#fff' : 'inherit',
+              borderRadius: '0.5rem',
+              border: 'none',
+              cursor: 'pointer',
+            }}
+            onMouseDown={(e) => {
+              e.preventDefault();
+              button.handler(editorState, setEditorState);
+            }}
+          >
+            {button.title}
+          </button>
+        ))}
+      </div>
+      <div>
+        <Editor
+          editorState={editorState}
+          onChange={setEditorState}
+          customStyleMap={initialStyleMap}
+          placeholder='Write here...'
+        />
+      </div>
+    </div>
+  );
+};
+```
+
+## <a name='custom-inline-style'></a> Custom Inline Styles
+
+Although, contenido have a utility for the most common use cases but you can also have your custom inline styles. As an example, You can
+have buttons to change the text transformations or to change the text font or background color. We will add a support for the background
+color to our editor to have an example of inline style customization for `draft-js` as well. Approach will be the same for all valid
+CSS styles.
+
+First we set a key for each of our colors:
+
+```tsx
+...
+const HIGHLIGHT = 'HIGHLIGHT';
+...
+```
+
+Then update the buttons array by importing `toggleInlineStyle` and `hasInlineStyleOf` from contenido (for Typescript we import `State`
+and `StateHandler` types as well):
+
+Typescript:
+
+```tsx
+const buttons = [
+  { title: 'Bold', handler: toggleBold, checker: isBold },
+  { title: 'Italic', handler: toggleItalic, checker: isItalic },
+  { title: 'Underline', handler: toggleUnderline, checker: isUnderline },
+  { title: 'Line Through', handler: toggleLineThrough, checker: isLineThrough },
+  { title: 'Overline', handler: toggleOverline, checker: isOverline },
+  { title: 'Sup', handler: toggleSup, checker: isSup },
+  { title: 'Sub', handler: toggleSub, checker: isSub },
+  {
+    title: 'Highlight',
+    handler: (editorState: State, stateHandler: StateHandler) =>
+      toggleInlineStyle(editorState, stateHandler, HIGHLIGHT),
+    checker: (editorState: State) => hasInlineStyleOf(editorState, HIGHLIGHT),
+  },
+];
+```
+
+Javascript:
+
+```tsx
+const buttons = [
+  { title: 'Bold', handler: toggleBold, checker: isBold },
+  { title: 'Italic', handler: toggleItalic, checker: isItalic },
+  { title: 'Underline', handler: toggleUnderline, checker: isUnderline },
+  { title: 'Line Through', handler: toggleLineThrough, checker: isLineThrough },
+  { title: 'Overline', handler: toggleOverline, checker: isOverline },
+  { title: 'Sup', handler: toggleSup, checker: isSup },
+  { title: 'Sub', handler: toggleSub, checker: isSub },
+  {
+    title: 'Highlight',
+    handler: (editorState, stateHandler) =>
+      toggleInlineStyle(editorState, stateHandler, HIGHLIGHT),
+    checker: (editorState) => hasInlineStyleOf(editorState, HIGHLIGHT),
+  },
+];
+```
+
+The final step is to create a style map object and use it instead of the `initialStyleMap`. It's important to spread the initial one
+in order to keep the other styles functionality:
+
+```tsx
+...
+  const styleMap = {
+    ...initialStyleMap,
+    HIGHLIGHT: { backgroundColor: '#fdffb4' },
+  };
+...
+```
+
+and then replace it like this:
+
+```tsx
+...
+  <Editor
+    editorState={editorState}
+    onChange={setEditorState}
+    customStyleMap={styleMap}
+    placeholder='Write here...'
+  />
+...
+```
+
+## <a name='result-demo'></a>Result
+
+This is the result:
+
+<InlineStylesEditor />

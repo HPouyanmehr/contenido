@@ -7,7 +7,7 @@ export const fixHref = (href?: string | URL | Url | UrlObject): string => {
   let link = '';
 
   if (typeof href === 'string') {
-    link = href;
+    link = href.replaceAll('[object Object],', '').replaceAll(' ', '');
   } else {
     link = href.toString();
   }

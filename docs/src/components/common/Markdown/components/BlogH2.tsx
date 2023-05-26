@@ -21,7 +21,7 @@ const BlogH2: FC<HeadingTwoProps> = (props) => {
         sx={{
           margin: '1.75em 0 0.83em',
           ':hover': {
-            '& a': {
+            '.hash': {
               display: 'inline-block',
             },
           },
@@ -32,6 +32,7 @@ const BlogH2: FC<HeadingTwoProps> = (props) => {
         {children}{' '}
         {children && (
           <Link
+            className='hash'
             color='divider'
             href={`#${fixHref(children.toString())}`}
             sx={{ display: 'none' }}
