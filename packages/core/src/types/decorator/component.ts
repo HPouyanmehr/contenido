@@ -11,4 +11,7 @@ export interface DecoratorComponentProps extends LinkAttributes {
   decoratedText: string;
   entityKey: string;
   mutability: DraftEntityMutability;
+  offsetKey: string;
+  end: number;
+  start: number;
 }

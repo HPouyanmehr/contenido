@@ -32,6 +32,9 @@ const withDecoratorComponent =
         blockType={blockType}
         mutability={mutability}
         entityKey={entityKey}
+        offsetKey={offsetKey}
+        end={end}
+        start={start}
         {...otherProps}
         {...attributes}
       />
