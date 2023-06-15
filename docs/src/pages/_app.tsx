@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Head from 'next/head';
 import { CacheProvider, EmotionCache } from '@emotion/react';
+import NextNProgress from 'nextjs-progressbar';
 
 // Types
 import type { AppProps as NextAppProps } from 'next/app';
@@ -34,6 +35,7 @@ const App = (props: AppProps) => {
       <Head>
         <meta name='viewport' content='initial-scale=1, width=device-width' />
       </Head>
+      <NextNProgress color='#4cb5f5' />
       <ContextProvider>
         <div className={cascadiaCode.className}>
           <Component {...pageProps} />
