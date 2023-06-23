@@ -1,0 +1,384 @@
+---
+title: Draft-js text alignment in less than 5 minutes
+description: In this tutorial, We'll implement text alignment utility in draft-js with the help of contenido.
+tags: texteditor,wysiwyg,draftjs,contenido,editor,rte,react
+cover: draft-js-text-alignment-in-less-than-5-minutes
+type: tutorial,example
+date: 2023-06-21
+update: 2023-06-23
+---
+
+## What is this post about?
+
+Text alignment is one of the essential functionalities of an editor. Using the text alignment, the user can easily set the
+horizontal position of the context. If you did experience implementing alignment in draft-js you know that it can be time-consuming.
+In this tutorial, We'll implement text alignment utility in draft-js with the help of contenido.
+
+## Table of contents
+
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Create Editor Component](#create-editor-component)
+- [Add Placeholder](#add-placeholder)
+- [Add Toolbar Buttons](#add-toolbar-buttons)
+- [Result and Demo](#result-demo)
+
+## <a name='requirements'></a> Requirements
+
+To be able to create an editor, the only requirement is to know how to set up a ReactJS (or NextJs) project. We're going to use
+[draft-js](https://draftjs.org/) and [contenido](https://contenidojs.com/) packages in this tutorial.
+
+### <a name='darft-js'></a> Draft JS
+
+Draft-js is a rich text editor framework for React.
+
+<BlogSuggest
+  coverAlt='A brief introduction to draft-js'
+  link='a-brief-introduction-of-draft-js'
+/>
+
+### <a name='contenido'></a> Contenido
+
+Contenido is a library with a set of tools to help you create your rich text editor on top of draft-js. We use contenido to
+boost the development process and avoid repetitive processes. Read [this post](https://contenidojs.com/a-brief-introduction-to-contenido)
+to get familiar with contenido.
+
+## <a name='installation'></a> Installation
+
+First, we will install React and Typescript (There will be a JS alternative for everything, so stick with your favorite one).
+
+```bash
+# typescript
+npx create-react-app draft-text-alignment --template typescript
+
+# javascript
+npx create-react-app draft-text-alignment
+```
+
+After the installation is done, install `draft-js` and `contenido` with this command:
+
+```bash
+# typescript
+npm i draft-js @types/draft-js contenido@latest
+
+# javascript
+npm i draft-js  contenido@latest
+```
+
+## <a name='create-editor-component'></a> Create Editor component
+
+After setting up the project, create a `components` folder in the `src` directory and then create the `Editor` component:
+
+Typescript:
+
+```tsx
+// src > components > Editor.tsx
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor } from 'contenido';
+
+// Types
+import type { FC } from 'react';
+
+// Custom Types
+export interface TextAlignmentEditorProps {}
+
+const TextAlignmentEditor: FC<TextAlignmentEditorProps> = (props) => {
+  // States
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  return (
+    <div>
+      <div>// We'll add the toolbar here</div>
+      <div>
+        <Editor editorState={editorState} onChange={setEditorState} />
+      </div>
+    </div>
+  );
+};
+```
+
+Javascript:
+
+```jsx
+// src > components > Editor.jsx
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor } from 'contenido';
+
+const TextAlignmentEditor = (props) => {
+  // States
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  return (
+    <div>
+      <div>// We'll add the toolbar here</div>
+      <div>
+        <Editor editorState={editorState} onChange={setEditorState} />
+      </div>
+    </div>
+  );
+};
+```
+
+to make the editor much more visible add the border styles to the div:
+
+```tsx
+...
+      <div style={{
+         border: '1px solid #252525',
+         borderRadius: '0.5rem',
+         padding: '0.5rem 1rem',
+        }}
+      >
+        <Editor editorState={editorState} onChange={setEditorState} />
+      </div>
+...
+```
+
+## <a name='add-placeholder'></a> Add Placeholder
+
+Also adding a placeholder can be useful, so:
+
+```tsx
+...
+        <Editor
+          editorState={editorState}
+          onChange={setEditorState}
+         placeholder='Write here...'
+        />
+...
+```
+
+## <a name='add-toolbar-buttons'></a> Add Toolbar Buttons
+
+Now, it's time to add the buttons to the toolbar. First we will create an array of buttons to map them in the toolbar. After that,
+we use JS `map` to render the buttons.
+
+Added lines are the same for both Javascript and Typescript:
+
+```tsx
+// src > components > Editor.tsx
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor } from 'contenido';
+
+// Types
+import type { FC } from 'react';
+
+// Custom Types
+export interface TextAlignmentEditorProps {}
+
+const buttons = [
+  { title: 'left' },
+  { title: 'center' },
+  { title: 'right' },
+  { title: 'justify' },
+];
+
+const TextAlignmentEditor: FC<TextAlignmentEditorProps> = (props) => {
+  // States
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  return (
+    <div>
+      <div>
+        {buttons.map((button) => (
+          <button
+            key={button.title}
+            style={{
+              minWidth: '2rem',
+              padding: '0.5rem',
+              borderRadius: '0.5rem',
+              border: 'none',
+              cursor: 'pointer',
+              textTransform: 'capitalize',
+            }}
+          >
+            {button.title}
+          </button>
+        ))}
+      </div>
+      <div>
+        <Editor
+          editorState={editorState}
+          onChange={setEditorState}
+          placeholder='Write here...'
+        />
+      </div>
+    </div>
+  );
+};
+```
+
+To toggle between text alignments, we'll use the `toggleTextAlign` utility of contentio and pass the alignment key to that..
+
+```tsx
+// src > components > Editor.tsx
+....
+import {
+  Editor,
+  toggleTextAlign // Import this utility
+} from 'contenido';
+...
+```
+
+The editor needs a function to properly style the alignment. To do so, import the `blockStyleFn` from `contenido` and pass it as an
+attribute to the editor component. Also the default keys for alignment starts with `text-align-` in contenido.
+
+```tsx
+// src > components > Editor.tsx
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, blockStyleFn, toggleTextAlign } from 'contenido';
+
+// Types
+import type { FC } from 'react';
+
+// Custom Types
+export interface TextAlignmentEditorProps {}
+
+const buttons = [
+  { title: 'left' },
+  { title: 'center' },
+  { title: 'right' },
+  { title: 'justify' },
+];
+
+const TextAlignmentEditor: FC<TextAlignmentEditorProps> = (props) => {
+  // States
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  return (
+    <div>
+      <div>
+        {buttons.map((button) => (
+          <button
+            key={button.title}
+            style={{
+              minWidth: '2rem',
+              padding: '0.5rem',
+              borderRadius: '0.5rem',
+              border: 'none',
+              cursor: 'pointer',
+              textTransform: 'capitalize',
+            }}
+            onMouseDown={(e) => {
+              e.preventDefault();
+              toggleTextAlign(
+                editorState,
+                setEditorState,
+                `text-align-${button.title}`
+              );
+            }}
+          >
+            {button.title}
+          </button>
+        ))}
+      </div>
+      <div>
+        <Editor
+          editorState={editorState}
+          onChange={setEditorState}
+          placeholder='Write here...'
+          blockStyleFn={blockStyleFn}
+        />
+      </div>
+    </div>
+  );
+};
+```
+
+To have the alignment work properly import styles contenido styles into your `App.tsx` (or `_app.tsx` in next.js).
+
+```tsx
+...
+// Styles
+import 'contenido/dist/styles.css';
+...
+```
+
+The editor basic alignment should work properly up to this point, but as an improvement we can change the style of selected
+button to illustrate the difference. There is also a function for each of these alignments to find out if it is the selected
+alignment or not.
+
+```tsx
+// src > components > Editor.tsx
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import {
+  Editor,
+  blockStyleFn,
+  toggleTextAlign,
+  isTextRightAligned,
+  isTextCenterAligned,
+  isTextLeftAligned,
+  isTextJustifyAligned,
+} from 'contenido';
+
+// Types
+import type { FC } from 'react';
+
+// Custom Types
+export interface TextAlignmentEditorProps {}
+
+const buttons = [
+  { title: 'left', checker: isTextLeftAligned },
+  { title: 'center', checker: isTextCenterAligned },
+  { title: 'right', checker: isTextRightAligned },
+  { title: 'justify', checker: isTextJustifyAligned },
+];
+
+const TextAlignmentEditor: FC<TextAlignmentEditorProps> = (props) => {
+  // States
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  return (
+    <div>
+      <div>
+        {buttons.map((button) => (
+          <button
+            key={button.title}
+            style={{
+              minWidth: '2rem',
+              padding: '0.5rem',
+              backgroundColor: button.checker(editorState)
+                ? '#4cb5f5'
+                : 'rgba(125, 125, 125, 0.25)',
+              color: button.checker(editorState) ? '#fff' : 'inherit',
+              borderRadius: '0.5rem',
+              border: 'none',
+              cursor: 'pointer',
+              textTransform: 'capitalize',
+            }}
+            onMouseDown={(e) => {
+              e.preventDefault();
+              toggleTextAlign(
+                editorState,
+                setEditorState,
+                `text-align-${button.title}`
+              );
+            }}
+          >
+            {button.title}
+          </button>
+        ))}
+      </div>
+      <div>
+        <Editor
+          editorState={editorState}
+          onChange={setEditorState}
+          placeholder='Write here...'
+          blockStyleFn={blockStyleFn}
+        />
+      </div>
+    </div>
+  );
+};
+```
+
+## <a name='result-demo'></a>Result
+
+This is the result:
+
+<TextAlignmentEditor />

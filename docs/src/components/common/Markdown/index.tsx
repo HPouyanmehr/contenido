@@ -34,6 +34,7 @@ import TableRow from 'components/core/TableRow';
 
 // Demo Editors
 import InlineStylesEditor from 'components/examples/InlineStyles';
+import TextAlignmentEditor from 'components/examples/TextAlignment';
 
 // Custom Types
 export interface MarkdownProps {
@@ -75,6 +76,7 @@ const Markdown: FC<MarkdownProps> = (props) => {
           BlogSuggest: BlogSuggest,
           // Example Editors
           InlineStylesEditor,
+          TextAlignmentEditor,
         },
       }}
     >
