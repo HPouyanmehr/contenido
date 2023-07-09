@@ -1,0 +1,527 @@
+---
+title: Add image to draft-js editor (no plugin)
+description: We'll learn how to work with atomic blocks and how to add image support to the editor.
+tags: texteditor,wysiwyg,draftjs,atomic,contenido,editor,rte,react
+cover: draft-js-text-alignment-in-less-than-5-minutes
+type: tutorial,example
+date: 2023-07-09
+update: 2023-07-09
+---
+
+## What is this post about?
+
+If you are implementing an editor, you probably need to add different sorts of media to your content, like images, audio, or video.
+The process of adding a non-text block (atomic block) to the draft js is similar for all sorts of media. We'll learn how to work
+with atomic blocks and how to add image support to the editor.
+
+## Table of contents
+
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Create Editor Component](#create-editor-component)
+- [Add Placeholder](#add-placeholder)
+- [Steps Overview](#steps-overview)
+- [Add Toolbar](#add-toolbar)
+- [Handle Adding Image](#handle-adding-image)
+- [Create Image Component](#create-image-component)
+- [Create The Decorator](#create-the-decorator)
+- [Add Decorator to the State](#add-decorator-to-the-state)
+- [Result and Demo](#result-demo)
+
+## <a name='requirements'></a> Requirements
+
+To be able to create an editor, the only requirement is to know how to set up a ReactJS (or NextJs) project. We're going to use
+[draft-js](https://draftjs.org/) and [contenido](https://contenidojs.com/) packages in this tutorial.
+
+### <a name='darft-js-and-contenido'></a> Draft JS and Contenido
+
+**Draft-js** is a rich text editor framework for React. ([Read More](https://contenidojs.com/a-brief-introduction-of-draft-js))
+
+**Contenido** is a library with a set of tools to help you create your rich text editor on top of draft-js. We use contenido to
+boost the development process and avoid repetitive processes. Read [this post](https://contenidojs.com/a-brief-introduction-to-contenido)
+to get familiar with contenido.
+
+## <a name='installation'></a> Installation
+
+First, we will install React and Typescript (There will be a JS alternative for everything, so stick with your favorite one).
+
+```bash
+# typescript
+npx create-react-app draft-text-alignment --template typescript
+
+# javascript
+npx create-react-app draft-text-alignment
+```
+
+After the installation is done, install `draft-js` and `contenido` with this command:
+
+```bash
+# typescript
+npm i draft-js @types/draft-js contenido@latest
+
+# javascript
+npm i draft-js  contenido@latest
+```
+
+## <a name='create-editor-component'></a> Create Editor component
+
+After setting up the project, create a `components` folder in the `src` directory and then create the `Editor` component:
+
+Typescript:
+
+```tsx
+// src > components > Editor.tsx
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor } from 'contenido';
+
+// Types
+import type { FC } from 'react';
+
+// Custom Types
+export interface MediaEditorProps {}
+
+const MediaEditor: FC<MediaEditorProps> = (props) => {
+  // States
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  return (
+    <div>
+      <div>// We'll add the toolbar here</div>
+      <div>
+        <Editor editorState={editorState} onChange={setEditorState} />
+      </div>
+    </div>
+  );
+};
+```
+
+Javascript:
+
+```jsx
+// src > components > Editor.jsx
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor } from 'contenido';
+
+const MediaEditor = (props) => {
+  // States
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  return (
+    <div>
+      <div>// We'll add the toolbar here</div>
+      <div>
+        <Editor editorState={editorState} onChange={setEditorState} />
+      </div>
+    </div>
+  );
+};
+```
+
+To make the editor much more visible add the border styles to the div:
+
+```tsx
+...
+      <div style={{
+         border: '1px solid #252525',
+         borderRadius: '0.5rem',
+         padding: '0.5rem 1rem',
+        }}
+      >
+        <Editor editorState={editorState} onChange={setEditorState} />
+      </div>
+...
+```
+
+To have the styles work properly import contenido styles into your `App.tsx` (or `_app.tsx` in next.js).
+
+```tsx
+...
+// Styles
+import 'contenido/dist/styles.css';
+...
+```
+
+## <a name='add-placeholder'></a> Add Placeholder
+
+Also adding a placeholder can be useful, so:
+
+```tsx
+...
+        <Editor
+          editorState={editorState}
+          onChange={setEditorState}
+         placeholder='Write here...'
+        />
+...
+```
+
+## <a name='steps-overview'></a> Steps Overview
+
+Before implementing the image support, I like to clarify each step of adding the media to the editor.
+
+In draft-js, the non-text block will be an atomic block. By default, the editor core only knows about the text and has no idea
+about the non-text blocks. When we add an atomic block to the editor, it'll ignore it until we say how to render that. To show
+the editor to render an atomic block, we need to decorate that block. Decorating in draft js is the process of finding and
+clarifying the final shape of an atomic block.
+
+For example, to add an image block to the editor:
+
+1. We add an atomic block with the 'image' type (or whatever keyword you like).
+1. Then we define a function to find entities with 'image' type.
+1. Finally we'll use our custom Image component to render that.
+
+## <a name='add-toolbar'></a> Add Toolbar
+
+Now, it's time to add the button to the toolbar.
+
+Added lines are the same for both Javascript and Typescript:
+
+```tsx
+// src > components > Editor.tsx
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor } from 'contenido';
+
+// Types
+import type { FC } from 'react';
+
+// Custom Types
+export interface MediaEditorProps {}
+
+const MediaEditor: FC<MediaEditorProps> = (props) => {
+  // States
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  return (
+    <div>
+      <div>
+        <button
+          style={{
+            minWidth: '2rem',
+            padding: '0.5rem',
+            borderRadius: '0.5rem',
+            border: 'none',
+            cursor: 'pointer',
+            textTransform: 'capitalize',
+          }}
+        >
+          Add Image
+        </button>
+      </div>
+      <div
+        style={{
+          border: '1px solid #252525',
+          borderRadius: '0.5rem',
+          padding: '0.5rem 1rem',
+        }}
+      >
+        <Editor
+          editorState={editorState}
+          onChange={setEditorState}
+          placeholder='Write here...'
+        />
+      </div>
+    </div>
+  );
+};
+```
+
+Using contenido, we can easily have the necessary utilities for the process. `addImage` utility helps us to add an atomic block
+to the editor with the type of 'image' and then using `createDecorator` in combination to the image component and
+the `findEntitiesOf('image')` leads to rendering images properly and in the way we like.
+
+```tsx
+// src > components > Editor.tsx
+....
+import {
+  Editor,
+  addImage, // Import this utility
+  createDecorator, // Import this utility
+  findEntitiesOf, // Import this utility
+} from 'contenido';
+...
+```
+
+So the editor component will be like this:
+
+```tsx
+// src > components > Editor.tsx
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, addImage, createDecorator, findEntitiesOf } from 'contenido';
+
+// Types
+import type { FC } from 'react';
+
+// Custom Types
+export interface MediaEditorProps {}
+
+const MediaEditor: FC<MediaEditorProps> = (props) => {
+  // States
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  return (
+    <div>
+      <div>
+        <button
+          style={{
+            minWidth: '2rem',
+            padding: '0.5rem',
+            borderRadius: '0.5rem',
+            border: 'none',
+            cursor: 'pointer',
+            textTransform: 'capitalize',
+          }}
+        >
+          Add Image
+        </button>
+      </div>
+      <div
+        style={{
+          border: '1px solid #252525',
+          borderRadius: '0.5rem',
+          padding: '0.5rem 1rem',
+        }}
+      >
+        <Editor
+          editorState={editorState}
+          onChange={setEditorState}
+          placeholder='Write here...'
+        />
+      </div>
+    </div>
+  );
+};
+```
+
+## <a name='handle-adding-image'></a> Handle Adding Image
+
+Let's update the button event handlers to add an image to the editor.
+
+```tsx
+// src > components > Editor.tsx
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, addImage, createDecorator, findEntitiesOf } from 'contenido';
+
+// Types
+import type { FC } from 'react';
+
+// Custom Types
+export interface MediaEditorProps {}
+
+const MediaEditor: FC<MediaEditorProps> = (props) => {
+  // States
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  // Utilities
+  const handleAddImage = () => {
+    const imageProps = {
+      src: 'https://picsum.photos/200/200',
+      alt: 'Random image',
+      style: { width: 200, height: 200 },
+    };
+
+    addImage(editorState, setEditorState, imageProps);
+  };
+
+  return (
+    <div>
+      <div>
+        <button
+          style={{
+            minWidth: '2rem',
+            padding: '0.5rem',
+            borderRadius: '0.5rem',
+            border: 'none',
+            cursor: 'pointer',
+            textTransform: 'capitalize',
+          }}
+          onMouseDown={(e) => {
+            e.preventDefault();
+
+            handleAddImage();
+          }}
+        >
+          Add Image
+        </button>
+      </div>
+      <div
+        style={{
+          border: '1px solid #252525',
+          borderRadius: '0.5rem',
+          padding: '0.5rem 1rem',
+        }}
+      >
+        <Editor
+          editorState={editorState}
+          onChange={setEditorState}
+          placeholder='Write here...'
+        />
+      </div>
+    </div>
+  );
+};
+```
+
+Note: In this example, we'll use hardcoded details for our image. In a real-world scenario, You can show a pop-up where
+the user enter the data, and then you can pass those to the handler.
+
+If there is an upload phase in your application, you need to upload the image to the server first and then pass the link to that
+to the editor.
+
+## <a name='create-image-component'></a> Create Image Component
+
+Up to this point, The added image to the editor won't be visible as there is no decorator. To decorate the added media,
+we'll create the image component first.
+
+JavaScript:
+
+```jsx
+// src > components > Image.jsx
+const Image = (props) => {
+  if (blockType.blockType === 'image') {
+    const { alt, src, style } = props;
+
+    return <img alt={alt} src={src} />;
+  }
+
+  return <p>The atomic type is not supported in this demo!</p>;
+};
+
+export default Image;
+```
+
+TypeScript:
+
+```tsx
+// src > components > Image.tsx
+// Types
+import type { FC } from 'react';
+import type { DecoratorComponentProps, ImageAttributes } from 'contenido';
+
+const Image: FC<DecoratorComponentProps> = (props) => {
+  if (props.blockType === 'image') {
+    const { src, alt, style } = props as ImageAttributes;
+    if (src && alt)
+      return (
+        <Image alt={alt} src={src} width={style.width} height={style.height} />
+      );
+  }
+  return <p>The atomic type is not supported in this demo!</p>;
+};
+
+export default Image;
+```
+
+## <a name='create-the-decorator'></a> Create the Decorator
+
+As we mentioned earlier, Decorating in draft js is the process of finding and clarifying the final shape of an atomic block.
+
+This is how the decorator will look like (For both TS and JS):
+
+```tsx
+// src > components > Editor.tsx
+// Custom Components
+import Image from './Image.tsx';
+
+...
+const decorators = createDecorator([
+    {
+      component: Image,
+      strategy: findEntitiesOf('image');,
+    },
+  ]);
+...
+```
+
+It's an array an you can have multiple decorators for different types of atomic blocks.
+
+## <a name='add-decorator-to-the-state'></a> Add Decorator to the State
+
+We have all and it's time to put them together to see the result.
+
+```tsx
+// src > components > Editor.tsx
+import { useState } from 'react';
+import { EditorState } from 'draft-js';
+import { Editor, addImage, createDecorator, findEntitiesOf } from 'contenido';
+
+// Types
+import type { FC } from 'react';
+
+// Custom Components
+import Image from './Image.tsx'
+
+// Custom Types
+export interface MediaEditorProps {}
+
+const MediaEditor: FC<MediaEditorProps> = (props) => {
+  // Decorator
+const decorators = createDecorator([
+    {
+      component: Image,
+      strategy: findEntitiesOf('image');,
+    },
+  ]);
+
+  // States
+  const [editorState, setEditorState] = useState(EditorState.createEmpty(decorators));
+
+  // Utilities
+  const handleAddImage = () => {
+    const imageProps = {
+      src: 'https://picsum.photos/200/200',
+      alt: 'Random image',
+      style: { width: 200, height: 200 },
+    };
+
+    addImage(editorState, setEditorState, imageProps);
+  };
+
+  return (
+    <div>
+      <div>
+        <button
+          style={{
+            minWidth: '2rem',
+            padding: '0.5rem',
+            borderRadius: '0.5rem',
+            border: 'none',
+            cursor: 'pointer',
+            textTransform: 'capitalize',
+          }}
+          onMouseDown={(e) => {
+            e.preventDefault();
+
+            handleAddImage();
+          }}
+        >
+          Add Image
+        </button>
+      </div>
+      <div
+        style={{
+          border: '1px solid #252525',
+          borderRadius: '0.5rem',
+          padding: '0.5rem 1rem',
+        }}
+      >
+        <Editor
+          editorState={editorState}
+          onChange={setEditorState}
+          placeholder='Write here...'
+        />
+      </div>
+    </div>
+  );
+};
+```
+
+## <a name='result-demo'></a>Result
+
+This is the result:
+
+<MediaEditor />
