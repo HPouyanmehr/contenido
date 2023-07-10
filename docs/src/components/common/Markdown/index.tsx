@@ -35,6 +35,7 @@ import TableRow from 'components/core/TableRow';
 // Demo Editors
 import InlineStylesEditor from 'components/examples/InlineStyles';
 import TextAlignmentEditor from 'components/examples/TextAlignment';
+import ImageEditor from 'components/section/demo/Image';
 
 // Custom Types
 export interface MarkdownProps {
@@ -77,6 +78,7 @@ const Markdown: FC<MarkdownProps> = (props) => {
           // Example Editors
           InlineStylesEditor,
           TextAlignmentEditor,
+          ImageEditor,
         },
       }}
     >

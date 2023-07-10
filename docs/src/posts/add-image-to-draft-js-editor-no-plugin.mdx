@@ -2,10 +2,10 @@
 title: Add image to draft-js editor (no plugin)
 description: We'll learn how to work with atomic blocks and how to add image support to the editor.
 tags: texteditor,wysiwyg,draftjs,atomic,contenido,editor,rte,react
-cover: draft-js-text-alignment-in-less-than-5-minutes
+cover: add-image-to-draft-js-editor-no-plugin
 type: tutorial,example
 date: 2023-07-09
-update: 2023-07-09
+update: 2023-07-10
 ---
 
 ## What is this post about?
@@ -407,7 +407,7 @@ const Image: FC<DecoratorComponentProps> = (props) => {
     const { src, alt, style } = props as ImageAttributes;
     if (src && alt)
       return (
-        <Image alt={alt} src={src} width={style.width} height={style.height} />
+        <img alt={alt} src={src} width={style.width} height={style.height} />
       );
   }
   return <p>The atomic type is not supported in this demo!</p>;
@@ -522,6 +522,7 @@ const decorators = createDecorator([
 
 ## <a name='result-demo'></a>Result
 
+In the demo below, the [image count](http://localhost:3000/docs/atomic-blocks/image-count) is limited.
 This is the result:
 
-<MediaEditor />
+<ImageEditor />
