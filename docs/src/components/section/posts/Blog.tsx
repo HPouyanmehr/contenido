@@ -42,7 +42,7 @@ const BlogPosts: FC<BlogPostsProps> = (props) => {
           })}
         >
           {posts.map((post) => (
-            <BlogPostCard key={post.title} post={post} />
+            <BlogPostCard key={post.title} post={post} sx={{ width: '100%' }} />
           ))}
         </Box>
       </Container>
