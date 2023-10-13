@@ -4,7 +4,7 @@
 
 Contenido is a library for building highly customizable rich text editors in React. Check out the documentation and demos [here](https://contenidojs.com).
 
-![Contenido Demo](./.github/assets/contenido-demo-image.jpg 'Contenido')
+![Contenido Demo](https://github.com/HPouyanmehr/contenido/blob/main/.github/assets/contenido-demo-image.jpg?raw=true 'Contenido')
 
 Using `contenido` you can create rich text editors in MUI(Material-UI), TailwindCSS, Bootstrap, and any other UI library or CSS frameworks.
 
