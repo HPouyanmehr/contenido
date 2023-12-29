@@ -1,5 +1,3 @@
-[Support `contenido` for $1 per month.](https://www.paypal.com/donate/?hosted_button_id=SW7L8MAT9BRA6)
-
 # Contenido - Overview
 
 Contenido is a library for building highly customizable rich text editors in React. Check out the documentation and demos [here](https://contenidojs.com).
