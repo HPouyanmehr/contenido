@@ -9,7 +9,7 @@ const isLink = (editorState: State, customLinkKey?: string) => {
   if (entityKey) {
     const entity = contentState.getEntity(entityKey);
     const entityType = entity.getType();
-    if (entityType === customLinkKey ? customLinkKey : 'LINK') return true;
+    return entityType === (customLinkKey ?? 'LINK');
   }
   return false;
 };
