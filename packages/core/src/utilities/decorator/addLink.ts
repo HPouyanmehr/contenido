@@ -7,11 +7,12 @@ import type { LinkAttributes, State, StateHandler } from '../../types';
 const addLink = (
   state: State,
   stateHandler: StateHandler,
-  attributes?: LinkAttributes
+  attributes?: LinkAttributes,
+  customLinkKey?: string
 ) => {
   const currentContent = state.getCurrentContent();
   const contentStateWithEntity = currentContent.createEntity(
-    'link',
+    customLinkKey ?? 'link',
     'IMMUTABLE',
     attributes
   );
