@@ -34,6 +34,7 @@ const addAtomicBlock = (
   );
 
   stateHandler(stateToSet);
+  return entityKey;
 };
 
 export default addAtomicBlock;
